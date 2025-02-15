@@ -1,0 +1,791 @@
+/* Стили для конопок */
+.nextChatButtonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    position: relative;
+}
+/*royalBlueButton*/
+.royalBlueButton {
+    border: none;
+    background-color: #4169E1;
+    color: white;
+    width: 242px;
+    height: 60px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    transition: ease-in .5s;
+}
+.royalBlueButton:not([disabled]):hover {
+    border: none;
+    background-color: #80a1ff;
+    color: #ffffff;
+    transition: ease-in .5s;
+}
+
+.royalBlueButton:focus {
+    outline: none;
+}
+.royalBlueButton[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    transition: ease-in .5s;
+}
+
+/**/
+.glowOnHoverButton {
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: #111;
+    position: relative;
+    border-radius: 10px;
+    margin-bottom: 14px;
+}
+
+.glowOnHoverButton:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glowOnHoverButton:active {
+    color: #000
+}
+
+.glowOnHoverButton:active:after {
+    background: transparent;
+}
+
+.glowOnHoverButton:hover:before {
+    opacity: 1;
+}
+
+.glowOnHoverButton:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+.glowOnHoverButton[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    transition: ease-in .5s;
+}
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+/*btn-three*/
+.btn-three {
+    border: none;
+    outline: none;
+    background: rgba(17, 17, 17, 0);
+    color: #FFF;
+    transition: all 0.5s;
+    position: relative;
+}
+.btn-three::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(255,255,255,0.1);
+    transition: all 0.3s;
+}
+.btn-three:hover::before {
+    opacity: 0 ;
+    transform: scale(0.5,0.5);
+}
+.btn-three::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border: 1px solid rgba(255,255,255,0.5);
+    transform: scale(1.2,1.2);
+}
+.btn-three:hover::after {
+    opacity: 1;
+    transform: scale(1,1);
+}
+.btn-three[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    transition: ease-in .5s;
+}
+
+/*button_anim*/
+.button_anim {
+    min-width: 300px;
+    min-height: 60px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: #313133;
+    background: #4FD1C5;
+    background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+}
+
+.button_anim::before {
+    content: '';
+    border-radius: 1000px;
+    min-width: calc(300px + 12px);
+    min-height: calc(60px + 12px);
+    border: 6px solid #00FFCB;
+    box-shadow: 0 0 60px rgba(0,255,203,.64);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
+}
+
+.button_anim:hover, .button_anim:focus {
+    color: #313133;
+    transform: translateY(-6px);
+}
+
+.button_anim:hover::before, .button_anim:focus::before {
+    opacity: 1;
+}
+
+.button_anim:not([disabled]):after {
+    content: '';
+    width: 30px; height: 30px;
+    border-radius: 100%;
+    border: 6px solid #00FFCB;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+}
+
+.button_anim:hover::after, .button_anim:focus::after {
+    animation: none;
+    display: none;
+}
+
+.button_anim[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    transition: ease-in .5s;
+}
+
+@keyframes ring {
+    0% {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+/*IMG Button*/
+.nextChatButtonContainerImg {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    position: relative;
+    border: none;
+}
+.nextChatButtonContainerImg:focus {
+    outline: none;
+}
+.nextChatButtonContainerImg[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    transition: ease-in .5s;
+}
+
+/*progress bar*/
+.timeProgress {
+    padding: 0;
+    margin: 0;
+}
+
+.timeProgressFill {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/*Инвентарь*/
+.dynamic-inventory-button {
+    position: absolute;
+    top: 439px;
+    left: 32px;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.3s ease;
+}
+
+.dynamic-inventory-button:hover, .close-inventory-button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.dynamic-inventory-button:active, .close-inventory-button:active {
+    transform: scale(0.9);
+}
+
+.close-inventory-button {
+    min-width: 50px;
+    min-height: 50px;
+    top: -28px;
+    right: -24px;
+}
+
+.inventory-cell-main, .inventory-cell-dynamic {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 4px;
+}
+
+.inventory-container {
+    gap: 10px;
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.dynamic-inventory-container {
+    gap: 10px;
+    position: absolute;
+    padding: 41px 10px 10px 10px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.dynamic-inventory-container {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.dynamic-inventory-container::-webkit-scrollbar {
+    display: none;
+}
+
+/*Text Animation*/
+.shiningAnim {
+    letter-spacing: 4px;
+    overflow: hidden;
+    background: linear-gradient(90deg, #000, #fff, #000);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    animation: shiningAnimation 3s linear infinite !important;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes shiningAnimation {
+    0% {
+        background-position: -500%;
+    }
+    100% {
+        background-position: 500%;
+    }
+}
+
+.anim-text-flow, .anim-text-flow-hover:hover {
+}
+.anim-text-flow span, .anim-text-flow-hover:hover span {
+    animation-name: anim-text-flow-keys;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+}
+@keyframes anim-text-flow-keys {
+    0% {
+        color: #be5cd6;
+    }
+    5% {
+        color: #5cd6d2;
+    }
+    10% {
+        color: #87d65c;
+    }
+    15% {
+        color: #d65cb6;
+    }
+    20% {
+        color: #5cb1d6;
+    }
+    25% {
+        color: #d65cad;
+    }
+    30% {
+        color: #5cd66e;
+    }
+    35% {
+        color: #d65cb8;
+    }
+    40% {
+        color: #d6b45c;
+    }
+    45% {
+        color: #d6915c;
+    }
+    50% {
+        color: #d66e5c;
+    }
+    55% {
+        color: #d6815c;
+    }
+    60% {
+        color: #875cd6;
+    }
+    65% {
+        color: #d65c89;
+    }
+    70% {
+        color: #bad65c;
+    }
+    75% {
+        color: #5cd6cc;
+    }
+    80% {
+        color: #abd65c;
+    }
+    85% {
+        color: #d6a75c;
+    }
+    90% {
+        color: #5c7ad6;
+    }
+    95% {
+        color: #70d65c;
+    }
+    100% {
+        color: #d6cc5c;
+    }
+}
+.anim-text-flow span:nth-of-type(1), .anim-text-flow-hover:hover span:nth-of-type(1) {
+    animation-delay: -19.8s;
+}
+.anim-text-flow span:nth-of-type(2), .anim-text-flow-hover:hover span:nth-of-type(2) {
+    animation-delay: -19.6s;
+}
+.anim-text-flow span:nth-of-type(3), .anim-text-flow-hover:hover span:nth-of-type(3) {
+    animation-delay: -19.4s;
+}
+.anim-text-flow span:nth-of-type(4), .anim-text-flow-hover:hover span:nth-of-type(4) {
+    animation-delay: -19.2s;
+}
+.anim-text-flow span:nth-of-type(5), .anim-text-flow-hover:hover span:nth-of-type(5) {
+    animation-delay: -19s;
+}
+.anim-text-flow span:nth-of-type(6), .anim-text-flow-hover:hover span:nth-of-type(6) {
+    animation-delay: -18.8s;
+}
+.anim-text-flow span:nth-of-type(7), .anim-text-flow-hover:hover span:nth-of-type(7) {
+    animation-delay: -18.6s;
+}
+.anim-text-flow span:nth-of-type(8), .anim-text-flow-hover:hover span:nth-of-type(8) {
+    animation-delay: -18.4s;
+}
+.anim-text-flow span:nth-of-type(9), .anim-text-flow-hover:hover span:nth-of-type(9) {
+    animation-delay: -18.2s;
+}
+.anim-text-flow span:nth-of-type(10), .anim-text-flow-hover:hover span:nth-of-type(10) {
+    animation-delay: -18s;
+}
+.anim-text-flow span:nth-of-type(11), .anim-text-flow-hover:hover span:nth-of-type(11) {
+    animation-delay: -17.8s;
+}
+.anim-text-flow span:nth-of-type(12), .anim-text-flow-hover:hover span:nth-of-type(12) {
+    animation-delay: -17.6s;
+}
+.anim-text-flow span:nth-of-type(13), .anim-text-flow-hover:hover span:nth-of-type(13) {
+    animation-delay: -17.4s;
+}
+.anim-text-flow span:nth-of-type(14), .anim-text-flow-hover:hover span:nth-of-type(14) {
+    animation-delay: -17.2s;
+}
+.anim-text-flow span:nth-of-type(15), .anim-text-flow-hover:hover span:nth-of-type(15) {
+    animation-delay: -17s;
+}
+.anim-text-flow span:nth-of-type(16), .anim-text-flow-hover:hover span:nth-of-type(16) {
+    animation-delay: -16.8s;
+}
+.anim-text-flow span:nth-of-type(17), .anim-text-flow-hover:hover span:nth-of-type(17) {
+    animation-delay: -16.6s;
+}
+.anim-text-flow span:nth-of-type(18), .anim-text-flow-hover:hover span:nth-of-type(18) {
+    animation-delay: -16.4s;
+}
+.anim-text-flow span:nth-of-type(19), .anim-text-flow-hover:hover span:nth-of-type(19) {
+    animation-delay: -16.2s;
+}
+.anim-text-flow span:nth-of-type(20), .anim-text-flow-hover:hover span:nth-of-type(20) {
+    animation-delay: -16s;
+}
+.anim-text-flow span:nth-of-type(21), .anim-text-flow-hover:hover span:nth-of-type(21) {
+    animation-delay: -15.8s;
+}
+.anim-text-flow span:nth-of-type(22), .anim-text-flow-hover:hover span:nth-of-type(22) {
+    animation-delay: -15.6s;
+}
+.anim-text-flow span:nth-of-type(23), .anim-text-flow-hover:hover span:nth-of-type(23) {
+    animation-delay: -15.4s;
+}
+.anim-text-flow span:nth-of-type(24), .anim-text-flow-hover:hover span:nth-of-type(24) {
+    animation-delay: -15.2s;
+}
+.anim-text-flow span:nth-of-type(25), .anim-text-flow-hover:hover span:nth-of-type(25) {
+    animation-delay: -15s;
+}
+.anim-text-flow span:nth-of-type(26), .anim-text-flow-hover:hover span:nth-of-type(26) {
+    animation-delay: -14.8s;
+}
+.anim-text-flow span:nth-of-type(27), .anim-text-flow-hover:hover span:nth-of-type(27) {
+    animation-delay: -14.6s;
+}
+.anim-text-flow span:nth-of-type(28), .anim-text-flow-hover:hover span:nth-of-type(28) {
+    animation-delay: -14.4s;
+}
+.anim-text-flow span:nth-of-type(29), .anim-text-flow-hover:hover span:nth-of-type(29) {
+    animation-delay: -14.2s;
+}
+.anim-text-flow span:nth-of-type(30), .anim-text-flow-hover:hover span:nth-of-type(30) {
+    animation-delay: -14s;
+}
+.anim-text-flow span:nth-of-type(31), .anim-text-flow-hover:hover span:nth-of-type(31) {
+    animation-delay: -13.8s;
+}
+.anim-text-flow span:nth-of-type(32), .anim-text-flow-hover:hover span:nth-of-type(32) {
+    animation-delay: -13.6s;
+}
+.anim-text-flow span:nth-of-type(33), .anim-text-flow-hover:hover span:nth-of-type(33) {
+    animation-delay: -13.4s;
+}
+.anim-text-flow span:nth-of-type(34), .anim-text-flow-hover:hover span:nth-of-type(34) {
+    animation-delay: -13.2s;
+}
+.anim-text-flow span:nth-of-type(35), .anim-text-flow-hover:hover span:nth-of-type(35) {
+    animation-delay: -13s;
+}
+.anim-text-flow span:nth-of-type(36), .anim-text-flow-hover:hover span:nth-of-type(36) {
+    animation-delay: -12.8s;
+}
+.anim-text-flow span:nth-of-type(37), .anim-text-flow-hover:hover span:nth-of-type(37) {
+    animation-delay: -12.6s;
+}
+.anim-text-flow span:nth-of-type(38), .anim-text-flow-hover:hover span:nth-of-type(38) {
+    animation-delay: -12.4s;
+}
+.anim-text-flow span:nth-of-type(39), .anim-text-flow-hover:hover span:nth-of-type(39) {
+    animation-delay: -12.2s;
+}
+.anim-text-flow span:nth-of-type(40), .anim-text-flow-hover:hover span:nth-of-type(40) {
+    animation-delay: -12s;
+}
+.anim-text-flow span:nth-of-type(41), .anim-text-flow-hover:hover span:nth-of-type(41) {
+    animation-delay: -11.8s;
+}
+.anim-text-flow span:nth-of-type(42), .anim-text-flow-hover:hover span:nth-of-type(42) {
+    animation-delay: -11.6s;
+}
+.anim-text-flow span:nth-of-type(43), .anim-text-flow-hover:hover span:nth-of-type(43) {
+    animation-delay: -11.4s;
+}
+.anim-text-flow span:nth-of-type(44), .anim-text-flow-hover:hover span:nth-of-type(44) {
+    animation-delay: -11.2s;
+}
+.anim-text-flow span:nth-of-type(45), .anim-text-flow-hover:hover span:nth-of-type(45) {
+    animation-delay: -11s;
+}
+.anim-text-flow span:nth-of-type(46), .anim-text-flow-hover:hover span:nth-of-type(46) {
+    animation-delay: -10.8s;
+}
+.anim-text-flow span:nth-of-type(47), .anim-text-flow-hover:hover span:nth-of-type(47) {
+    animation-delay: -10.6s;
+}
+.anim-text-flow span:nth-of-type(48), .anim-text-flow-hover:hover span:nth-of-type(48) {
+    animation-delay: -10.4s;
+}
+.anim-text-flow span:nth-of-type(49), .anim-text-flow-hover:hover span:nth-of-type(49) {
+    animation-delay: -10.2s;
+}
+.anim-text-flow span:nth-of-type(50), .anim-text-flow-hover:hover span:nth-of-type(50) {
+    animation-delay: -10s;
+}
+.anim-text-flow span:nth-of-type(51), .anim-text-flow-hover:hover span:nth-of-type(51) {
+    animation-delay: -9.8s;
+}
+.anim-text-flow span:nth-of-type(52), .anim-text-flow-hover:hover span:nth-of-type(52) {
+    animation-delay: -9.6s;
+}
+.anim-text-flow span:nth-of-type(53), .anim-text-flow-hover:hover span:nth-of-type(53) {
+    animation-delay: -9.4s;
+}
+.anim-text-flow span:nth-of-type(54), .anim-text-flow-hover:hover span:nth-of-type(54) {
+    animation-delay: -9.2s;
+}
+.anim-text-flow span:nth-of-type(55), .anim-text-flow-hover:hover span:nth-of-type(55) {
+    animation-delay: -9s;
+}
+.anim-text-flow span:nth-of-type(56), .anim-text-flow-hover:hover span:nth-of-type(56) {
+    animation-delay: -8.8s;
+}
+.anim-text-flow span:nth-of-type(57), .anim-text-flow-hover:hover span:nth-of-type(57) {
+    animation-delay: -8.6s;
+}
+.anim-text-flow span:nth-of-type(58), .anim-text-flow-hover:hover span:nth-of-type(58) {
+    animation-delay: -8.4s;
+}
+.anim-text-flow span:nth-of-type(59), .anim-text-flow-hover:hover span:nth-of-type(59) {
+    animation-delay: -8.2s;
+}
+.anim-text-flow span:nth-of-type(60), .anim-text-flow-hover:hover span:nth-of-type(60) {
+    animation-delay: -8s;
+}
+.anim-text-flow span:nth-of-type(61), .anim-text-flow-hover:hover span:nth-of-type(61) {
+    animation-delay: -7.8s;
+}
+.anim-text-flow span:nth-of-type(62), .anim-text-flow-hover:hover span:nth-of-type(62) {
+    animation-delay: -7.6s;
+}
+.anim-text-flow span:nth-of-type(63), .anim-text-flow-hover:hover span:nth-of-type(63) {
+    animation-delay: -7.4s;
+}
+.anim-text-flow span:nth-of-type(64), .anim-text-flow-hover:hover span:nth-of-type(64) {
+    animation-delay: -7.2s;
+}
+.anim-text-flow span:nth-of-type(65), .anim-text-flow-hover:hover span:nth-of-type(65) {
+    animation-delay: -7s;
+}
+.anim-text-flow span:nth-of-type(66), .anim-text-flow-hover:hover span:nth-of-type(66) {
+    animation-delay: -6.8s;
+}
+.anim-text-flow span:nth-of-type(67), .anim-text-flow-hover:hover span:nth-of-type(67) {
+    animation-delay: -6.6s;
+}
+.anim-text-flow span:nth-of-type(68), .anim-text-flow-hover:hover span:nth-of-type(68) {
+    animation-delay: -6.4s;
+}
+.anim-text-flow span:nth-of-type(69), .anim-text-flow-hover:hover span:nth-of-type(69) {
+    animation-delay: -6.2s;
+}
+.anim-text-flow span:nth-of-type(70), .anim-text-flow-hover:hover span:nth-of-type(70) {
+    animation-delay: -6s;
+}
+.anim-text-flow span:nth-of-type(71), .anim-text-flow-hover:hover span:nth-of-type(71) {
+    animation-delay: -5.8s;
+}
+.anim-text-flow span:nth-of-type(72), .anim-text-flow-hover:hover span:nth-of-type(72) {
+    animation-delay: -5.6s;
+}
+.anim-text-flow span:nth-of-type(73), .anim-text-flow-hover:hover span:nth-of-type(73) {
+    animation-delay: -5.4s;
+}
+.anim-text-flow span:nth-of-type(74), .anim-text-flow-hover:hover span:nth-of-type(74) {
+    animation-delay: -5.2s;
+}
+.anim-text-flow span:nth-of-type(75), .anim-text-flow-hover:hover span:nth-of-type(75) {
+    animation-delay: -5s;
+}
+.anim-text-flow span:nth-of-type(76), .anim-text-flow-hover:hover span:nth-of-type(76) {
+    animation-delay: -4.8s;
+}
+.anim-text-flow span:nth-of-type(77), .anim-text-flow-hover:hover span:nth-of-type(77) {
+    animation-delay: -4.6s;
+}
+.anim-text-flow span:nth-of-type(78), .anim-text-flow-hover:hover span:nth-of-type(78) {
+    animation-delay: -4.4s;
+}
+.anim-text-flow span:nth-of-type(79), .anim-text-flow-hover:hover span:nth-of-type(79) {
+    animation-delay: -4.2s;
+}
+.anim-text-flow span:nth-of-type(80), .anim-text-flow-hover:hover span:nth-of-type(80) {
+    animation-delay: -4s;
+}
+.anim-text-flow span:nth-of-type(81), .anim-text-flow-hover:hover span:nth-of-type(81) {
+    animation-delay: -3.8s;
+}
+.anim-text-flow span:nth-of-type(82), .anim-text-flow-hover:hover span:nth-of-type(82) {
+    animation-delay: -3.6s;
+}
+.anim-text-flow span:nth-of-type(83), .anim-text-flow-hover:hover span:nth-of-type(83) {
+    animation-delay: -3.4s;
+}
+.anim-text-flow span:nth-of-type(84), .anim-text-flow-hover:hover span:nth-of-type(84) {
+    animation-delay: -3.2s;
+}
+.anim-text-flow span:nth-of-type(85), .anim-text-flow-hover:hover span:nth-of-type(85) {
+    animation-delay: -3s;
+}
+.anim-text-flow span:nth-of-type(86), .anim-text-flow-hover:hover span:nth-of-type(86) {
+    animation-delay: -2.8s;
+}
+.anim-text-flow span:nth-of-type(87), .anim-text-flow-hover:hover span:nth-of-type(87) {
+    animation-delay: -2.6s;
+}
+.anim-text-flow span:nth-of-type(88), .anim-text-flow-hover:hover span:nth-of-type(88) {
+    animation-delay: -2.4s;
+}
+.anim-text-flow span:nth-of-type(89), .anim-text-flow-hover:hover span:nth-of-type(89) {
+    animation-delay: -2.2s;
+}
+.anim-text-flow span:nth-of-type(90), .anim-text-flow-hover:hover span:nth-of-type(90) {
+    animation-delay: -2s;
+}
+.anim-text-flow span:nth-of-type(91), .anim-text-flow-hover:hover span:nth-of-type(91) {
+    animation-delay: -1.8s;
+}
+.anim-text-flow span:nth-of-type(92), .anim-text-flow-hover:hover span:nth-of-type(92) {
+    animation-delay: -1.6s;
+}
+.anim-text-flow span:nth-of-type(93), .anim-text-flow-hover:hover span:nth-of-type(93) {
+    animation-delay: -1.4s;
+}
+.anim-text-flow span:nth-of-type(94), .anim-text-flow-hover:hover span:nth-of-type(94) {
+    animation-delay: -1.2s;
+}
+.anim-text-flow span:nth-of-type(95), .anim-text-flow-hover:hover span:nth-of-type(95) {
+    animation-delay: -1s;
+}
+.anim-text-flow span:nth-of-type(96), .anim-text-flow-hover:hover span:nth-of-type(96) {
+    animation-delay: -0.8s;
+}
+.anim-text-flow span:nth-of-type(97), .anim-text-flow-hover:hover span:nth-of-type(97) {
+    animation-delay: -0.6s;
+}
+.anim-text-flow span:nth-of-type(98), .anim-text-flow-hover:hover span:nth-of-type(98) {
+    animation-delay: -0.4s;
+}
+.anim-text-flow span:nth-of-type(99), .anim-text-flow-hover:hover span:nth-of-type(99) {
+    animation-delay: -0.2s;
+}
+.anim-text-flow span:nth-of-type(100), .anim-text-flow-hover:hover span:nth-of-type(100) {
+    animation-delay: 0s;
+}
+
+
+
+/* JUMP */
+.jumpAnim span {
+    display: inline-block;
+    /*-webkit-animation: bounce 2s ease infinite alternate; !* Увеличено с 0.3s до 0.5s *!*/
+}
+
+.jumpAnim span:nth-child(2) {
+    -webkit-animation-delay: 0.2s;
+}
+
+.jumpAnim span:nth-child(3) {
+    -webkit-animation-delay: 0.4s;
+}
+
+.jumpAnim span:nth-child(4) {
+    -webkit-animation-delay: 0.6s;
+}
+
+.jumpAnim span:nth-child(5) {
+    -webkit-animation-delay: 0.8s;
+}
+
+.jumpAnim span:nth-child(6) {
+    -webkit-animation-delay: 1s;
+}
+
+.jumpAnim span:nth-child(7) {
+    -webkit-animation-delay: 1.2s;
+}
+
+.jumpAnim span:nth-child(8) {
+    -webkit-animation-delay: 0.4s;
+}
+
+.jumpAnim span:nth-child(9) {
+    -webkit-animation-delay: 0.6s;
+}
+
+.jumpAnim span:nth-child(10) {
+    -webkit-animation-delay: 0.8s;
+}
+
+.jumpAnim span:nth-child(11) {
+    -webkit-animation-delay: 1s;
+}
+
+.jumpAnim span:nth-child(12) {
+    -webkit-animation-delay: 1.2s;
+}
+
+.jumpAnim span:nth-child(13) {
+    -webkit-animation-delay: 1.4s;
+}
+
+.jumpAnim span:nth-child(14) {
+    -webkit-animation-delay: 1.6s;
+}
+
+@-webkit-keyframes bounce {
+    100% {
+        top: -20px;
+        text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
+        0 5px 0 #ccc, 0 6px 0 #ccc, 0 7px 0 #ccc, 0 8px 0 #ccc, 0 9px 0 #ccc,
+        0 50px 25px rgba(0, 0, 0, 0.2);
+    }
+}
