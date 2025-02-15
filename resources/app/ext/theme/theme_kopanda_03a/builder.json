@@ -1,0 +1,19 @@
+{
+    "name":{
+        "ja":"カジュアル　縦",
+        "en":"Casual Vertically",
+        "ru":"Casual Vertically"
+    },
+    "pm":{
+        "font_color":"0x383C5F", 
+        "name_color":"0xF5F5F5",  
+        "frame_opacity":255  
+    },
+    "glink":"ts03a",
+    "pro":0,
+    "width":640,
+    "height":960,
+    "author":"kopanda"
+    
+}
+
