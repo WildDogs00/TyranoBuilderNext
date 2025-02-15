@@ -1,0 +1,9 @@
+{
+    "array_font":[{"name":"ゴシック体","val":"sans-serif,'メイリオ'"},{"name":"明朝体","val":"serif,'游明朝'"},{"name":"筆記体","val":"cursive"},{"name":"ファンタジー","val":"fantasy"},{"name":"等幅","val":"monospace"}],
+    "vertical":"true",
+    "tutorial_url":"http://b.tyrano.jp/tutorial",
+    "live2d_confirm_url":"https://www.live2d.jp/terms/live2d-proprietary-software-license-agreement/",
+    "bbs_url":"http://tyranobuilder.bbs.fc2.com/",
+    "plugin_library_url":"https://plugin.tyrano.jp/item/search?kind=2"
+}
+
