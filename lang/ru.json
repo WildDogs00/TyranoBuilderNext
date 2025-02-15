@@ -1,0 +1,22 @@
+{
+  "array_font": [
+    {
+      "name": "Arial",
+      "val": "Arial"
+    },
+    {
+      "name": "Georgia",
+      "val": "Georgia"
+    },
+    {
+      "name": "Tahoma",
+      "val": "Tahoma"
+    },
+    {
+      "name": "TimesNewRoman",
+      "val": "serif"
+    }
+  ],
+  "vertical": "true",
+  "ティラノスクリプト": "TyranoScript"
+}
