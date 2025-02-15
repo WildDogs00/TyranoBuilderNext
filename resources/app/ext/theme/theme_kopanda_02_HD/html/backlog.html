@@ -1,0 +1,75 @@
+<div class="display_menu">
+
+	<div class="menu_item" style="position:absolute; top:44px; left:1104px;">
+	<a href="javascript:void(0)"><img class="menu_close" src="data/others/plugin/theme_kopanda_02_HD/image/system/menu_button_close.png" /></a>
+	</div>
+
+	<div style="clear:both"></div>
+
+	<img class="button_smart button_arrow_up" src='data/others/plugin/theme_kopanda_02_HD/image/system/arrow_up.png' style='cursor:pointer;left:760px;top:36px;position:absolute;'>
+	<img class="button_smart button_arrow_down" src='data/others/plugin/theme_kopanda_02_HD/image/system/arrow_down.png' style='cursor:pointer;left:640px;top:36px;position:absolute;'>
+
+<div class="log_body" id="touchbox"></div>
+
+</div>
+
+<img src='data/others/plugin/theme_kopanda_02_HD/image/system/menu_log_bg.png' style='left:0;top:0;width:100%;height:100%;position:absolute;z-index:100' />
+
+<script class="menu_close">
+	var tmp_src = "";
+	$(".menu_close").hover(function(){
+		tmp_src = $(this).find("img").attr("src");
+		var img_src = tmp_src.replace(".gif","2.gif").replace(".png","2.png");
+		$(this).find("img").attr("src",img_src);
+	},
+	function(){
+		//���Ƃɂ��ǂ�
+		$(this).find("img").attr("src",tmp_src);
+	});
+</script>
+
+<script>
+
+	$(function(){
+	var box = $('#touchbox')[0];
+	var touchStartPositionX;
+	var touchStartPositionY;
+	var touchMovePositionX;
+	var touchMovePositionY;
+	var moveFarX;
+	var moveFarY;
+	var startScrollX;
+	var startScrollY;
+	var moveScrollX;
+	var moveScrollY;
+
+	box.addEventListener("touchstart",touchHandler,false);
+	box.addEventListener("touchmove",touchHandler,false);
+
+	function touchHandler(e){
+		var touch = e.touches[0];
+		if(e.type == "touchstart"){
+			touchStartPositionX = touch.pageX;
+			touchStartPositionY = touch.pageY;
+			//�^�b�`�O�X�N���[�����Ƃ�
+			startScrollX = $('#touchbox').scrollLeft();
+			startScrollY = $('#touchbox').scrollTop();
+		}
+		if(e.type == "touchmove"){
+			e.preventDefault();
+			//���݂̍��W���擾
+			touchMovePositionX = touch.pageX;
+			touchMovePositionY = touch.pageY;
+			//�����Ƃ�
+			moveFarX = touchStartPositionX - touchMovePositionX;
+			moveFarY = touchStartPositionY - touchMovePositionY;
+			//�X�N���[���𓮂���
+			moveScrollX = startScrollX +moveFarX;
+			moveScrollY = startScrollY +moveFarY;
+			$('#touchbox').scrollLeft(moveScrollX);
+			$('#touchbox').scrollTop(moveScrollY);
+		}
+	}
+});
+
+</script>

@@ -1,0 +1,18 @@
+{
+    "name":{
+        "ja":"デジタル HD",
+        "en":"Digital HD",
+        "ru":"Digital HD"
+    },
+    "pm":{
+        "font_color":"0x333333", 
+        "name_color":"0x48D1CC",  
+        "frame_opacity":200  
+    },
+    "glink":"ts02",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda"
+    
+}
