@@ -1,0 +1,28 @@
+{
+  "name": "vnegame",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "adm-zip": "^0.4.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+   "window": {
+    "title": "",
+    "width": 960,
+    "height": 640,
+    "min_width": 100,
+    "min_height": 100,
+     "resize":true,
+     "displayFullScreenMode":true,
+    "devtools":false
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
