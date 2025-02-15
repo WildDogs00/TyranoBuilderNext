@@ -1,0 +1,84 @@
+<div id="make_scenario" class="row-fluid">
+    <div class="col-md-6 scrollY">
+        <div class="x_panel">
+
+            <form class="form-horizontal form-label-left">
+                <label class="vne-control-label vne-md-content-margin">{{:_s("Тип сборки")}}</label>
+                <div class="form-group vne-md-content">
+                    <select ts="selectExportType" class="form-control">
+                        <option value="browser">{{:_s("Приложение под браузер")}}</option>
+                        <option value="win">{{:_s("Приложение для Windows")}}</option>
+                        <option value="mac">{{:_s("Приложение для Mac")}}</option>
+                        <option value="linux">{{:_s("Приложение для Linux")}}</option>
+                        <option value="ios">{{:_s("Приложение для iOS")}}</option>
+                        <option value="android">{{:_s("Приложение для Android")}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="vne-control-label vne-md-content-margin">{{:_s("Поддерживаемая разрядность")}}</label>
+                    <div class="vne-md-content">
+                        <div class="radio">
+                            <input type="radio" class="btn-check active" name="options" id="option1" autocomplete="on" ts="radioBit64" checked>
+                            <label class="btn darkTheme-radio-button" for="option1">64bit</label>
+
+                            <input type="radio" class="btn-check " name="options" id="option2" autocomplete="off" ts="radioBit32">
+                            <label class="btn darkTheme-radio-button" for="option2">32bit</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="vne-control-label vne-md-content-margin">{{:_s("Установить свою иконку")}}</label>
+                    <div class="vne-md-content">
+                        <div class="checkbox form-check form-switch">
+                            <label>
+                                <input type="checkbox" ts="checkIcon" value="" class="checkbox form-check-input" style="width: 40px !important;">
+                                {{:_s("Установка своей иконки приложения")}}（<span
+                                    ts="labelIcon">{{:_s("Файл не выбран")}}</span>）
+                            </label>
+                            <div>
+                                <button type="button" ts="btnFileIcon" class="btn-default">{{:_s("Выбрать иконку")}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="vne-control-label vne-md-content-margin">{{:_s("Окно")}}</label>
+                    <div class="vne-md-content">
+                        <div class="checkbox form-check form-switch">
+                            <label>
+                                <input type="checkbox" ts="checkShrinkWindow" class="checkbox form-check-input" style="width: 40px !important;">
+                                {{:_s("Разрешить изменение размера игрового экрана")}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="vne-control-label vne-md-content-margin">{{:_s("Файлы")}}</label>
+                    <div class="vne-md-content">
+                        <div class="checkbox form-check form-switch">
+                            <label>
+                                <input type="checkbox" ts="checkAsar" class="checkbox form-check-input" style="width: 40px !important;" checked>
+                                {{:_s("Скрыть файлы")}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="vne-control-label vne-md-content-margin">{{:_s("Путь экспорта")}}</label>
+                    <div class="vne-md-content" style="height: 42px; margin-bottom: 5px !important;">
+                        <input type="text" disabled="disabled" ts="textExportDir"
+                               class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <span ts="btnSubmitExport" class="darkTheme-export-button" title='{{:_s("Запустить экспорт проекта")}}'><i
+            class="fa-solid fa-file-export"></i></span>
+</div>

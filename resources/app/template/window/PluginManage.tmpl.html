@@ -1,0 +1,96 @@
+<div class="row">
+
+    <div class="col-sm-5">
+
+        <label class="vne-control-label vne-md-content-margin"
+               style="margin-top:10px">{{:_s("Установленные плагины")}}</label>
+        <div class="vne-md-content">
+            <select class="select_plugin form-control" id="form-field-select-2" size=10
+                    style="margin-top:10px;height: 188px !important; padding: 5px !important;">
+            </select>
+            <br>
+            <br>
+            <div class="form-group chara_add_block checkbox form-check form-switch" style="margin-top:10px; display: none">
+                <input id="check_plugin_dlc" class="check_plugin_dlc checkbox form-check-input" type="checkbox" ><label for="check_plugin_dlc">
+                {{:_s("Выберите из DLC")}}</label>
+            </div>
+            <div class="form-group chara_add_block area_select_plugin_dlc" style="width:180px;display:none">
+                <select id="select_plugin_dlc" class="select_plugin_dlc" style="width: 100px;max-width: 150px;">
+                </select>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 5px !important;"></div>
+        <div class="form-inline">
+            <div class="vne-md-content">
+                <div class="form-group chara_add_block">
+                    <input class="button_plugin_add btn-default" type="button" value='{{:_s("Добавить новый")}}'>
+                    <input class="button_plugin_remove btn-default" type="button" value='{{:_s("Удалить")}}'>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="col-sm-7">
+
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs vne-md-content-margin" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+        <span class="nav-link active vne-cs-tab-item" id="home-tab" data-bs-toggle="tab"
+              data-bs-target="#exp"
+              role="tab" aria-controls="home" aria-selected="true">{{:_s("Описание")}}</span>
+            </li>
+            <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" id="profile-tab" data-bs-toggle="tab" data-bs-target="#add_cmp"
+              role="tab" aria-controls="profile" aria-selected="false">{{:_s("Компоненты")}}</span>
+            </li>
+
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="exp" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <div style="float:left;">
+                    <label style="font-size:20px" class="plugin_title vne-control-label vne-md-content-margin"></label>
+                    <label class="plugin_text vne-control-label-help-text vne-md-content-margin">
+                    </label>
+
+                </div>
+                <div style="float:left; width: 362px" class="vne-md-content">
+                    <img class="plugin_img" style="display:none;width:170px;margin-bottom: 5px !important;"/>
+                </div>
+
+                <div style="clear:both"></div>
+            </div>
+            <div class="tab-pane" id="add_cmp" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <label class="vne-control-label vne-md-content-margin" style="float:left;width:300px;">
+                    {{:_s("Описание плагина")}}
+                </label>
+                <div style="float:left;">
+                    <div class="vne-md-content">
+                        <textarea id="textarea_add_cmp" class="plugin_text_area">{{:_s("Описание плагина")}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            <span>　</span>
+            <span class="text_not_pro" style="color:red;display:none">*Стандартные издания ограничены максимум двумя экземплярами.</span>
+<!--            <span style="float:right" class="button_plugin_lib_open vne_theme-open-site-plugin" data-bs-toggle="tooltip"-->
+<!--                  data-bs-placement="bottom" data-bs-title='{{:_s("プラグインライブラリを開く")}}'><i class="fa-solid fa-album-circle-plus"></i></span>-->
+        </div>
+
+    </div>
+    <div style="margin-bottom: 5px !important;"></div>
+</div>
+
+<script>
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+</script>

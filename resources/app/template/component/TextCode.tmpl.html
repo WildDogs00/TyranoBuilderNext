@@ -1,0 +1,75 @@
+
+
+<div item-type="sort" class="tb-main-cpn scenario component-box">
+            <div class="cpn-ico-block">
+              <div class="cpn-ico"><span class="tb-i-text" title='{{:_s("Текст")}}'></span></div>
+            </div>
+            <div class="cpn-block">
+              <div class="cpn-header-block">
+                <div class="cpn-header-title">
+                  <div class="cpn-title">{{:_s("Текст")}}</div>
+                  <div class="cpn-desc">{{:component.getTitle()}}</div>
+                </div>
+                <div class="cpn-header-nav">
+                  <span class="tb-i-chevron-down component_slide" title='{{:_s("Развернуть")}}'></span>
+                  <span class="tb-i-time component_remove" title='{{:_s("Удалить")}}'></span>
+                </div>
+              </div>
+              <div class="cpn-body">
+                  <button class="btn-default btn textAreaBtnF"
+                          style="font-size: 18px !important;padding: 0 5px 0 5px !important;margin-bottom: 5px !important;"
+                          data-text="[emb exp='f.ваша_переменная']"
+                          data-action="textAreaBtnF"
+                          title='{{:_s("По месту вставляет обычную переменную. Может понадобиться, например, чтобы вывести имя персонажа в тексте.")}}'><i class="fa-solid fa-f"></i></button>
+                  <button class="btn-default btn textAreaBtnSF"
+                          style="font-size: 18px !important;padding: 0 5px 0 5px !important;margin-bottom: 5px !important;"
+                          data-text="[emb exp='sf.ваша_переменная']"
+                          data-action="textAreaBtnSF"
+                          title='{{:_s("По месту вставляет системную переменную.")}}'><i class="fa-solid fa-s"></i><i class="fa-solid fa-f"></i></button>
+                  <button class="btn-default btn textAreaBtnMark"
+                          style="font-size: 18px !important;padding: 0 5px 0 5px !important;margin-bottom: 5px !important;"
+                          data-text='[mark color="" font_color="" size=""]'
+                          data-action="textAreaBtnMark"
+                          title='{{:_s("Изменяет цвет фона, текста и размер фона.")}}'><i class="fa-solid fa-m"></i></button>
+                  <button class="btn-default btn textAreaBtnMacros"
+                          style="font-size: 18px !important;padding: 0 5px 0 5px !important;margin-bottom: 5px !important;"
+                          data-text='[graph storage=""]'
+                          data-action="textAreaBtnMacros"
+                          title='{{:_s("Вставляет вызов макроса в текст.")}}'><i class="fa-solid fa-m"></i><i class="fa-duotone fa-a"></i></button>
+                  <button class="btn-default btn textAreaBtnImg"
+                          style="font-size: 18px !important;padding: 0 5px 0 5px !important;margin-bottom: 5px !important;"
+                          data-text='[graph storage=""]'
+                          data-action="textAreaBtnImg"
+                          title='{{:_s("Вставляет изображение в текст.")}}'><i class="fa-solid fa-image"></i></button>
+                  <button class="btn-default btn textAreaBtnLink"
+                          style="font-size: 18px !important;padding: 0 5px 0 5px !important;margin-bottom: 5px !important;"
+                          data-text='[link target=]'
+                          data-action="textAreaBtnLink"
+                          title='{{:_s("Вставляет гиперссылку в текст.")}}'><i class="fa-solid fa-l"></i></button>
+                  <button class="btn-default btn textAreaBtnP"
+                          style="font-size: 18px !important;padding: 0 5px 0 5px !important;margin-bottom: 5px !important;"
+                          data-text='[target=]'
+                          data-action="textAreaBtnP"
+                          title='{{:_s("Вставляем теги в текст.")}}'><i class="fa-solid fa-bars"></i></button>
+                  <button class="btn-default btn textAreaBtnVo"
+                          style="font-size: 18px !important;padding: 0 5px 0 5px !important;margin-bottom: 5px !important;"
+                          data-text='[target=]'
+                          data-action="textAreaBtnVo"
+                          title='{{:_s("Вставляем теги озвученной реплики персонажа в текст.")}}'><i class="fa-solid fa-v"></i><i class="fa-solid fa-o"></i></button>
+                  <button class="btn-default btn textAreaBtnFormatText"
+                          style="font-size: 18px !important;padding: 0 5px 0 5px !important;margin-bottom: 5px !important;"
+                          data-text='[target=]'
+                          data-action="textAreaBtnFormatText"
+                          title='{{:_s("Форматирование текста.")}}'><i class="fa-regular fa-text-width"></i></button>
+                  <button class="btn-default btn textAreaBtnFormatText"
+                          style="font-size: 18px !important;padding: 0 5px 0 5px !important;margin-bottom: 5px !important;"
+                          data-text='[target=]'
+                          data-action="textAreaBtnAnimationText"
+                          title='{{:_s("Анимация текста.")}}'><i class="fa-solid fa-circle-notch"></i></button>
+                <textarea id="editor" wrap="on" style="height:80px" class="form-control textarea_">{{:component.getText()}}</textarea>
+              </div>
+            </div>
+    <script src="js/vne_theme/theme.core.js"></script>
+    <link href="js/vne_theme/lib/themes/classic.min.css" rel="stylesheet" type="text/css">
+    <script src="js/vne_theme/lib/pickr.min.js"></script>
+</div>

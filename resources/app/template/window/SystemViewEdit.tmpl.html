@@ -1,0 +1,166 @@
+<div style="box-sizing:content-box">
+    <style>
+
+    	#bound_select {
+    		-webkit-box-sizing: content-box;
+    	    -moz-box-sizing: content-box;
+    	    box-sizing: content-box;
+    	}
+
+    	.button {
+    		-webkit-box-sizing: content-box;
+    	    -moz-box-sizing: content-box;
+    	    box-sizing: content-box;
+    	}
+
+
+    </style>
+
+	<div id="bound_area" style="position:relative;">
+
+
+    	<div style="position:absolute;z-index:9999999999">
+    		<div id="bound_panel" style="padding:5px;width:400px;height:255px;" class="darkTheme-bp-panel">
+    			<div class="vne_help_project_area area_image vne-md-content" style="position: relative;top: 5px;width: 389px" >
+        			<div style="float:left;">
+        				<div style="padding:4px">
+        					<select class="select_img tb_select_image_style" size="5" ></select>
+        				</div>
+                    </div>
+                    <div style="float:left">
+
+                        <div style="padding:4px">
+        					<input class="btn-default" id="button_file_img" type="button" value='{{:_s("Выбрать изображение")}}' />
+        				</div>
+
+        				<div class="area_width" style="padding:4px">
+            				{{:_s("Размер")}}
+        					<div>
+                                <input class="text_sysview_img_size form-control;" style="width:60px;background-color:white" type="text" />px
+                            </div>
+        				</div>
+
+						<br>
+        				<div style="padding:4px" class="checkbox form-check form-switch">
+        					<input type="checkbox" class="check_display checkbox form-check-input"  />　{{:_s("Скрыть изображение")}}
+    				    </div>
+
+                    </div>
+
+                    <div style="clear:both"></div>
+
+    			</div>
+
+    			<div class="vne_help_project_area area_prop" style="display:none" >
+
+    				<div style="float:left;">
+        				<div style="padding:4px">
+        					<select class="select_prop" size="5" style="width:120px;height:120px;font-size:10px" ></select>
+        				</div>
+                    </div>
+                    <div style="float:left">
+
+                        <div class="part_input part_input_color" style="padding:4px">
+                            {{:_s("Цвет")}}:
+                            <input class="text_font_color " style="width:100px;height:30px"  value=""  type="text" />
+					    </div>
+					    <div class="part_input part_input_size" style="padding:4px">
+					        {{:_s("Размер")}}:
+					        <input class="text_font_size spinner-1 form-control;" style="width:60px;background-color:white" type="text" />
+				        </div>
+                        <div class="part_input part_input_family" style="padding:4px">
+					        {{:_s("Изменить шрифт")}}:
+					        <select class="select_font" ></select>
+				        </div>
+
+                    </div>
+
+                    <div style="clear:both"></div>
+
+    			</div>
+
+    			<div style="position:absolute;right:10px;bottom:10px">
+    					<input class="btn-default" id="button_submit" type="button" value='{{:_s("Принять")}}' />
+    			</div>
+
+
+    		</div>
+
+    	</div>
+
+    	<div id="bound_select" style="z-index:99999;position:absolute;cursor:move" class="event-setting-element">
+    	</div>
+
+        {{if view_size == "menu" }}
+
+        	<div style="margin-top:100px;position:absolute;z-index:2;width:100%">
+        		<div  style="position:relative;margin-top:3%;text-align:center;">
+        		    <img class="menu_save" data-kind="img_change" src="" />
+        		</div>
+
+        		<div  style="position:relative;margin-top:3%;text-align:center;cursor:pointer">
+        		    <img class="menu_load" data-kind="img_change" src="" />
+        		</div>
+
+        		<div  style="position:relative;margin-top:3%;text-align:center;cursor:pointer">
+        		    <img class="menu_window_close" data-kind="img_change" src="" />
+        		</div>
+
+        		<div  style="position:relative;margin-top:3%;text-align:center;cursor:pointer">
+        		    <img class="menu_skip" data-kind="img_change" src="" />
+        		</div>
+
+        		<div  style="position:relative;margin-top:3%;text-align:center;cursor:pointer">
+        		    <img class="menu_back_title" data-kind="img_change" src="" />
+        		</div>
+        	</div>
+
+    	{{/if}}
+
+
+    	{{if view_size == "menu1280" }}
+
+        	<div style="margin-top:50px;position:absolute;z-index:2;width:100%">
+        		<div  style="position:relative;margin-top:2%;text-align:center;">
+        		    <img class="menu_save" data-kind="img_change" src="" />
+        		</div>
+
+        		<div  style="position:relative;margin-top:2%;text-align:center;cursor:pointer">
+        		    <img class="menu_load" data-kind="img_change" src="" />
+        		</div>
+
+        		<div  style="position:relative;margin-top:2%;text-align:center;cursor:pointer">
+        		    <img class="menu_window_close" data-kind="img_change" src="" />
+        		</div>
+
+        		<div  style="position:relative;margin-top:2%;text-align:center;cursor:pointer">
+        		    <img class="menu_skip" data-kind="img_change" src="" />
+        		</div>
+
+        		<div  style="position:relative;margin-top:2%;text-align:center;cursor:pointer">
+        		    <img class="menu_back_title" data-kind="img_change" src="" />
+        		</div>
+        	</div>
+
+    	{{/if}}
+
+
+
+    	<div class="menu_item " style="position:absolute;right:10px;top:10px;z-index:2">
+    	    <a href="#"><img class="menu_close" src="" data-kind="img_change"  /></a>
+    	</div>
+
+
+        <div style='clear:both'></div>
+
+        <img class="button_smart button_arrow_up"  src='' style='cursor:pointer;left:670px;top:20px;position:absolute;'>
+        <img class="button_smart button_arrow_down" src='' style='cursor:pointer;left:760px;top:15px;position:absolute;'>
+
+    	<img class="img_label" data-kind="img_change"  src='' style='z-index:2;left:0;top:0;position:absolute;'>
+        <img class="img_bg_base" data-kind="img_change" src='' style='z-index:1;left:0;top:0;width:100%;height:100%;position:absolute;'>
+
+
+	</div>
+
+
+</div>

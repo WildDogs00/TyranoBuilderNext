@@ -1,0 +1,348 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs vne-md-content-margin" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <span class="nav-link active vne-cs-tab-item" data-bs-toggle="tab"
+              data-bs-target="#image"
+              role="tab" aria-controls="home" aria-selected="true">{{:_s("Изображения")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" data-bs-toggle="tab" data-bs-target="#position"
+              role="tab" aria-controls="profile" aria-selected="false">{{:_s("Позиция")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" data-bs-toggle="tab" data-bs-target="#opacity"
+              role="tab" aria-controls="messages" aria-selected="false">{{:_s("Непрозрачность")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" data-bs-toggle="tab" data-bs-target="#ptext"
+              role="tab" aria-controls="messages" aria-selected="false">{{:_s("Имя")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" data-bs-toggle="tab" data-bs-target="#icon"
+              role="tab" aria-controls="messages" aria-selected="false">{{:_s("Иконка")}}</span>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="image" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <label class="vne-control-label vne-md-content-margin">
+            {{:_s("Ваше изображение текстового поля")}}
+        </label>
+        <div class="form-group vne-md-content">
+            <div class="checkbox form-check form-switch">
+                    <label>
+                        <input class="check_message_image checkbox form-check-input" type="checkbox" value="">
+                        {{:_s("Использовать нестандартное окно сообщения")}}</label>
+            </div>
+        </div>
+        <div style="display:none" class="area_select_image">
+            <label class="vne-control-label-help-text vne-md-content-margin">
+                {{:_s("Выберите нужное изображение")}}
+            </label>
+            <div class="vne-md-content">
+                <input class="button_image_select btn-default" type="button" value='{{:_s("Выбрать")}}'>
+                <div class="selected_image"></div>
+            </div>
+        </div>
+
+        <label class="vne-control-label-help-text vne-md-content-margin">{{:_s("Выбор стиля анимации появления окна сообщения")}}</label>
+        <div class="vne-md-content">
+            <select class="form-select vne_auto_save vne-md-content" name="vne_auto_save" id="textBoxAnimation">
+                <option value="Anim1">{{:_s("fadeIn")}}</option>
+                <option value="Anim2">{{:_s("slideInUp")}}</option>
+                <option value="Anim3">{{:_s("rollIn")}}</option>
+                <option value="Anim4">{{:_s("bounceIn")}}</option>
+                <option value="Anim5">{{:_s("zoomIn")}}</option>
+                <option value="">{{:_s("Нет")}}</option>
+            </select>
+        </div>
+    </div>
+    </div>
+    <div class="tab-pane" id="position" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">
+                {{:_s("Размер окна")}}
+            </label>
+            <div class="vne-md-content">
+                {{:_s("Ширина")}}
+                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="msg_width spinner-10 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="600" autocomplete="off" role="spinbutton">
+					</span>
+                px
+                {{:_s("Высота")}}
+                <span class="">
+						<input class="msg_height spinner-10 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="158" autocomplete="off" role="spinbutton">
+					</span>
+                px
+            </div>
+
+            <label class="vne-control-label vne-md-content-margin">
+                {{:_s("Позиция текстового окна")}}
+            </label>
+
+            <div class="vne-md-content">
+                {{:_s("По оси X")}}
+                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="msg_left spinner-10 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="20" autocomplete="off" role="spinbutton">
+					</span>
+                px
+                {{:_s("По оси Y")}}
+                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="msg_top spinner-10" type="text" value="" aria-valuemin="0" aria-valuenow="278"
+                               autocomplete="off" role="spinbutton">
+					</span>
+                px
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">
+                {{:_s("Позиция текста внутри текстового окна")}}
+            </label>
+            <div class="form-inline vne-md-content">
+                {{:_s("Сверху")}}
+                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="margint spinner-10 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="45" autocomplete="off" role="spinbutton">
+					</span>
+                px
+                {{:_s("Снизу")}}
+                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="marginb spinner-10 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="10" autocomplete="off" role="spinbutton">
+					</span>
+                px
+                <br>
+                <div class="form-inline">
+                    {{:_s("Слева")}}
+                    <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="marginl spinner-10 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="10" autocomplete="off" role="spinbutton">
+					</span>
+                    px
+                    {{:_s("Справа")}}
+                    <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="marginr spinner-10 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="20" autocomplete="off" role="spinbutton">
+					</span>
+                    px
+                </div>
+            </div>
+            <label class="vne-control-label-help-text vne-md-content-margin">
+                {{:_s("Отступ текста от внутренних краев текстового окна")}}
+            </label>
+        </div>
+    </div>
+    <div class="tab-pane" id="opacity" role="tabpanel" aria-labelledby="messages-tab" tabindex="0">
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">
+                {{:_s("Непрозрачность")}}
+            </label>
+            <div class="form-inline vne-md-content">
+					<span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<label>
+                            <input class="opacity spinner-1 form-control" type="text" value="" aria-valuemin="0"
+                            aria-valuenow="180" autocomplete="off" role="spinbutton">
+                        </label>
+					</span>
+                (0〜255)
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label class="vne-control-label vne-md-content-margin">
+                {{:_s("Цвет окна")}}
+            </label>
+            <div class="form-inline vne-md-content">
+                <input style="width:100px;height:30px" class="window_color input_setting form-control" value=""
+                       type="text">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">
+                {{:_s("Закругление углов")}}
+            </label>
+            <div class="form-inline vne-md-content">
+					<span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="radius spinner-1 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="0" autocomplete="off" role="spinbutton">
+					</span>
+            </div>
+            <label class="vne-control-label-help-text vne-md-content-margin">
+                {{:_s("10 – малое закругление, 30 – среднее закругление, 100 – сильное закругление")}}
+            </label>
+        </div>
+    </div>
+    <div class="tab-pane" id="ptext" role="tabpanel" aria-labelledby="settings-tab" tabindex="0">
+        <div class="form-group" style="float:left;margin-right:10px">
+
+            <label class="vne-control-label vne-md-content-margin">
+                {{:_s("Размер текста")}}
+            </label>
+            <div class="form-inline vne-md-content">
+					<span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="chara_name_size spinner-1 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="26" autocomplete="off" role="spinbutton"/>
+					</span>
+                px
+                <br>
+                <br>
+                <div class="checkbox form-check form-switch">
+                    <input class="chara_name_bold checkbox form-check-input" type="checkbox" value="">
+                    {{:_s("Жирный текст")}}
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="form-group" style="float:left">
+
+            <label class="vne-control-label vne-md-content-margin">
+                {{:_s("Цвет")}}
+            </label>
+            <div class="vne-md-content">
+                <input style="width:100px;height:30px" class="chara_name_color input_setting form-control color_text"
+                       value="" type="text">
+            </div>
+        </div>
+
+        <div style="clear:both"></div>
+
+
+        <div class="form-group">
+
+            <label class="vne-control-label vne-md-content-margin">
+                {{:_s("Положение имени")}}
+            </label>
+            <div class="form-inline vne-md-content">
+                {{:_s("По оси X")}}
+                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="chara_name_x spinner-10 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="30" autocomplete="off" role="spinbutton">
+					</span>
+                px
+                &nbsp&nbsp&nbsp
+                {{:_s("По оси Y")}}
+                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="chara_name_y spinner-10 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="288" autocomplete="off">
+					</span>
+                px
+            </div>
+        </div>
+
+
+        <div class="form-group" style="width:150px;float:left">
+
+            <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Обводка")}}</label>
+            <div class="vne-md-content">
+                <select style="width:100px" class="input_setting form-control flag_edge">
+                    <option value="false">{{:_s("Нет")}}</option>
+                    <option value="true">{{:_s("Да")}}</option>
+                </select>
+                <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Цвет обводки")}}</label><br/>
+                <input style="float:left;width:100px;height:30px" class="input_setting form-control color_text edge_color"
+                       value="" type="text">
+            </div>
+        </div>
+        <div class="form-group" style="width:150px;float:left">
+
+            <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Тень")}}</label>
+            <div class="vne-md-content">
+                <select style="width:100px" class="input_setting form-control flag_shadow">
+                    <option value="false">{{:_s("Нет")}}</option>
+                    <option value="true">{{:_s("Да")}}</option>
+                </select>
+                <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Цвет тени")}}</label><br/>
+                <input style="float:left;width:100px;height:30px" class="input_setting form-control color_text shadow_color"
+                       value="" type="text">
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <div class="tab-pane" id="icon" role="tabpanel" aria-labelledby="settings-tab" tabindex="0">
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">
+                {{:_s("Иконка ожидания клика")}}
+            </label>
+            <div class="form-inline vne-md-content">
+                <p><img class="wait_click_img" style="height:40px" src=""/></p>
+                <br>
+                <p><span style="cursor:pointer" class="button_img_file btn-default">{{:_s("Выбрать иконку (только .gif)")}}</span></p>
+            </div>
+
+        </div>
+
+        <br>
+        <div class="form-group vne-md-content">
+            <div class="form-inline form-check form-switch">
+                <input class="check_click_img_fix checkbox form-check-input" type="checkbox" value="">
+                {{:_s("Зафиксировать позицию иконки")}}
+            </div>
+        </div>
+
+        <div class="icon_position_area form-group">
+            <label class="vne-control-label vne-md-content-margin">
+                {{:_s("Позиция иконки")}}
+            </label>
+            <div class="form-inline vne-md-content">
+                {{:_s("Позиция по X")}}
+                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="icon_position_x spinner-10 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="288" autocomplete="off">
+					</span>
+                px
+                　
+                {{:_s("Позиция по Y")}}
+                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+						<input class="icon_position_y spinner-10 form-control" type="text" value="" aria-valuemin="0"
+                               aria-valuenow="288" autocomplete="off">
+					</span>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="button_sbm_block">
+    <input class="button_sbm btn btn-default darkTheme-md-content-btn" type="button" style="margin-right: 4px !important;" value='{{:_s("Применить")}}'>
+</div>
+
+<script>
+    const fs = require('fs');
+    const path = require('path');
+    const projectPath = app.getProjectPath();
+
+    $(document).ready(function() {
+        const savedAnimationName = localStorage.getItem('textBoxAnimation');
+        if (savedAnimationName) {
+            $('#textBoxAnimation').val(savedAnimationName);
+        }
+        $('#textBoxAnimation').change(function() {
+            const animationName = $(this).val();
+            const gameSettings = {
+                settings: {
+                    textBoxAnimation: animationName
+                }
+            };
+            localStorage.setItem('textBoxAnimation', animationName);
+
+            fs.writeFile(path.join(projectPath, './tyrano/gameSettings.json'), JSON.stringify(gameSettings, null, 2), function(err) {
+                if(err) {
+                    console.log(err);
+                }
+            });
+        });
+    });
+
+
+</script>

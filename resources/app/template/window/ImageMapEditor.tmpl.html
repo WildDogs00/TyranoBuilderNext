@@ -1,0 +1,279 @@
+<div class="parts_box" style="box-sizing:content-box; overflow: auto; height: 600px;">
+    <label class="vne-control-label-help-text vne-md-content-margin">{{:_s("Не забывайте нажать кнопку сохранения после редактирования!")}}</label>
+    <div id="jsoneditor" style="display: none;"></div>
+    <div class="container ach_container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="accordion" id="mapsAccordion">
+                    <div id="mapsContainer" class="container" style="background: none !important;"></div>
+                </div>
+
+                <template id="mapTemplate">
+                    <div class="accordion-item" style="border: none; padding: 3px !important; background: none !important; padding-top: 5px !important;">
+                        <h2 class="accordion-header" id="mapHeading">
+                            <button class="accordion-button collapsed ach_button" type="button" data-bs-toggle="collapse" data-bs-target="#mapCollapse" aria-expanded="false" aria-controls="mapCollapse">
+                                {{:_s("Карта")}}:&nbsp; <span class="map_name" data-key="name"> </span>
+                            </button>
+                        </h2>
+
+                        <div id="mapCollapse" class="accordion-collapse collapse" aria-labelledby="mapHeading" data-bs-parent="#mapsAccordion">
+                            <div class="card mb-3" style="border: none; padding: 5px !important; background: var(--vne-param-group-color);">
+                                <div class="card-header">
+                                    <input type="text" class="form-control" placeholder='{{:_s("Название карты")}}' data-key="name" title='{{:_s("Название карты")}}'>
+                                    <br>
+                                </div>
+                                <div class="card-body">
+                                    <div class="accordion" id="targetsAccordion">
+                                        <div id="targetsContainer" class="container" style="background: none !important;"></div>
+                                    </div>
+                                    <div style="margin-left: 10px !important; margin-bottom: 10px !important; margin-top: 10px !important;">
+                                        <button class="btn-default add-target">{{:_s("Добавить таргет-зону")}}</button>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn-default delete-map" style="margin-top: 5px !important;">{{:_s("Удалить карту")}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <template id="targetTemplate">
+                    <div class="accordion-item" style="border: none; padding: 3px !important; background: none !important; padding-top: 5px !important;">
+                        <h2 class="accordion-header" id="targetHeading">
+                            <button class="accordion-button collapsed target_button" type="button" data-bs-toggle="collapse" data-bs-target="#targetCollapse" aria-expanded="false" aria-controls="targetCollapse">
+                                {{:_s("Таргет-зона")}}:&nbsp; <span class="target_name" data-key="name"> </span>
+                            </button>
+                        </h2>
+
+                        <div id="targetCollapse" class="accordion-collapse collapse" aria-labelledby="targetHeading" data-bs-parent="#targetsAccordion">
+                            <div class="card mb-3" style="border: none; padding: 5px !important; background: var(--vne-param-group-color);">
+                                <div class="card-header">
+                                    <input type="text" class="form-control" placeholder='{{:_s("Название таргет-зоны")}}' data-key="name" title='{{:_s("Название таргет-зоны")}}'>
+                                    <hr>
+                                    <br>
+                                </div>
+                                <div class="card-body ime-card-body">
+                                    <div class="form-group row mb-2">
+                                        <label for="jump" class="col-sm-3 col-form-label">{{:_s("Имя прыжка")}}</label>
+                                        <div class="col-sm-9 mb-2">
+                                            <input type="text" class="form-control" id="jump" placeholder='{{:_s("Имя прыжка")}}' data-key="jump" title='{{:_s("Имя прыжка")}}'>
+                                        </div>
+                                        <label for="jump" class="col-sm-3 col-form-label">{{:_s("Координаты")}}</label>
+                                        <div class="col-sm-9 mb-2">
+                                            <input type="text" class="form-control" id="coords" placeholder='{{:_s("Имя прыжка")}}' data-key="coords" title='{{:_s("Имя прыжка")}}'>
+                                        </div>
+
+                                        <li  style="margin-bottom: 5px !important;margin-left: 8px !important;" class="btn-default mb-2" onclick="ImageMapEditorCoords()">
+                                        <span style="font-size: 19px;">
+                                                {{:_s("Получить координаты")}}
+                                        </span>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn-default delete-target" style="margin-top: 5px !important;">{{:_s("Удалить таргет-зону")}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <div style="margin-left: 10px !important; margin-bottom: 10px !important; margin-top: 10px !important;">
+                    <button id="addMap" class="btn-default">{{:_s("Добавить карту")}}</button>
+                    <button id="save" class="btn-default">{{:_s("Сохранить")}}</button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div id="mapPreview" class="mapPreview" style="position: sticky;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/vne_theme/theme.core.js"></script>
+    <script>
+
+        const mapsContainer = document.querySelector('#mapsContainer');
+        const mapTemplate = document.querySelector('#mapTemplate');
+        const targetTemplate = document.querySelector('#targetTemplate');
+        const editor = new JSONEditor(document.querySelector('#jsoneditor'));
+        const projectPatch = app.getProjectPath();
+
+        function loadJson() {
+            return fetch(projectPatch + 'data/system/imageMap.json')
+                .then(response => response.json())
+                .catch(error => console.error($.s('Ошибка:'), error));
+        }
+
+        function cleanJsonObject(obj) {
+            const cleanedObj = {};
+            Object.entries(obj).forEach(([key, value]) => {
+                if (typeof key === 'string' && key.trim() !== '' && key !== 'undefined') {
+                    if (value !== undefined) {
+                        cleanedObj[key] = value;
+                    }
+                }
+            });
+            return cleanedObj;
+        }
+
+        function saveJson(updatedJson, filePath) {
+            const cleanedJson = updatedJson;
+            const jsonString = JSON.stringify(cleanedJson, null, 2);
+            fs.writeFileSync(filePath, jsonString);
+        }
+
+        function updateInterface(json) {
+            mapsContainer.innerHTML = '';
+            Object.entries(json).forEach(([mapName, mapData]) => {
+                const mapCard = generateMapCard(mapName, mapData, json);
+                if (mapCard) {
+                    mapsContainer.appendChild(mapCard);
+                }
+            });
+        }
+
+        function generateMapCard(mapName, mapData, json) {
+            if (!mapTemplate || !mapTemplate.content) {
+                console.error("Шаблон mapTemplate не найден.");
+                return null;
+            }
+
+            const mapCard = mapTemplate.content.cloneNode(true);
+            let mapElement = mapCard.querySelector('.accordion-item');
+            mapElement.querySelector('.map_name').textContent = mapName;
+            const nameInput = mapElement.querySelector('input[data-key="name"]');
+            nameInput.value = mapName;
+
+            nameInput.addEventListener('input', (event) => {
+                const newName = event.target.value.trim();
+                if (newName && newName !== mapName) {
+                    if (!json[newName]) {
+                        // Переместить данные из старого ключа в новый
+                        json[newName] = {...json[mapName]};
+                        delete json[mapName];
+                        mapName = newName;
+                        editor.set(json);
+                        mapElement.querySelector('.map_name').textContent = newName;
+                        // Обновить идентификаторы аккордеона, чтобы они соответствовали новому названию карты
+                        setAccordion(mapElement, newName);
+                    } else {
+                        console.error("Карта с таким именем уже существует.");
+                    }
+                }
+            });
+
+            setAccordion(mapElement, mapName);
+
+            const targetsContainer = mapElement.querySelector('#targetsContainer');
+            Object.entries(mapData).forEach(([targetName, targetData]) => {
+                const targetCard = generateTargetCard(targetName, targetData, mapName, json);
+                if (targetCard) {
+                    targetsContainer.appendChild(targetCard);
+                }
+            });
+
+            mapElement.querySelector('.add-target').addEventListener('click', () => addTarget(mapName, json));
+            mapElement.querySelector('.delete-map').addEventListener('click', () => deleteMap(mapName, json));
+
+            return mapElement;
+        }
+
+        function generateTargetCard(targetName, targetData, mapName, json) {
+            if (!targetTemplate || !targetTemplate.content) {
+                console.error("Шаблон targetTemplate не найден.");
+                return null;
+            }
+
+            const targetCard = targetTemplate.content.cloneNode(true);
+            let targetElement = targetCard.querySelector('.accordion-item');
+            targetElement.querySelector('.target_name').textContent = targetName;
+
+            for (const input of targetElement.querySelectorAll('input')) {
+                const key = input.dataset.key;
+                input.value = targetData[key] || '';
+                input.addEventListener('input', () => {
+                    targetData[key] = input.value;
+                    editor.set(json);
+                    updateMapPreview(mapName, json);
+                });
+            }
+
+            setAccordion(targetElement, targetName, mapName);
+            targetElement.querySelector('.delete-target').addEventListener('click', () => deleteTarget(mapName, targetName, json));
+
+            return targetElement;
+        }
+
+        function setAccordion(element, id, parentId = '') {
+            const headingId = `heading-${parentId}-${id}`;
+            const collapseId = `collapse-${parentId}-${id}`;
+            element.querySelector('.accordion-header').id = headingId;
+            element.querySelector('.accordion-collapse').id = collapseId;
+            element.querySelector('.accordion-button').dataset.bsTarget = `#${collapseId}`;
+            element.querySelector('.accordion-button').ariaControls = collapseId;
+            element.querySelector('.accordion-collapse').ariaLabelledby = headingId;
+        }
+
+        function addTarget(mapName, json) {
+            const targetName = `target${Object.keys(json[mapName]).length + 1}`;
+            json[mapName][targetName] = {
+                coords: '',
+                jump: ''
+            };
+            editor.set(json);
+            updateInterface(json);
+        }
+
+        function deleteTarget(mapName, targetName, json) {
+            delete json[mapName][targetName];
+            editor.set(json);
+            updateInterface(json);
+        }
+
+        function deleteMap(mapName, json) {
+            delete json[mapName];
+            editor.set(json);
+            updateInterface(json);
+        }
+
+        function updateMapPreview(mapName, json) {
+            const previewElement = document.querySelector('#mapPreview');
+            previewElement.innerHTML = `<h3>${mapName}</h3>`;
+            Object.entries(json[mapName]).forEach(([targetName, targetData]) => {
+                const targetElement = document.createElement('div');
+                targetElement.innerHTML = `<strong>${targetName}:</strong> coords: ${targetData.coords}, jump: ${targetData.jump}`;
+                previewElement.appendChild(targetElement);
+            });
+        }
+
+        document.querySelector('#addMap').addEventListener('click', () => {
+            const json = editor.get();
+            const mapName = `map${Object.keys(json).length + 1}`;
+            json[mapName] = {};
+            editor.set(json);
+            updateInterface(json);
+        });
+
+        document.querySelector('#save').addEventListener('click', () => {
+            const json = editor.get();
+            const filePath = projectPatch + 'data/system/imageMap.json';
+            saveJson(json, filePath);
+            Swal.fire({
+                position: 'bottom-end',
+                icon: 'success',
+                title: $.s("Карты сохранены!"),
+                color: "var(--vne-text-color)",
+                background: "var(--vne-right-panel-color)",
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true
+            });
+        });
+
+        loadJson().then(json => {
+            editor.set(json);
+            updateInterface(json);
+        });
+    </script>
+</div>

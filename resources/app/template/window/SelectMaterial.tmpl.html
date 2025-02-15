@@ -1,0 +1,28 @@
+<div>
+			<div class="form-horizontal folder_select">
+              <div class="form-group">
+                <div class="col-sm-11 form-inline">
+                  <select class="form-control col-sm-6 select-category">
+                    <option value="bg">{{:_s("Фоны")}}</option>
+                    <option value="chara">{{:_s("Персонажи")}}</option>
+                  </select>
+                  <span style="margin:4px">{{:_s("Дважды кликните, чтобы загрузить ресурсы")}}</span>
+                  <div style="float:right">
+                 	<a id="page_prev" href="#" class="no-links" >＜＜prev</a>｜<a id="page_next" href="#" class="no-links">next＞＞</a>
+                  </div>
+                
+                </div>
+                <div style="padding-top:3px;display:none" class="col-sm-11 form-inline area_add_folder_input">
+                  <input type="text" class="form-control col-sm-6 text_add_folder">
+                  <input type="button" class="form-control col-sm-6 sbm_add_folder" value='{{:_s("Принять")}}' />
+                </div>
+                
+              </div>
+            </div>
+           
+			<div class="file_select_list_area" style="overflow:auto">
+              <ul class="list-unstyled list-add-file" style="height:230px;">
+                
+              </ul>
+			</div>
+</div>

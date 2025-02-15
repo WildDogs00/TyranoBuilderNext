@@ -1,0 +1,117 @@
+<div style="box-sizing:content-box">
+
+	<div id="bound_area" style="position:relative;">
+	<div style="position:absolute;z-index:9999999999">
+		<div id="bound_panel" class="darkTheme-bp-panel" style="width:400px;height:255px">
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs vne-md-content-margin" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+        <span class="nav-link active vne-cs-tab-item" data-bs-toggle="tab"
+              data-bs-target="#image"
+              role="tab" aria-controls="home" aria-selected="true" style="position: relative; top: 6px" >{{:_s("Основное")}}</span>
+				</li>
+				<li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" data-bs-toggle="tab"
+              data-bs-target="#effect"
+              role="tab" aria-controls="profile" aria-selected="false" style="position: relative; top: 6px" >{{:_s("Эффекты")}}</span>
+				</li>
+				<li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" data-bs-toggle="tab"
+              data-bs-target="#position"
+              role="tab" aria-controls="profile" aria-selected="false" style="position: relative; top: 6px" >{{:_s("Анимация")}}</span>
+				</li>
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div class="tab-pane active" id="image" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+					<div class="vne-md-content" style="position: relative;top: 9px;">
+						<div style="padding:4px">
+							X <span class="bound_x"></span>px
+							Y <span class="bound_y"></span>px
+						</div>
+						<br>
+						<div style="padding:4px">
+							{{:_s("Текст")}} <input type="text" class="text_ptext" style="width:300px" />
+						</div>
+						<div style="padding:4px">
+							{{:_s("Цвет")}}
+							<input class="text_font_color text_color" style="width:100px;height:30px"  value=""  type="text" />
+							{{:_s("Размер")}}
+							<input class="text_font_size spinner-1 form-control;" style="width:60px;background-color:white" type="text" />
+						</div>
+						<div style="padding:4px">
+							{{:_s("Изменить шрифт")}} <select class="select_font" ></select>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="effect" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+					<div class="vne-md-content" style="position: relative;top: 9px;">
+						<div style="padding:4px">
+							{{:_s("Эффекты")}} <br />
+							<select class="select_effect " >
+								<option value="0">{{:_s("Нет")}}</option>
+								<option value="1">{{:_s("Обводка")}}</option>
+								<option value="2">{{:_s("Тень")}}</option>
+							</select>
+						</div>
+						<div style="padding:4px">
+							{{:_s("Цвет")}} <br />
+							<input class="text_effect_color text_color" style="width:100px;height:30px"  value=""  type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="position" role="tabpanel" aria-labelledby="messages-tab" tabindex="0">
+					<div class="vne-md-content" style="position: relative;top: 9px;">
+						<div style="padding:4px" class="checkbox form-check form-switch">
+							<input type="checkbox" class="check_anim checkbox form-check-input"  />　{{:_s("Анимация текста")}} <span style="color:red;display:none" class="alert_pro_only">{{:_s("(Только Pro версия)")}}</span>
+						</div>
+						<br>
+						<div class="area_anim_effect" style="display:none">
+							<div style="padding:4px" class="checkbox form-check form-switch">
+								<input type="checkbox" class="check_fadeout checkbox form-check-input"  />　{{:_s("Исчезает после показа")}}
+							</div>
+
+							<div style="padding:4px">
+								{{:_s("Появление")}} <select class="select_anim_effect select_anim select_anim_effect_in" data-key="effect" data-type="in" ></select>
+							</div>
+							<div style="padding:4px">
+								{{:_s("Затухание")}} <select class="select_anim_effect select_anim select_anim_effect_out" data-key="effect" data-type="out" ></select>
+							</div>
+
+							<div style="padding:4px" class="checkbox form-check form-switch">
+								<input type="checkbox" class="check_wait checkbox form-check-input"  />　{{:_s("Ждать окончание анимации")}}
+							</div>
+
+							<input type="button" id="button_font_preview" value='{{:_s("Предпросмотр")}}' class="btn-default"/>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div style="position:absolute;left:10px;bottom:-40px">
+				<input type="button" id="button_bound_background" value='{{:_s("Изменить фон")}}' class="btn-default"/> 　
+				<input id="button_bound" type="button" value='{{:_s("Принять")}}' class="btn-default"/>
+			</div>
+
+
+		</div>
+
+	</div>
+
+	{{if bound_type == "ptext"}}
+	<div id="bound_select" style="z-index:99999;position:absolute;cursor:move;background: rgba(0,53,99,0.45);" class="event-setting-element">
+
+	</div>
+	{{/if}}
+
+	<img id="bound_background_img" style="z-index:1;width:100%;height:100%" src="" />
+
+	</div>
+	<canvas  id="pixel" class="pixel" style="pointer-events: none; width: 100%; height: 100%"></canvas >
+</div>
+<script src="js/vne_theme/theme.core.js"></script>
+<script>
+	gridBg();
+</script>

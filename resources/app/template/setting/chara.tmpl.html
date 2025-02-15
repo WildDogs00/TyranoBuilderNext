@@ -1,0 +1,115 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs vne-md-content-margin" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <span class="nav-link active vne-cs-tab-item" id="home-tab" data-bs-toggle="tab"
+              data-bs-target="#position"
+              role="tab" aria-controls="home" aria-selected="true">{{:_s("Позиция")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" id="profile-tab" data-bs-toggle="tab" data-bs-target="#face"
+              role="tab" aria-controls="profile" aria-selected="false">{{:_s("Выражение")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" id="messages-tab" data-bs-toggle="tab" data-bs-target="#focus"
+              role="tab" aria-controls="messages" aria-selected="false">{{:_s("Фокус")}}</span>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="position" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Позиционирование")}}</label>
+            <br/>
+            <div class="vne-md-content form-check form-switch">
+                <input class="check_chara_mode checkbox form-check-input" type="checkbox" value="">
+                {{:_s("Автоматически регулирует положение при выходе персонажа.")}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Анимация")}}</label>
+            <br/>
+            <div class="vne-md-content form-check form-switch">
+                <input class="check_chara_anim checkbox form-check-input" type="checkbox" value="">
+                {{:_s("Анимировать при изменении Состояния / Картинки.")}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Регулировка скорости позиционирования")}}</label>
+            <div class="form-inline vne-md-content">
+                <input class="text_pos_change_time" value="24" type="text">
+                {{:_s("ms")}}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Эффекты анимации")}}</label>
+            <br/>
+            <div class="vne-md-content">
+                <select class="select_chara_anim_mode input_setting form-control">
+                    <option value="linear">default</option>
+                    <option value="easeInQuad">easeInQuad</option>
+                    <option value="easeOutQuad">easeOutQuad</option>
+                    <option value="easeInOutQuad">easeInOutQuad</option>
+                    <option value="easeInCubic">easeInCubic</option>
+                    <option value="easeOutCubic">easeOutCubic</option>
+                    <option value="easeInOutCubic">easeInOutCubic</option>
+                    <option value="easeInQuart">easeInQuart</option>
+                    <option value="easeOutQuart">easeOutQuart</option>
+                    <option value="easeInOutQuart">easeInOutQuart</option>
+                    <option value="easeInQuint">easeInQuint</option>
+                    <option value="easeOutQuint">easeOutQuint</option>
+                    <option value="easeInOutQuint">easeInOutQuint</option>
+                    <option value="easeInExpo">easeInExpo</option>
+                    <option value="easeOutExpo">easeOutExpo</option>
+                    <option value="easeInCirc">easeInCirc</option>
+                    <option value="easeOutCirc">easeOutCirc</option>
+                    <option value="easeInOutCirc">easeInOutCirc</option>
+                    <option value="easeInElastic">easeInElastic</option>
+                    <option value="easeInBounce">easeInBounce</option>
+                    <option value="easeOutBounce">easeOutBounce</option>
+                    <option value="easeInOutBounce">easeInOutBounce</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane" id="face" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Скорость замены Состояния / Картинки")}}</label>
+            <div class="form-inline vne-md-content">
+                <input class="text_chara_mod_time" value="24" type="text">
+                {{:_s("ms")}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Состояние")}}</label>
+            <br/>
+            <div class="vne-md-content form-check form-switch">
+                <input class="check_memory_chara_face checkbox form-check-input" type="checkbox" value="">
+                {{:_s("Запоминать положение персонажа при выходе из сцены")}}
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane" id="focus" role="tabpanel" aria-labelledby="messages-tab" tabindex="0">
+        <div class="form-group">
+            <label style="margin-top: 10px !important;" class="vne-control-label-help-text vne-md-content-margin">{{:_s("Выделение говорящего персонажа")}}</label>
+            <div class="vne-md-content">
+                {{:_s("Эффект фокуса")}}
+                <select class="select_talk_focus input_setting form-control">
+                    <option value="none">{{:_s("Без эффекта")}}</option>
+                    <option value="brightness">{{:_s("Яркость")}}</option>
+                    <option value="blur">{{:_s("Размытие")}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="button_sbm_block">
+    <input class="button_sbm btn btn-default darkTheme-md-content-btn" type="button" style="margin-right: 4px !important;" value='{{:_s("Применить")}}'>
+</div>

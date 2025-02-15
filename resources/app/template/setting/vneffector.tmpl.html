@@ -1,0 +1,69 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs vne-md-content-margin" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <span class="nav-link active vne-cs-tab-item" id="home-tab" data-bs-toggle="tab"
+              data-bs-target="#edit"
+              role="tab" aria-controls="home" aria-selected="true">{{:_s("Настройка")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" id="profile-tab" data-bs-toggle="tab" data-bs-target="#text"
+              role="tab" aria-controls="profile" aria-selected="false">{{:_s("Текст")}}</span>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="edit" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Вкладки")}}</label>
+            <div class="vne-md-content checkbox form-check form-switch">
+                <input class="check_tab_mode checkbox form-check-input" type="checkbox" value="">
+                {{:_s("Включить вкладки сценария")}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Конфигурация компонентов (область инструментов)")}}</label>
+            <div class="vne-md-content">
+                <select class="input_setting form-control select_component_open">
+                    <option value="click">{{:_s("Свернуть / Развернуть по нажатию")}}</option>
+                    <option value="mouseover">{{:_s("Свернуть / Развернуть при наведении курсора мыши")}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Помощь")}}</label>
+            <div class="vne-md-content checkbox form-check form-switch">
+                <input class="check_show_help checkbox form-check-input" type="checkbox" value="">
+                {{:_s("Отображение строки подсказок")}}
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane" id="text" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <label class="vne-control-label vne-md-content-margin">{{:_s("Настройки текста")}}</label>
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Размер шрифта")}}</label>
+            <div class="vne-md-content">
+                <input style="width:200px" class="input_setting form-control spinner-1 text_cmp_font_size" type="text"
+                       value="12">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Высота текстового поля")}}</label>
+            <br/>
+            <div class="vne-md-content">
+                <input style="width:200px" class="input_setting form-control spinner-10 text_cmp_height" type="text"
+                       value="80">px
+            </div>
+        </div>
+        <span class="vne-control-label-help-text vne-md-content-margin">{{:_s("Примечание. Перезагрузите проект, чтобы применить новые настройки.")}}</span>
+    </div>
+</div>
+
+
+<div class="button_sbm_block">
+    <input class="button_sbm btn btn-default darkTheme-md-content-btn" type="button" style="margin-right: 4px !important;" value='{{:_s("Применить")}}'>
+</div>

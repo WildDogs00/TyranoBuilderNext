@@ -1,0 +1,45 @@
+<div class="page-content">
+    <div class="tb-menu">
+        <div class="tb-menu-inner">
+
+            <div class="vne-menu-nav vne-md-content-margin">
+                <span class="nav-item vne-cs-tab-item active" data-tab="component" data-nav="component">{{:_s("Компоненты")}}</span>
+                <span class="nav-item vne-cs-tab-item" data-tab="fav" data-nav="fav">{{:_s("Менеджер избранного")}}</span>
+            </div>
+
+            <div class="vne-menu-body">
+                <div id="tab-component" class="cpn-block tab-main vne-md-content"
+                     style="display:grid;height:400px; width: 100%">
+                    <div class="cpn-component-block" style="border:none;height:340px;overflow-y:scroll">
+                    </div>
+                    <div class="component_help" style="margin-left:323px;width:220px;height:340px;visibility: hidden;">
+                        <div class="component_help_area">
+                        </div>
+                    </div>
+                    <input type="button" class="btn_apply_component btn-default"
+                           style="font-size:12px;margin-left:0px;margin-top:10px;" value='{{:_s("Сохранить")}}'/>
+                </div>
+                <div id="tab-fav" class="cpn-block tab-main" style="height:360px">
+                    <div class="form-group">
+                        <label class="vne-control-label vne-md-content-margin">{{:_s("Выбрать избранное")}}</label>
+                        <div class="vne-md-content">
+                            <select style="width:300px;display:inline" class="form-control select_fav">
+                            </select>
+                            <input type="button" class="btn_delete_fav btn-default"
+                                   style="font-size:12px;margin-left:10px;margin-top:0px;" value='{{:_s("Удалить")}}'/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="vne-control-label vne-md-content-margin">{{:_s("Имя")}}</label>
+                        <div class="vne-md-content">
+                            <input type="text" style="width:300px" class="input_name form-control">
+                            <input type="button" class="btn_apply_fav btn-default"
+                                   style="font-size:12px;margin-left:0px;margin-top:10px;" value='{{:_s("Сохранить проект")}}' />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/vne_theme/theme.core.js"></script>
+</div>

@@ -1,0 +1,69 @@
+<div id="keyconfig" class="tab-pane active">
+    <ul class="nav navbar-nav nav-tabs vne-md-content-margin">
+        <li data-nav="key" class="active nav-item">
+            <span href="#keyconfig_key" class="nav-link vne-cs-tab-item">{{:_s("Клавиатура")}}</span>
+        </li>
+        <li data-nav="mouse" class="nav-item">
+            <span href="#keyconfig_mouse" class="nav-link vne-cs-tab-item">{{:_s("Мышь")}}</span>
+        </li>
+        <li data-nav="gesture" class="nav-item">
+            <span href="#keyconfig_smart" class="nav-link vne-cs-tab-item">{{:_s("Жесты (Смарт-Устройства)")}}</span>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="tab_keyconfig_key" class="tab-main" style="">
+            <div style="float:left; width: 360px">
+                <div class="tab-change area_key" style="padding:4px">
+                    <label class="vne-control-label vne-md-content-margin">{{:_s("Конфигурации")}}</label>
+                    <div class="vne-md-content">
+                        <input class="text_key" type="text" placeholder='{{:_s("Нажмите нужную клавишу")}}' style="width:130px;" />
+                        <input class="button_add_key vne-set-area-btn" type="button" value='{{:_s("Назначить")}}' />
+                    </div>
+                </div>
+                <div class="tab-change area_mouse" style="padding:4px">
+                    <div class="vne-md-content">
+                        <div >{{:_s("Конфигурация мыши")}}</div>
+                    </div>
+                </div>
+                <div class="tab-change area_gesture" style="padding:4px">
+                    <div class="vne-md-content">
+                        <div >{{:_s("Жесты")}}</div>
+                    </div>
+                </div>
+                <label class="vne-control-label vne-md-content-margin">
+                    {{:_s("Редактировать")}}
+                </label>
+                <div class="vne-md-content">
+                    <div style="padding:4px">
+                        <select class="select_key form-control vne-cont-bg" size="8" style="height:120px !important;font-size:12px" ></select>
+                    </div>
+                    <div class="tab-change area_key" style="padding-top: 5px !important;">
+                        <input class="button_remove_key vne-set-area-btn" type="button" value='{{:_s("Удалить")}}' />
+                    </div>
+                </div>
+            </div>
+            <div style="float:left">
+                <div style="padding:4px">
+                    <label class="vne-control-label vne-md-content-margin">{{:_s("Действие")}}</label>
+                    <div class="vne-md-content">
+                        <select class="select_action form-control" style="" >
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div id="tab_keyconfig_mouse" class="tab-main" style="display:none; margin-top: 5px!important;">
+            <div >{{:_s("Конфигурация мыши")}}</div>
+        </div>
+        <div id="tab_keyconfig_smart" class="tab-main" style="display:none">
+            <div >{{:_s("Жесты (только для смартфонов)")}}</div>
+        </div>
+    </div>
+    <div class="button_sbm_block">
+        <input class="button_sbm btn btn-default darkTheme-md-content-btn" type="button" style="margin-right: 4px !important;" value='{{:_s("Применить")}}'>
+    </div>
+</div>
+

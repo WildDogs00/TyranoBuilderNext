@@ -1,0 +1,858 @@
+<div class="parts_box" style="box-sizing:content-box; overflow: auto; height: 600px;">
+    <button id="updateUILE" class="btn-default" style="position: absolute;top: 8px;right: 11px;z-index: 5;" title='{{:_s("Обновить интерфейс. Может понадобиться чтобы не закрывать и снова открыть окно редактора, чтобы отобразить кнопки удаления.")}}'><i class="fa-solid fa-rotate-right"></i></button>
+    <label class="vne-control-label-help-text vne-md-content-margin">{{:_s("Не забывайте нажать кнопку сохранения после редактирования!")}}</label>
+    <div id="jsoneditor" style="display: none;"></div>
+    <div class="container ach_container" style="margin: 5px !important;"><div style="margin: 10px !important;">
+        <label for="languageSelector">{{:_s("Выберите язык для редактирования:")}}</label>
+        <select id="languageSelector" class="form-control btn-default" style="display: inline-block; width: auto;"></select>
+        <button id="addLanguage" class="btn-default">{{:_s("Добавить язык перевода")}}</button>
+        <button id="scanText" class="btn-default">{{:_s("Просканировать текст")}}</button>
+        <button onclick="scanImageTranslate()" class="btn-default">{{:_s("Просканировать изображения")}}</button>
+    </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="accordion" id="langSystemAccordion">
+                    <div id="langSystemContainer" class="container" style="background: none !important;"></div>
+                </div>
+                <template id="langSystemTemplate">
+                    <div class="accordion-item" style="border: none;padding: 3px !important;background: none !important;padding-top: 5px !important;">
+                        <h2 class="accordion-header" id="langSystemHeading">
+                            <button class="accordion-button collapsed ach_button" type="button" data-bs-toggle="collapse" data-bs-target="#langSystemCollapse" aria-expanded="false" aria-controls="langSystemCollapse">
+                                {{:_s("")}}<span class="ach_name"> </span> &nbsp;&nbsp; &nbsp;  <span class="ach_id"> </span>
+                            </button>
+                        </h2>
+                        <div id="langSystemCollapse" class="accordion-collapse collapse" aria-labelledby="langSystemHeading" data-bs-parent="#achievementsAccordion">
+                            <div class="card mb-3" style="border: none;padding: 5px !important;background: var(--vne-param-group-color);">
+                                <div class="card-body">
+                                </div>
+                                <div class="card-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div class="fend" style="margin-left: 10px !important; margin-bottom: 10px !important; margin-top: 10px !important;">
+                    <button id="save" class="btn-default">{{:_s("Сохранить")}}</button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div id="langPreview" class="achievementPreview" style="position: sticky;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const langSystemContainer = document.querySelector('#langSystemContainer');
+        const langSystemTemplate = document.querySelector('#langSystemTemplate');
+        const updateUIBtn = document.getElementById('updateUILE');
+        const editor = new JSONEditor(document.querySelector('#jsoneditor'));
+        const languageSelector = document.getElementById('languageSelector');
+        const projectPatch = app.getProjectPath();
+        const path = require('path');
+        const addLanguageBtn = document.querySelector('#addLanguage');
+        let globalJson = {};
+        let activeFileWatch = null;
+
+        function loadLanguages() {
+            const langDirectory = projectPatch + 'data/lang/';
+            const languageSelector = document.getElementById('languageSelector');
+            languageSelector.innerHTML = '';
+            fs.readdirSync(langDirectory).forEach(file => {
+                if (path.extname(file) === '.json') {
+                    const option = document.createElement('option');
+                    option.value = file;
+                    option.textContent = path.basename(file, '.json');
+                    languageSelector.appendChild(option);
+                }
+            });
+        }
+        function loadJsonByLanguage() {
+            const selectedLang = languageSelector.value;
+            const filePath = projectPatch + 'data/lang/' + selectedLang;
+
+            return fs.readFile(filePath, 'utf8')
+                .then(data => {
+                    const jsonData = JSON.parse(data);
+                    if (selectedLang === 'interface.json') {
+                        jsonData.__interfaceData = true;
+                    }
+                    return jsonData;
+                })
+                .catch(error => console.error($.s('Ошибка:'), error));
+        }
+
+        function safeId(key) {
+            return key.replace(/\W+/g, "_");
+        }
+
+        function generateCard(key, language, json) {
+            if(!langSystemTemplate.content) {
+                console.error("Template for langSystemTemplate is missing");
+                return null;
+            }
+            const card = langSystemTemplate.content.cloneNode(true).querySelector('.accordion-item');
+            if (!card) {
+                console.error("Could not find .accordion-item in the template");
+                return null;
+            }
+            updateCardElement(card, key, language, json);
+            card.querySelector('.accordion-collapse').addEventListener('show.bs.collapse', () => {
+                updateLangPreview();
+            });
+            const uniqueID = "langSystemCollapse_" + safeId(key);
+            card.querySelector('.accordion-header').id = "heading_" + uniqueID;
+            card.querySelector('.accordion-button').setAttribute("data-bs-target", "#" + uniqueID);
+            card.querySelector('.accordion-button').setAttribute("aria-controls", uniqueID);
+            card.querySelector('.accordion-collapse').id = uniqueID;
+            card.querySelector('.accordion-collapse').setAttribute("aria-labelledby", "heading_" + uniqueID);
+            return card;
+        }
+
+        function updateInterface(json) {
+            langSystemContainer.innerHTML = '';
+            globalJson = json;
+
+            if (json.__interfaceData) {
+                Object.entries(json).forEach(([key, translations]) => {
+                    if (key !== "__interfaceData") {
+                        const card = generateCard(key, translations[languageSelector.value], json);
+                        langSystemContainer.appendChild(card);
+                    }
+                });
+            } else {
+                Object.entries(json).forEach(([key, value]) => {
+                    const card = generateCard(key, value, json);
+                    langSystemContainer.appendChild(card);
+                });
+            }
+        }
+
+        if (languageSelector) {
+            languageSelector.addEventListener('change', function() {
+                loadJsonByLanguage().then(json => {
+                    globalJson = json;
+                    editor.set(json);
+                    updateInterface(json);
+                });
+            });
+        }
+
+        document.getElementById('updateUILE').addEventListener('click', function() {
+            loadJsonByLanguage().then(json => {
+                updateInterface(json);
+            });
+        });
+
+        function createDeleteButton(originalDiv, translatedDiv, originalText, updatedJson) {
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '{{:_s("Удалить")}}';
+            deleteButton.classList.add('btn', 'btn-danger', 'delete-button');
+            deleteButton.addEventListener('click', function() {
+                const selectedLang = document.getElementById('languageSelector').value.replace('.json', '');
+
+                if (updatedJson[selectedLang] && updatedJson[selectedLang][originalText]) {
+                    delete updatedJson[selectedLang][originalText];
+                }
+
+                originalDiv.remove();
+                translatedDiv.remove();
+            });
+            return deleteButton;
+        }
+
+        function createDeleteButtonForInterface(parentKey, translationContainer, originalDiv, translatedDiv, languageCode, updatedJson) {
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '{{:_s("Удалить")}}';
+            deleteButton.classList.add('btn', 'btn-danger', 'delete-button');
+            deleteButton.addEventListener('click', function() {
+
+                if (!updatedJson || !updatedJson[parentKey]) {
+                    console.error("updatedJson or parentKey is not valid", updatedJson, parentKey);
+                    return;
+                }
+                if (updatedJson[parentKey][languageCode]) {
+                    delete updatedJson[parentKey][languageCode];
+                }
+                translationContainer.remove();
+            });
+
+            return deleteButton;
+        }
+
+        function createDeleteKeyButton(parentKey, cardElement, updatedJson) {
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '{{:_s("Удалить блок")}}';
+            deleteButton.classList.add('btn', 'btn-danger', 'delete-key-button');
+
+            deleteButton.addEventListener('click', function() {
+                if (!updatedJson || !updatedJson[parentKey]) {
+                    console.error("updatedJson or parentKey is not valid", updatedJson, parentKey);
+                    return;
+                }
+                delete updatedJson[parentKey];
+                cardElement.remove();
+            });
+
+            return deleteButton;
+        }
+
+
+        function updateCardElement(cardElement, key, language, json) {
+            var updatedJson = globalJson;
+            const cardBody = cardElement.querySelector('.card-body');
+            const cardFooter = cardElement.querySelector('.card-footer');
+            const langSystemHeading = cardElement.querySelector('.accordion-header');
+            const selectedLang = document.getElementById('languageSelector').value.replace('.json', '');
+
+            if (selectedLang == "interface") {
+                cardElement.querySelector(".ach_name").textContent = key;
+
+                Object.entries(json[key]).forEach(([originalText, translatedText]) => {
+                    const translationContainer = document.createElement('div');
+                    translationContainer.setAttribute('class', 'translation-row');
+
+                    const originalDiv = document.createElement('div');
+                    originalDiv.innerHTML = `
+                        <label class="langString">{{:_s("Код перевода")}}</label>
+                        <input type="text" class="form-control original-text-input" value="${originalText}" data-original="${originalText}">
+                    `;
+                    translationContainer.appendChild(originalDiv);
+
+                    const translatedDiv = document.createElement('div');
+                    translatedDiv.innerHTML = `
+                        <label class="langString">{{:_s("Перевод")}}</label>
+                        <input type="text" class="form-control translated-text-input" value="${translatedText}">
+                    `;
+                    translationContainer.appendChild(translatedDiv);
+
+                    if (!updatedJson) {
+                        console.error("updatedJson is not defined!");
+                        return;
+                    }
+                    const deleteButton = createDeleteButtonForInterface(key, translationContainer, originalDiv, translatedDiv, originalText, updatedJson);
+                    deleteButton.style.cssText = `
+                            position: relative;
+                            top: -48px;
+                            right: -430px;
+                            font-size: 13px;
+                            opacity: 0.5;
+                            padding: 1px !important;
+                            border-top-right-radius: 0px;
+                            border-bottom-right-radius: 0px;
+                        `;
+                    translationContainer.appendChild(deleteButton);
+                    cardBody.appendChild(translationContainer);
+                });
+
+                // Кнопка "Добавить строку"
+                const addInnerButton = document.createElement('button');
+                addInnerButton.setAttribute('class', 'btn btn-default add-row-button');
+                addInnerButton.textContent = '{{:_s("Добавить строку")}}';
+                addInnerButton.style.cssText = `margin: 5px !important;`;
+
+                addInnerButton.addEventListener('click', function() {
+                    const translationContainer = document.createElement('div');
+                    translationContainer.setAttribute('class', 'translation-row');
+
+                    const newOriginalInput = document.createElement('input');
+                    newOriginalInput.setAttribute('type', 'text');
+                    newOriginalInput.setAttribute('class', 'form-control original-text-input');
+                    newOriginalInput.setAttribute('data-original', '');
+
+                    const originalDiv = document.createElement('div');
+                    originalDiv.innerHTML = '<label class="langString">{{:_s("Код перевода")}}</label>';
+                    originalDiv.appendChild(newOriginalInput);
+                    translationContainer.appendChild(originalDiv);
+
+                    const newTranslatedInput = document.createElement('input');
+                    newTranslatedInput.setAttribute('type', 'text');
+                    newTranslatedInput.setAttribute('class', 'form-control translated-text-input');
+
+                    const translatedDiv = document.createElement('div');
+                    translatedDiv.innerHTML = '<label class="langString">{{:_s("Перевод")}}</label>';
+                    translatedDiv.appendChild(newTranslatedInput);
+                    translationContainer.appendChild(translatedDiv);
+
+                    cardBody.appendChild(translationContainer);
+                });
+
+                const deleteKeyButton = createDeleteKeyButton(key, cardElement, updatedJson);
+                deleteKeyButton.style.cssText = `
+                            position: relative;
+                            top: -36px;
+                            right: -378px;
+                            font-size: 13px;
+                            opacity: 0.5;
+                            padding: 2px !important;
+                            z-index: 5;
+                        `;
+                langSystemHeading.appendChild(deleteKeyButton);
+
+
+                cardBody.appendChild(addInnerButton);
+
+                const fendDiv = document.querySelector('.fend');
+                if (!fendDiv.querySelector('.add-block-button')) {
+                    const addBlockButton = document.createElement('button');
+                    addBlockButton.setAttribute('class', 'btn btn-default add-block-button');
+                    addBlockButton.textContent = '{{:_s("Добавить блок")}}';
+                    addBlockButton.style.cssText = `
+                            position: absolute;
+                            margin-left: 5px !important;
+                        `;
+                    addBlockButton.addEventListener('click', function() {
+                        Swal.fire({
+                            title: '{{:_s("Введите слово или сочетание для перевода:")}}',
+                            input: 'text',
+                            color: "var(--vne-text-color)",
+                            background: "var(--vne-right-panel-color)",
+                            showCancelButton: true,
+                            confirmButtonText: '{{:_s("Подтвердить")}}',
+                            cancelButtonText: '{{:_s("Отмена")}}'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                const keyInput = result.value;
+                                if (keyInput && !json[keyInput]) {
+                                    json[keyInput] = {
+                                        "Test1": "Test1",
+                                        "Test2": "Test2"
+                                    };
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: '{{:_s("Ошибка!")}}',
+                                        text: '{{:_s("Ключ уже существует или введено неверное значение!")}}',
+                                        confirmButtonText: 'OK'
+                                    });
+                                }
+                            }
+                        });
+
+                    });
+                    fendDiv.appendChild(addBlockButton);
+
+                }
+            } else {
+                cardElement.querySelector(".ach_name").textContent = key;
+                cardElement.querySelector(".ach_id").textContent = language.ach_id || "";
+
+                if (key === "s") {
+                    return;
+                }
+
+                const addButton = document.createElement('button');
+                addButton.setAttribute('class', 'btn btn-default add-row-button');
+                addButton.textContent = '{{:_s("Добавить строку")}}';
+                addButton.style.cssText = `
+                margin: 5px !important;
+            `;
+
+                addButton.addEventListener('click', function() {
+                    const newOriginalInput = document.createElement('input');
+                    newOriginalInput.setAttribute('type', 'text');
+                    newOriginalInput.setAttribute('class', 'form-control original-text-input');
+                    newOriginalInput.setAttribute('data-original', '');
+
+                    const newTranslatedInput = document.createElement('input');
+                    newTranslatedInput.setAttribute('type', 'text');
+                    newTranslatedInput.setAttribute('class', 'form-control translated-text-input');
+
+                    newOriginalInput.addEventListener('input', function() {
+                        if (!json[selectedLang]) {
+                            json[selectedLang] = {};
+                        }
+                    });
+
+                    newTranslatedInput.addEventListener('input', function() {
+                        if (newOriginalInput.value && !json[selectedLang]) {
+                            json[selectedLang] = {};
+                        }
+                    });
+
+                    const newOriginalDiv = document.createElement('div');
+                    newOriginalDiv.innerHTML = '<label class="langString">{{:_s("Текст оригинальный")}}</label>';
+                    newOriginalDiv.appendChild(newOriginalInput);
+
+                    const newTranslatedDiv = document.createElement('div');
+                    newTranslatedDiv.innerHTML = '<label class="langString">{{:_s("Перевод")}}</label>';
+                    newTranslatedDiv.appendChild(newTranslatedInput);
+
+                    cardBody.appendChild(newOriginalDiv);
+                    cardBody.appendChild(newTranslatedDiv);
+                });
+
+                if (json[selectedLang]) {
+                    Object.entries(json[selectedLang]).forEach(([originalText, translatedText]) => {
+                        const originalDiv = document.createElement('div');
+                        originalDiv.innerHTML = `
+                            <label class="langString">{{:_s("Текст оригинальный")}}</label>
+                            <input type="text" class="form-control original-text-input" value="${originalText}" data-original="${originalText}">
+                        `;
+
+                        const translatedDiv = document.createElement('div');
+                        translatedDiv.innerHTML = `
+                            <label class="langString">{{:_s("Перевод")}}</label>
+                            <input type="text" class="form-control translated-text-input" value="${translatedText}">
+                        `;
+
+                        const deletePairButton = createDeleteButton(originalDiv, translatedDiv, originalText, json);
+                        deletePairButton.style.cssText = `
+                            position: relative;
+                            top: -48px;
+                            right: -430px;
+                            font-size: 13px;
+                            opacity: 0.5;
+                            padding: 1px !important;
+                            border-top-right-radius: 0px;
+                            border-bottom-right-radius: 0px;
+                        `;
+                        translatedDiv.appendChild(deletePairButton);
+                        cardBody.appendChild(originalDiv);
+                        cardBody.appendChild(translatedDiv);
+                    });
+                }
+                cardFooter.appendChild(addButton);
+            }
+
+        }
+
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('remove-row-button')) {
+                const translatedDiv = e.target.closest('div');
+                const previousDiv = translatedDiv.previousElementSibling;
+
+                if (translatedDiv && previousDiv) {
+                    translatedDiv.remove();
+                    previousDiv.remove();
+                }
+            }
+        });
+
+        function watchFileChanges(filePath) {
+            if (activeFileWatch) {
+                activeFileWatch.close();
+                activeFileWatch = null;
+            }
+
+            activeFileWatch = fs.watch(filePath, (eventType) => {
+                if (eventType === 'change') {
+                    updateLangPreview();
+                }
+            });
+        }
+
+
+        function updateLangPreview() {
+            const languageSelector = document.getElementById('languageSelector');
+            const selectedLangFile = languageSelector.value;
+            const selectedLangName = languageSelector.options[languageSelector.selectedIndex].text;
+            const filePath = projectPatch + 'data/lang/' + selectedLangFile;
+
+            if (activeFileWatch) {
+                activeFileWatch.close();
+                activeFileWatch = null;
+            }
+
+            fs.readFile(filePath, 'utf8')
+                .then(data => {
+                    const jsonData = JSON.parse(data);
+                    const previewElement = document.querySelector('#langPreview');
+                    previewElement.innerHTML = '';
+
+                    if (selectedLangFile === "interface.json") {
+                        // Логика для interface.json
+                        if (jsonData && typeof jsonData === 'object' && Object.keys(jsonData).length > 0) {
+                            for (let key in jsonData) {
+                                const translations = jsonData[key];
+                                let groupElement = document.createElement('div');
+                                let header = document.createElement('h3');
+                                header.textContent = key;
+                                groupElement.appendChild(header);
+                                for (let lang in translations) {
+                                    let p = document.createElement('p');
+                                    p.textContent = lang + ': ' + translations[lang];
+                                    groupElement.appendChild(p);
+                                }
+                                previewElement.appendChild(groupElement);
+                            }
+                        } else {
+                            previewElement.textContent = `No data available in interface.json.`;
+                        }
+                    } else {
+                        // Логика для всех остальных файлов
+                        const langData = jsonData[selectedLangName];
+                        if (langData && typeof langData === 'object' && Object.keys(langData).length > 0) {
+                            for (let key in langData) {
+                                let p = document.createElement('p');
+                                p.textContent = key + ': ' + langData[key];
+                                previewElement.appendChild(p);
+                            }
+                        } else {
+                            previewElement.textContent = `No data available for the selected language: ${selectedLangName}.`;
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error(`Error loading the language file for ${selectedLangName}:`, error);
+                    const previewElement = document.querySelector('#langPreview');
+                    previewElement.textContent = `Error loading data for the selected language: ${selectedLangName}. Check if the file exists and is formatted correctly.`;
+                });
+            watchFileChanges(filePath);
+        }
+
+
+        function saveCurrentJson(updatedJson, customFilePath = null) {
+            let filePath;
+            if (customFilePath) {
+                filePath = customFilePath;
+            } else if (languageSelector) {
+                const currentFilename = languageSelector.value;
+                filePath = projectPatch + 'data/lang/' + currentFilename;
+            } else {
+                console.error('Cannot determine the file path to save the JSON.');
+                return;
+            }
+            try {
+                fs.writeFileSync(filePath, JSON.stringify(updatedJson, null, 2));
+            } catch (error) {
+                console.error('Failed to save the file:', error.message);
+            }
+        }
+
+        if (addLanguageBtn) {
+            addLanguageBtn.addEventListener('click', function() {
+                Swal.fire({
+                    title: $.s("Введите код нового языка"),
+                    input: 'text',
+                    inputPlaceholder: $.s("Например, en, fr и т.д."),
+                    color: "var(--vne-text-color)",
+                    background: "var(--vne-right-panel-color)",
+                    showCancelButton: true,
+                    confirmButtonText: $.s("Сохранить"),
+                    cancelButtonText: $.s("Отменить")
+                }).then((result) => {
+                    if (result.isConfirmed && result.value) {
+                        const newLang = result.value;
+                        const defaultStructure = {
+                            [newLang]: {
+                                "Hello.": "Hello.",
+                                "This is a new game project.": "This is a new game project."
+                            }
+                        };
+                        const filePath = projectPatch + 'data/lang/' + newLang + '.json';
+                        saveCurrentJson(defaultStructure, filePath);
+                        loadLanguages();
+                    }
+                });
+            });
+        }
+
+        document.getElementById('save').addEventListener('click', function() {
+            const updatedJson = {...globalJson};
+            const selectedLang = document.getElementById('languageSelector').value.replace('.json', '');
+
+            if (selectedLang === 'interface') {
+                const sectionHeaders = document.querySelectorAll('.ach_name');
+                sectionHeaders.forEach((headerElement, sectionIndex) => {
+                    const header = headerElement.textContent;
+                    if (!updatedJson[header]) {
+                        updatedJson[header] = {};
+                    }
+
+                    const sectionOriginalInputs = headerElement.closest('.accordion-item').querySelectorAll('.original-text-input');
+                    const sectionTranslatedInputs = headerElement.closest('.accordion-item').querySelectorAll('.translated-text-input');
+
+                    sectionOriginalInputs.forEach((input, index) => {
+                        const originalText = input.value.trim();
+                        const translatedText = sectionTranslatedInputs[index].value.trim();
+
+                        if (originalText && translatedText) {
+                            updatedJson[header][originalText] = translatedText;
+                        } else if (updatedJson[header] && updatedJson[header][originalText]) {
+                            delete updatedJson[header][originalText];
+                        }
+                    });
+                });
+            } else {
+                const originalInputs = document.querySelectorAll('.original-text-input');
+                const translatedInputs = document.querySelectorAll('.translated-text-input');
+
+                if (!updatedJson[selectedLang]) {
+                    updatedJson[selectedLang] = {};
+                }
+
+                originalInputs.forEach((input, index) => {
+                    const originalText = input.value.trim();
+                    const translatedText = translatedInputs[index].value.trim();
+                    const initialOriginalText = input.getAttribute('data-original');
+
+                    if (initialOriginalText && initialOriginalText !== originalText && updatedJson[selectedLang][initialOriginalText]) {
+                        delete updatedJson[selectedLang][initialOriginalText];
+                    }
+
+                    if (originalText && translatedText) {
+                        updatedJson[selectedLang][originalText] = translatedText;
+                    } else if (updatedJson[selectedLang] && updatedJson[selectedLang][originalText]) {
+                        delete updatedJson[selectedLang][originalText];
+                    }
+
+                    input.setAttribute('data-original', originalText);
+                });
+            }
+            if (updatedJson.interface) {
+                delete updatedJson.interface;
+            }
+            if (updatedJson.__interfaceData) {
+                delete updatedJson.__interfaceData;
+            }
+            saveCurrentJson(updatedJson);
+        });
+
+        updateUIBtn.addEventListener('click', function(json) {
+            updateInterface(json);
+        });
+
+        loadLanguages();
+        loadJsonByLanguage().then(json => {
+            editor.set(json);
+            updateInterface(json);
+        });
+
+
+        document.getElementById('scanText').addEventListener('click', function() {
+            try {
+
+                const directoryToScan = projectPatch + 'data/scenario/';
+
+                const excludedDirectories = ['system','_preview.ks','config.ks','first.ks','make.ks'];
+                const excludedFiles = ['interface.json'];
+
+                const languageCodes = [
+                    "af", // Afrikaans
+                    "sq", // Albanian
+                    "am", // Amharic
+                    "ar", // Arabic
+                    "hy", // Armenian
+                    "az", // Azerbaijani
+                    "eu", // Basque
+                    "be", // Belarusian
+                    "bn", // Bengali
+                    "bs", // Bosnian
+                    "bg", // Bulgarian
+                    "my", // Burmese
+                    "ca", // Catalan
+                    "zh", // Chinese
+                    "hr", // Croatian
+                    "cs", // Czech
+                    "da", // Danish
+                    "nl", // Dutch
+                    "en", // English
+                    "et", // Estonian
+                    "fi", // Finnish
+                    "fr", // French
+                    "ka", // Georgian
+                    "de", // German
+                    "el", // Greek
+                    "gu", // Gujarati
+                    "ht", // Haitian Creole
+                    "ha", // Hausa
+                    "he", // Hebrew
+                    "hi", // Hindi
+                    "hu", // Hungarian
+                    "is", // Icelandic
+                    "id", // Indonesian
+                    "ga", // Irish
+                    "it", // Italian
+                    "ja", // Japanese
+                    "jv", // Javanese
+                    "kn", // Kannada
+                    "kk", // Kazakh
+                    "km", // Khmer
+                    "ko", // Korean
+                    "ku", // Kurdish
+                    "ky", // Kyrgyz
+                    "lo", // Lao
+                    "lv", // Latvian
+                    "lt", // Lithuanian
+                    "lb", // Luxembourgish
+                    "mk", // Macedonian
+                    "mg", // Malagasy
+                    "ms", // Malay
+                    "ml", // Malayalam
+                    "mt", // Maltese
+                    "mr", // Marathi
+                    "mn", // Mongolian
+                    "ne", // Nepali
+                    "no", // Norwegian
+                    "fa", // Persian
+                    "pl", // Polish
+                    "pt", // Portuguese
+                    "pa", // Punjabi
+                    "ro", // Romanian
+                    "ru", // Russian
+                    "sr", // Serbian
+                    "si", // Sinhalese
+                    "sk", // Slovak
+                    "sl", // Slovenian
+                    "so", // Somali
+                    "es", // Spanish
+                    "su", // Sundanese
+                    "sw", // Swahili
+                    "sv", // Swedish
+                    "tg", // Tajik
+                    "ta", // Tamil
+                    "te", // Telugu
+                    "th", // Thai
+                    "tr", // Turkish
+                    "uk", // Ukrainian
+                    "ur", // Urdu
+                    "uz", // Uzbek
+                    "vi", // Vietnamese
+                    "cy", // Welsh
+                    "xh", // Xhosa
+                    "yi", // Yiddish
+                    "zu"  // Zulu
+                ];
+
+                function processFile(filePath, translations) {
+                    try {
+                        const content = fs.readFileSync(filePath, 'utf8');
+                        const lines = content.split('\n');
+                        let isInsideBlock = false;
+                        let currentBlock = '';
+
+                        let currentSection;
+                        for (let key of Object.keys(translations)) {
+                            if (languageCodes.includes(key) && key !== 's') {
+                                currentSection = key;
+                                break;
+                            }
+                        }
+
+                        if (!currentSection) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: $.s("Внимание!"),
+                                text: $.s("Допустимый языковой раздел не найден в переводах."),
+                                footer: $.s("Доступные коды языка: ") + `${languageCodes.join(', ')}`,
+                                color: "var(--vne-text-color)",
+                                background: "var(--vne-right-panel-color)",
+                            });
+                            return;
+                        }
+
+                        let progress = 0;
+                        const totalLines = lines.length;
+
+                        Swal.fire({
+                            title: $.s("Сканирование файлов..."),
+                            html: $.s("Прогресс: ") + "<b></b>%",
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            color: "var(--vne-text-color)",
+                            background: "var(--vne-right-panel-color)",
+                        });
+
+                        for (const line of lines) {
+                            const startTagMatch = line.match(/\[tb_start_text mode=(\d+) \]/);
+                            if (startTagMatch) {
+                                isInsideBlock = true;
+                                currentBlock = '';
+                            }
+
+                            if (isInsideBlock) {
+                                currentBlock += line + '\n';
+                            }
+
+                            if (line.includes('[_tb_end_text]')) {
+                                isInsideBlock = false;
+                                const textMatch = currentBlock.match(/\[tb_start_text mode=(\d+) \](.*?)\[_tb_end_text\]/s);
+                                if (textMatch) {
+                                    const text = textMatch[2];
+                                    const cleanedText = text.replace(/\[.*?\]/g, '').trim();
+
+                                    if (cleanedText) {
+                                        const textLines = cleanedText.split('\n');
+                                        for (let textLine of textLines) {
+                                            textLine = textLine.startsWith('#') ? textLine.slice(1).trim() : textLine.trim();
+                                            translations[currentSection][textLine] = '';
+                                        }
+                                    }
+                                }
+                            }
+                            progress++;
+                            const percentage = Math.round((progress / totalLines) * 100);
+                            Swal.update({html: `Прогресс: <b>${percentage}</b>%`});
+                        }
+                        Swal.close();
+                        Swal.fire({
+                            icon: 'success',
+                            title: $.s("Сканирование завершено!"),
+                            text: $.s("Текст был успешно добавлен."),
+                            color: "var(--vne-text-color)",
+                            background: "var(--vne-right-panel-color)",
+                            footer: $.s("Доступные коды языка: ") + `${languageCodes.join(', ')}`
+                        });
+                    } catch (error) {
+                        console.error(`Error reading file: ${filePath}`);
+                        Swal.fire({
+                            icon: 'error',
+                            title: $.s("Ошибка!"),
+                            text: $.s(`Произошла ошибка при чтении файла: ${filePath}`),
+                            color: "var(--vne-text-color)",
+                            background: "var(--vne-right-panel-color)",
+                            footer: error.message
+                        });
+                    }
+                }
+                function processDirectory(dirPath, translations) {
+                    try {
+                        const files = fs.readdirSync(dirPath);
+
+                        for (const file of files) {
+                            const filePath = path.join(dirPath, file);
+
+                            if (excludedFiles.includes(file) || excludedDirectories.includes(file)) {
+                                continue;
+                            }
+
+                            const stats = fs.statSync(filePath);
+
+                            if (stats.isDirectory()) {
+                                processDirectory(filePath, translations);
+                            } else if (path.extname(file) === '.ks' && !file.includes('interface.json')) {
+                                processFile(filePath, translations);
+                            }
+                        }
+                    } catch (error) {
+                        console.error(`Error processing directory: ${dirPath}`);
+                    }
+                }
+
+                const filesInLangDir = fs.readdirSync(projectPatch + 'data/lang/');
+
+                const jsonFilePaths = filesInLangDir.filter(filename => {
+                    const languageCode = path.basename(filename, '.json');
+                    return languageCodes.includes(languageCode);
+                }).map(filename => projectPatch + 'data/lang/' + filename);
+
+                const allTranslations = {};
+                jsonFilePaths.forEach(jsonFilePath => {
+                    allTranslations[jsonFilePath] = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
+                });
+
+                jsonFilePaths.forEach(jsonFilePath => {
+                    processDirectory(directoryToScan, allTranslations[jsonFilePath]);
+                });
+
+                jsonFilePaths.forEach(jsonFilePath => {
+                    fs.writeFileSync(jsonFilePath, JSON.stringify(allTranslations[jsonFilePath], null, 2));
+                });
+
+            } catch (error) {
+                console.error(`An error occurred: ${error}`);
+            }
+        });
+    </script>
+</div>

@@ -1,0 +1,817 @@
+<div class="container-fluid text-start">
+    <div class="dropdown dd_st animated animate__backInDown" style="position: absolute !important; z-index: 2;top: 8px;left: 11px">
+        <span class="vne_btn dropdown-toggle animated animate__fadeInLeft dropdown_btn_color" data-bs-toggle="dropdown" aria-expanded="false">
+            {{:_s("TBN")}}
+        </span>
+        <ul class="dropdown-menu">
+            <li  style="margin-bottom: 5px !important;margin-left: 8px !important;" class="vne_btn animated tb-header-title" id="t_open_folder_project">
+            <span style="font-size: 19px;">
+                    {{:_s("Открыть папку проекта")}}
+                </span>
+            </li>
+            <li style="margin-bottom: 5px !important;margin-left: 8px !important;" class="vne_btn animated" onclick="selectionProjects()" id="t_list_project">
+            <span style="font-size: 19px;">
+                    {{:_s("Список проектов")}}
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="dropdown dd_st animated animate__backInDown" style="position: absolute; z-index: 15;top: 8px;left: 598px">
+        <span class="vne_btn dropdown-toggle animated animate__fadeInLeft dropdown_btn_color" data-bs-toggle="dropdown" aria-expanded="false">
+            {{:_s("ВФ")}}
+        </span>
+        <ul class="dropdown-menu">
+            <li  style="margin-bottom: 5px !important;margin-left: 8px !important;" class="vne_btn animated" onclick="achievementEditor()">
+            <span style="font-size: 19px;">
+                    {{:_s("Редактор достижений")}}
+                </span>
+            </li>
+            <li  style="margin-bottom: 5px !important;margin-left: 8px !important;" class="vne_btn animated" onclick="langSystemEditor()">
+            <span style="font-size: 19px;">
+                    {{:_s("Редактор перевода")}}
+                </span>
+            </li>
+            <li  style="margin-bottom: 5px !important;margin-left: 8px !important;" class="vne_btn animated" onclick="mapGameEditor()">
+            <span style="font-size: 19px;">
+                    {{:_s("Редактор карты игры")}}
+            </span>
+            </li>
+            <li  style="margin-bottom: 5px !important;margin-left: 8px !important;" class="vne_btn animated" onclick="inventoryGameEditor()">
+            <span style="font-size: 19px;">
+                    {{:_s("Редактор инвентаря")}}
+            </span>
+            </li>
+            </li>
+            <li  style="margin-bottom: 5px !important;margin-left: 8px !important;" class="vne_btn animated" onclick="ImageMapEditor()">
+            <span style="font-size: 19px;">
+                    {{:_s("Редактор Image Map")}}
+            </span>
+            </li>
+        </ul>
+
+    </div>
+
+    <!-- Navigation -->
+    <ul class="nav vne-ep-nav animated animate__backInDown">
+        <li class="nav-item ">
+            <div class="vne-ep-logo cp" style="visibility: hidden">
+                <spa>TB</spa>
+            </div>
+            <div class="vne-ep-separator-logo"></div>
+        </li>
+        <li class="nav-item  vne-nav-icon cp">
+            <div class="button_function_preview cp" id="t_prev_play"><i
+                    class="fa-solid fa-play"></i></div>
+        </li>
+        <li class="nav-item  vne-nav-icon cp">
+            <div class="button_function_save" id="t_save_game"><i
+                    class="fa-solid fa-floppy-disk"></i></div>
+        </li>
+
+        <div class="vne-ep-separator-ps animated"></div>
+
+        <li class="nav-item  vne-nav-icon cp darkTheme-ep-nav-icon-settings">
+            <div class="button_function_chara_manage help" id="t_m_char"><i
+                    class="fa-solid fa-users"></i></div>
+        </li>
+        <li class="nav-item  vne-nav-icon cp darkTheme-ep-nav-icon-settings">
+            <div class="button_function_setting" id="t_settings"><i
+                    class="fa-solid fa-sliders"></i></div>
+        </li>
+        <li class="nav-item  vne-nav-icon cp darkTheme-ep-nav-icon-settings">
+            <div class="button_function_component_manage" id="t_component_m"><i
+                    class="fa-solid fa-hammer"></i></div>
+        </li>
+        <li class="nav-item  vne-nav-icon cp darkTheme-ep-nav-icon-settings">
+            <div id="t_var_m" onclick="varManage()"><i class="fa-solid fa-list-tree"></i>
+            </div>
+        </li>
+        <li class="nav-item  vne-nav-icon cp darkTheme-ep-nav-icon-settings">
+            <div id="t_plugin_m"
+                 onclick="pluginManage()"><i class="fa-solid fa-puzzle-piece-simple"></i>
+            </div>
+        </li>
+        <li class="nav-item  vne-nav-icon cp darkTheme-ep-nav-icon-settings">
+            <div id="t_l2d"
+                 onclick="componentSetting()"><i class="fa-solid fa-layer-plus"></i>
+            </div>
+        </li>
+        <li class="nav-item  vne-nav-icon cp darkTheme-ep-nav-icon-settings">
+            <div id="t_fuki_m"
+                 onclick="fukiManage()"><i class="fa-solid fa-thought-bubble"></i>
+            </div>
+        </li>
+        <li class="nav-item  vne-nav-icon cp darkTheme-ep-nav-icon-settings">
+            <div id="t_fonts_m"
+                 onclick="fontManage()"><i class="fa-solid fa-kerning"></i>
+            </div>
+        </li>
+        <li class="nav-item  vne-nav-icon cp darkTheme-ep-nav-icon-settings">
+            <div id="t_ui_editor"
+                 onclick="uiMaker()"><i class="fa-solid fa-browsers"></i></i>
+            </div>
+        </li>
+
+        <div class="vne-ep-separator-ep"></div>
+
+        <li class="nav-item  vne-nav-icon cp darkTheme-ep-nav-icon-ep" style="margin-left: 80px !important;">
+            <div class="button_function_live2d" data-help='{{:_s("Live2D設定")}}' id="t_live2d"><img style="margin-top:-4px !important;margin-left:-4px !important;width:30px;" src="_new/images/live2d.png" /></div>
+        </li>
+        <li class="nav-item  vne-nav-icon cp darkTheme-ep-nav-icon-ep">
+            <div class="button_function_export" id="t_export_game"><i
+                    class="fa-solid fa-file-export"></i></div>
+        </li>
+    </ul>
+    <span class="nav-item vne-nav-icon cp vne-settings-software-button" id="settingsSoftware">
+        <div title='{{:_s("Настройки приложения")}}'><i class="fa-solid fa-gear"></i>
+        </div>
+    </span>
+    <!-- Navigation end -->
+
+
+<!---->
+    <!-- Content start -->
+    <article class="tb-body vne-ep-content">
+        <!--Settings-->
+        <div class="vne-settings-software animated animate__backInUp " style="display: none" id="vne-settings-software-window">
+            <div class="vne-head-s" id="vne-settings-software-windowheader"><p>{{:_s("Настройки приложения")}}</p> <i class="fa-sharp fa-regular fa-circle-xmark vne-close-s" id="closeButton"></i></div>
+            <div class="vne-control-label-help-text">{{:_s("Настройка размера приложения")}}</div>
+            <select class="form-select vne_resize" name="vne_resize">
+                <option value="0"></option>
+                <option value="1">1280×720</option>
+                <option value="2">1700×900</option>
+            </select>
+
+            <div class="vne-control-label-help-text">{{:_s("Тип отображения функций")}}</div>
+            <input type="radio" class="btn-check" name="options" id="typeFuncShow" autocomplete="off" onclick='changeFunctionStyle()' checked>
+            <label class="btn btn-secondary typeFuncShow" for="typeFuncShow">{{:_s("Список")}}</label>
+            <input type="radio" class="btn-check" name="options" id="typeFuncShow2" onclick='changeFunctionStyle()' autocomplete="off">
+            <label class="btn btn-secondary typeFuncShow" for="typeFuncShow2">{{:_s("Две колонки")}}</label>
+
+            <div id="updateProjectFilesEng">
+                <div class="vne-control-label-help-text">{{:_s("Обновить файлы перевода в игре")}}</div>
+                <button class="btn btn-default" onclick="replaceFileLang()">{{:_s("Обновить")}}</button>
+            </div>
+
+            <div class="vne-control-label-help-text">{{:_s("Авто сохранение проекта")}}</div>
+            <select class="form-select vne_auto_save" name="vne_auto_save" id="vne_auto_save">
+                <option value="0">{{:_s("Отключить")}}</option>
+                <option value="5">{{:_s("Каждые 5 минут")}}</option>
+                <option value="10">{{:_s("Каждые 10 минут")}}</option>
+                <option value="15">{{:_s("Каждые 15 минут")}}</option>
+            </select>
+
+            <div class="vne-control-label-help-text">{{:_s("Выбор стартовой сцены")}}</div>
+            <select class="form-select vne_auto_save" name="vne_auto_save" id="vne_list_scene">
+            </select>
+
+            <div id="createLabelMap">
+                <div class="vne-control-label-help-text">{{:_s("Создать карту меток")}}</div>
+                <button class="btn btn-default" onclick="createMapLabel()">{{:_s("Создать")}}</button>
+            </div>
+        </div>
+
+        <div class="tb-main animated animate__backInUp" style="z-index: 5 !important;">
+            <div class="tb-main-header">
+                <div class="tb-tab-scene-select" style="">
+
+                </div>
+                <div class="header-nav">
+
+                    <span style="font-size:16px;margin-right:15px" id="button_tab_extend"
+                          class="tb-i-s-icon-folder-open" data-title=''></span>
+                    <span id="button_preview_scenario_from" class="tb-i-preview"
+                          data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          data-bs-title='{{:_s("Запустить Сцену")}}'></span>
+                    <span style="font-size:16px" id="button_debug_scenario_from" class="tb-i-s-icon-bug"
+                          data-bs-toggle="tooltip" data-bs-placement="bottom"
+                          data-bs-title='{{:_s("Отладка Сцены")}}'></span>
+                    <span id="button_search_component" class="tb-i-search" data-bs-toggle="tooltip"
+                          data-bs-placement="bottom" data-bs-title='{{:_s("Поиск сцены")}}'></span>
+                    <div class="tb-main-search-box form-inline">
+                        <div class="form-group">
+                            <select class="form-control select_search_mode">
+                                <option value="tb_start_text">{{:_s("Текст")}}</option>
+                            </select>
+                            <div class="input-group">
+                                <input class="form-control search_text" style="width:180px" type="text"
+                                       placeholder='{{:_s("Поиск")}}'>
+                                <div class="input-group-addon button_search_next">
+                                    <span class="tb-i-chevron-down" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                          data-bs-title='{{:_s("Далее")}}'></span>
+                                </div>
+                                <div class="input-group-addon button_search_back">
+                                    <span class="tb-i-chevron-up" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                          data-bs-title='{{:_s("Назад")}}'></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span id="button_open_component" class="tb-i-chevron-down" data-bs-toggle="tooltip"
+                          data-bs-placement="bottom" data-bs-title='{{:_s("Развернуть все")}}'></span>
+                </div>
+            </div>
+            <div id="main-component" class="tb-main-body" style="padding-bottom:200px">
+            </div>
+        </div>
+
+        <div class="tb-menu">
+            <div class="tb-menu-inner animated animate__backInLeft">
+                <div class="vne-menu-nav">
+                    <span class="nav-item active vne-nav-item-component" data-tab="component" data-nav="component" title='{{:_s("Компоненты")}}'>
+                        <i class="fa-duotone fa-code-compare"></i>
+                    </span>
+                    <span class="nav-item vne-nav-item-file" data-tab="file" data-nav="file" title='{{:_s("Ресурсы")}}'>
+                        <i class="fa-solid fa-laptop-arrow-down"></i>
+                    </span>
+                    <span class="nav-item vne-nav-item-scenario" data-tab="scenario" data-nav="scenario" title='{{:_s("Сцены")}}'>
+                        <i class="fa-sharp fa-solid fa-file-lines"></i>
+                    </span>
+                </div>
+                <div class="vne-menu-body">
+                    <div class="cpn-block component active">
+                        <div class="cpn-component-block scrollY">
+                            <div class="cpn-group group-scenario">
+                                <div class="cpn-header" data-group="scenario">
+                                    <div class="cpn-data-title scenario">
+                                        {{:_s("Cюжет")}}
+                                    </div>
+                                    <div class="cpn-header-nav">
+                                        <span class="tb-i-chevron-down" data-title='{{:_s("Развернуть")}}'></span>
+                                    </div>
+                                </div>
+                                <div class="cpn-body">
+
+                                    <div item-tag="text" item-type="insert" class="cpn-item help component_btn"
+                                         data-help='{{:_s("Добавить текст в игровую сцену.")}}'>
+                                        <span class="tb-i-text" data-title='{{:_s("Текст")}}'></span>
+                                        <span class="text">{{:_s("Текст")}}</span>
+                                    </div>
+
+                                    <div item-tag="cm" item-type="insert" class="cpn-item  help component_btn">
+                                        <span class="tb-i-page-break" data-title=""></span>
+                                        <span class="text">{{:_s("Обновление сцены")}}</span>
+                                    </div>
+
+                                    <div item-tag="glink" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Кнопка развилки. Нужна для более простого создания разветвления сюжета.")}}'>
+                                        <span class="tb-i-branch" data-title=""></span>
+                                        <span class="text">{{:_s("Кнопка развилки")}}</span>
+                                    </div>
+
+                                    <div item-tag="label" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Метка используется для разделения сцены на зоны к которым можно перейти с помощью прыжка или кнопки развилки.")}}'>
+                                        <span class="tb-i-label" data-title=""></span>
+                                        <span class="text">{{:_s("Метка")}}</span>
+                                    </div>
+
+                                    <div item-tag="jump" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Переход используется для прыжка к выбранной метке. Метка может быть как в текущем файле сценария, так и в другом.")}}'>
+                                        <span class="tb-i-jump" data-title=""></span>
+                                        <span class="text">{{:_s("Переход")}}</span>
+                                    </div>
+
+                                    <div item-tag="s" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Полностью останавливает игру.")}}'>
+                                        <span class="tb-i-game-stop" data-title=""></span>
+                                        <span class="text">{{:_s("Стоп")}}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="cpn-group group-character">
+                                <div class="cpn-header" data-group="character">
+                                    <div class="cpn-data-title character">
+                                        {{:_s("Персонажи")}}
+                                    </div>
+                                    <div class="cpn-header-nav">
+                                        <span class="tb-i-chevron-down" data-title='{{:_s("Развернуть")}}'></span>
+                                    </div>
+                                </div>
+                                <div class="cpn-body">
+
+                                    <div item-tag="chara_show" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Используется для вызова персонажа на сцену.")}}'>
+                                        <span class="tb-i-chara-in" data-title=""></span>
+                                        <span class="text">{{:_s("Персонаж")}}</span>
+                                    </div>
+
+                                    <div item-tag="chara_hide" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Убирает выбранного персонажа со сцены.")}}'>
+                                        <span class="tb-i-chara-out" data-title=""></span>
+                                        <span class="text">{{:_s("Убрать со сцены")}}</span>
+                                    </div>
+
+                                    <div item-tag="chara_mod" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Используется чтобы сменить выражение лица или позу персонажа.")}}'>
+                                        <span class="tb-i-chara-change" data-title=""></span>
+                                        <span class="text">{{:_s("Состояние")}}</span>
+                                    </div>
+
+                                    <div item-tag="chara_hide_all" item-type="insert"
+                                         class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Убирает всех персонажей со сцены.")}}'>
+                                        <span class="tb-i-chara-out" data-title=""></span>
+                                        <span class="text">{{:_s("Убрать всех персонажей")}}</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="cpn-group group-live2d" style="display:none">
+                                <div class="cpn-header" data-group="live2d">
+                                    <div style="background:#1E90FF" class="cpn-data-title live2d">
+                                        {{:_s("Live2D")}}
+                                    </div>
+                                    <div class="cpn-header-nav">
+                                        <span class="tb-i-chevron-down" data-title='{{:_s("Развернуть")}}'></span>
+                                    </div>
+                                </div>
+                                <div class="cpn-body">
+
+                                    <div item-tag="live2d_show" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Показывает подключенную модель Live2D.")}}'>
+                                        <span class="tb-i-live2d-in" data-title=""></span>
+                                        <span class="text">{{:_s("Показать Live2D")}}</span>
+                                    </div>
+
+                                    <div item-tag="live2d_motion" item-type="insert"
+                                         class="cpn-item  help component_btn" data-help='{{:_s("Движение Live2D модели.")}}'>
+                                        <span class="tb-i-live2d-change" data-title=""></span>
+                                        <span class="text">{{:_s("Live2D Движение")}}</span>
+                                    </div>
+
+                                    <div item-tag="live2d_hide" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Удаляет Live2D модель со сцены.")}}'>
+                                        <span class="tb-i-live2d-out" data-title=""></span>
+                                        <span class="text">{{:_s("Удалить Live2D")}}</span>
+                                    </div>
+
+                                    <div item-tag="live2d_trans" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Перемещение Live2D модели.")}}'>
+                                        <span class="tb-i-live2d-setting" data-title=""></span>
+                                        <span class="text">{{:_s("Движение Live2D")}}</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="cpn-group group-image">
+                                <div class="cpn-header" data-group="image">
+                                    <div class="cpn-data-title image">
+                                        {{:_s("Изображения")}}
+                                    </div>
+                                    <div class="cpn-header-nav">
+                                        <span class="tb-i-chevron-down" data-title='{{:_s("Развернуть")}}'></span>
+                                    </div>
+                                </div>
+                                <div class="cpn-body">
+
+                                    <div item-tag="bg" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Изменяет фоновое изображение. Используется для смены фона.")}}'>
+                                        <span class="tb-i-bg-change" data-title=""></span>
+                                        <span class="text">{{:_s("Изображение фона")}}</span>
+                                    </div>
+
+                                    <div item-tag="tb_image_show" item-type="insert"
+                                         class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Размещает любое изображение и в любом положении на экране.")}}'>
+                                        <span class="tb-i-img-in" data-title=""></span>
+                                        <span class="text">{{:_s("Показать картинку")}}</span>
+                                    </div>
+
+                                    <div item-tag="tb_image_hide" item-type="insert"
+                                         class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Удаление отображаемого на экране изображения.")}}'>
+                                        <span class="tb-i-img-out" data-title=""></span>
+                                        <span class="text">{{:_s("Скрыть картинку")}}</span>
+                                    </div>
+
+                                    <div item-tag="clickable" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Используется для определения на изображении активной зоны. По нажатию на которую можно произвести переход к нужной метке.")}}'>
+                                        <span class="tb-i-map" data-title=""></span>
+                                        <span class="text">{{:_s("Зона нажатия")}}</span>
+                                    </div>
+
+                                    <div item-tag="button" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Кнопка в качестве фона которая использует изображение.")}}'>
+                                        <span class="tb-i-button" data-title=""></span>
+                                        <span class="text">{{:_s("Графическая кнопка")}}</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="cpn-group group-effect">
+                                <div class="cpn-header" data-group="effect">
+                                    <div class="cpn-data-title effect">
+                                        {{:_s("Управление текстом")}}
+                                    </div>
+                                    <div class="cpn-header-nav">
+                                        <span class="tb-i-chevron-down" data-title='{{:_s("Развернуть")}}'></span>
+                                    </div>
+                                </div>
+                                <div class="cpn-body">
+
+                                    <div item-tag="tb_show_message_window" item-type="insert"
+                                         class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Показывает текстовое окно. Используется над Текстом.")}}'>
+                                        <span class="tb-i-text-in" data-title=""></span>
+                                        <span class="text">{{:_s("Показать текстовое поле")}}</span>
+                                    </div>
+
+                                    <div item-tag="tb_hide_message_window" item-type="insert"
+                                         class="cpn-item  help component_btn" data-help='{{:_s("Скрывает текстовое поле. Нужно, например, чтобы показать красоты нарисованного изображения.")}}'>
+                                        <span class="tb-i-text-out" data-title=""></span>
+                                        <span class="text">{{:_s("Скрыть текстовое поле")}}</span>
+                                    </div>
+
+                                    <div item-tag="hidemessage" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Скрывает окно сообщения до того момента пока не произойдет клик мыши по экрану.")}}'>
+                                        <span class="tb-i-text-click" data-title=""></span>
+                                        <span class="text">{{:_s("Скрыть окно сообщения")}}</span>
+                                    </div>
+
+                                    <div item-tag="delay" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Настраивает скорость с которым будет появляться текст.")}}'>
+                                        <span class="tb-i-text-speed" data-title=""></span>
+                                        <span class="text">{{:_s("Скорость текста")}}</span>
+                                    </div>
+
+                                    <div item-tag="font" item-type="insert" class="cpn-item help component_btn"
+                                         data-help='{{:_s("Изменяет шрифт текста. Можно, например изменить шрифт в каком-то отрезке игры.")}}'>
+                                        <span class="tb-i-text-effect-in" data-title=""></span>
+                                        <span class="text">{{:_s("Изменение шрифта")}}</span>
+                                    </div>
+
+                                    <div item-tag="resetfont" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Сбрасывает шрифт на тот, что установлен по умолчанию.")}}'>
+                                        <span class="tb-i-text-effect-out" data-title=""></span>
+                                        <span class="text">{{:_s("Сбросить шрифт")}}</span>
+                                    </div>
+
+                                    <div item-tag="wait" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Ожидание игнорирует действия игрока в течении указанного времени.")}}'>
+                                        <span class="tb-i-wait" data-title=""></span>
+                                        <span class="text">{{:_s("Ожидание")}}</span>
+                                    </div>
+
+                                    <div item-tag="quake" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Встряхивает весь экран.")}}'>
+                                        <span class="tb-i-quake" data-title=""></span>
+                                        <span class="text">{{:_s("Тряска экрана")}}</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="cpn-group group-media">
+                                <div class="cpn-header" data-group="media">
+                                    <div class="cpn-data-title media">
+                                        {{:_s("Медиа")}}
+                                    </div>
+                                    <div class="cpn-header-nav">
+                                        <span class="tb-i-chevron-down" data-title='{{:_s("Развернуть")}}'></span>
+                                    </div>
+                                </div>
+                                <div class="cpn-body">
+
+                                    <div item-tag="playbgm" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Воспроизводит фоновую музыку.")}}'>
+                                        <span class="tb-i-bgm-play" data-title=""></span>
+                                        <span class="text">{{:_s("Включить музыку")}}</span>
+                                    </div>
+
+                                    <div item-tag="stopbgm" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Прерывает воспроизведение фоновой музыки.")}}'>
+                                        <span class="tb-i-bgm-stop" data-title=""></span>
+                                        <span class="text">{{:_s("Выключить музыку")}}</span>
+                                    </div>
+
+                                    <div item-tag="playse" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Воспроизводит звук. Отличие музыки от звука только в одном, продолжительности. Также у звуков можно выбрать канал воспроизведения.")}}'>
+                                        <span class="tb-i-sound-play" data-title=""></span>
+                                        <span class="text">{{:_s("Включить звуковой эффект")}}</span>
+                                    </div>
+
+                                    <div item-tag="stopse" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Прерывает воспроизведение звукового эффекта.")}}'>
+                                        <span class="tb-i-sound-stop" data-title=""></span>
+                                        <span class="text">{{:_s("Выключить звуковой эффект")}}</span>
+                                    </div>
+
+                                    <div item-tag="movie" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Воспроизводит видео.")}}'>
+                                        <span class="tb-i-movie-play" data-title=""></span>
+                                        <span class="text">{{:_s("Видео")}}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="cpn-group group-eval">
+                                <div class="cpn-header" data-group="eval">
+                                    <div style="background:#D2691E" class="cpn-data-title eval">
+                                        {{:_s("Системное")}}
+                                    </div>
+                                    <div class="cpn-header-nav">
+                                        <span class="tb-i-chevron-down" data-title='{{:_s("Развернуть")}}'></span>
+                                    </div>
+                                </div>
+                                <div class="cpn-body">
+
+                                    <div item-tag="tb_eval" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Взаимодействует с переменной. Например, можно сменить значение выбранной переменной.")}}'>
+                                        <span class="tb-i-s-icon-codepen" data-title=""></span>
+                                        <span class="text">{{:_s("Настройка переменной")}}</span>
+                                    </div>
+
+                                    <div item-tag="edit" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("СПоказывает поле ввода текста. Можно использовать для того, чтобы пользователь задал имя героя, или, например создания кодового замка.")}}'>
+                                        <span class="tb-i-s-icon-power" data-title=""></span>
+                                        <span class="text">{{:_s("Поле ввода")}}</span>
+                                    </div>
+
+                                    <div item-tag="commit" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Сохраняет значение, введенное в поле ввода.")}}'>
+                                        <span class="tb-i-s-icon-power-cord" data-title=""></span>
+                                        <span class="text">{{:_s("Зафиксировать ввод")}}</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="cpn-group group-script">
+                                <div class="cpn-header" data-group="script">
+                                    <div class="cpn-data-title script">
+                                        {{:_s("Программирование")}}
+                                    </div>
+                                    <div class="cpn-header-nav">
+                                        <span class="tb-i-chevron-down" data-title='{{:_s("Развернуть")}}'></span>
+                                    </div>
+                                </div>
+                                <div class="cpn-body">
+
+                                    <div item-tag="iscript" item-type="insert" class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Функция является необязательной. Все можно сделать через визуальный редактор. Но если вам хочется сделать что-то специфическое, то используйте для этого JavaScript.")}}'>
+                                        <span class="tb-i-script" data-title="iscript"></span>
+                                        <span class="text">{{:_s("JavaScript")}}</span>
+                                    </div>
+
+                                    <div item-tag="tb_start_tyrano_code" item-type="insert"
+                                         class="cpn-item  help component_btn"
+                                         data-help='{{:_s("Напрямую редактировать теги TyranoScript")}}'>
+                                        <span class="tb-i-t-script" data-title="TyranoScript"></span>
+                                        <span class="text">{{:_s("TyranoScript")}}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="cpn-block file">
+                        <div class="cpn-nav">
+                            <div class="cpn-nav-item active" data-nav="bg" data-bs-toggle="tooltip"
+                                 data-bs-placement="bottom" data-bs-title='"{{:_s("Фоны")}}"' title='{{:_s("Фоны")}}'><span
+                                    class="tb-i-bg"></span></div>
+                            <span class="cpn-nav-item" data-nav="image" data-bs-toggle="tooltip"
+                                  data-bs-placement="bottom" data-bs-title='"{{:_s("Изображения")}}"' title='{{:_s("Другие изображения")}}'><span
+                                    class="tb-i-image"></span></span>
+                            <span class="cpn-nav-item" data-nav="chara" data-bs-toggle="tooltip"
+                                  data-bs-placement="bottom" data-bs-title='"{{:_s("Персонажи")}}"' title='{{:_s("Персонажи")}}'><span
+                                    class="tb-i-character"></span></span>
+                            <span class="cpn-nav-item" data-nav="se" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                  data-bs-title='"{{:_s("Звуковые эффекты")}}"' title='{{:_s("Звуковые эффекты")}}'><span
+                                    class="tb-i-sound"></span></span>
+                            <span class="cpn-nav-item" data-nav="bgm" data-bs-toggle="tooltip"
+                                  data-bs-placement="bottom" data-bs-title='"{{:_s("Музыка")}}"' title='{{:_s("Музыка")}}'><span
+                                    class="tb-i-bgm"></span></span>
+                        </div>
+
+                        <div class="cpn-data-title-block">
+                            <div class="cpn-active-data-title nav-data-title">
+                                {{:_s("Добавление файлов")}}
+                            </div>
+                            <button class="btn btn-default btn-sm button_add_file" data-target="#add-file">
+                                <i class="fa-solid fa-plus" title='{{:_s("Добавить файл")}}'></i>
+                            </button>
+                            <button style="display:none" class="btn btn-default btn-sm button_tab_chara_manager"
+                                    data-target="#add-file">
+                                <i class="fa-solid fa-plus" title='{{:_s("Менеджер персонажей")}}'></i>
+                            </button>
+                        </div>
+
+                        <div class="form-inline cpn-search-block">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-cpn-search text-search-file"
+                                           placeholder='{{:_s("Поиск по имени файла")}}'>
+                                    <div class="input-group-addon">
+                                        <span class="tb-i-search"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cpn-filer-block filer-file"></div>
+
+                        <div class="cpn-preview-block ">
+                            <div class="cpn-preview-block-inner">
+                                <img class="preview_area"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cpn-block scenario">
+                        <div class="cpn-data-title-block">
+                            <div class="cpn-active-data-title">
+                                {{:_s("Сцены")}}
+                            </div>
+                            <button id="button_new_scenario" class="btn btn-default btn-sm button_new_scenario">
+                                <i class="fa-solid fa-plus" title='{{:_s("Новая сцена")}}'></i>
+                            </button>
+                        </div>
+
+                        <div class="form-inline cpn-search-block">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-cpn-search text-search-scenario"
+                                           placeholder='{{:_s("Поиск по имени сцены")}}'>
+                                    <div class="input-group-addon">
+                                        <span class="tb-i-search"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cpn-filer-block filer-scenario">
+                            {{for array_files ~edit_scenario=edit_scenario}}
+                            {{if (item == ~edit_scenario) }}
+                            <div class="cpn-filer-item-wrapper">
+                                <div class="cpn-filer-item active" data-scenario="{{:item}}">
+                                    <span class="tb-i-file-text"></span><span class="cpn-filer-text">{{:item.replace(".ks","")}}</span>
+                                </div>
+                            </div>
+                            {{else}}
+                            <div class="cpn-filer-item-wrapper">
+                                <div class="cpn-filer-item " data-scenario="{{:item}}">
+                                    <span class="tb-i-file-text"></span><span class="cpn-filer-text">{{:item.replace(".ks","")}}</span>
+                                </div>
+                            </div>
+                            {{/if}}
+                            {{/for}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tb-parameter animated animate__backInRight">
+            <div class="tb-prm-block param-box active" data-prm="">
+                <div class="prm-header">
+                    <span id="param-icon" class=""></span>
+                    <span class="text param-name "></span>
+                    <a class="button_param_pin" style="cursor:pointer"><span class="tb-i-s-icon-pushpin"
+                                                                             style="border:0;background:transparent;border-radius:none;box-shadow:none;"></span></a>
+                </div>
+                <div class="prm-body darkTheme-ep-param">
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <div id="tab_context_menu" class="context_menu"
+         style="display:none;z-index:99999;position:absolute;left:10px;top:10px">
+        <ul id="tab_menu" class="ui-menu ui-widget ui-widget-content ui-corner-all" role="menu" tabindex="0"
+            aria-activedescendant="ui-id-6">
+
+        </ul>
+    </div>
+
+    <div id="component_context_menu" class="context_menu"
+         style="display:none;z-index:99999;position:absolute;left:10px;top:10px">
+        <ul id="menu" class="ui-menu ui-widget ui-widget-content ui-corner-all" role="menu" tabindex="0"
+            aria-activedescendant="ui-id-6">
+
+            <li class="ui-menu-item" role="presentation">
+                <a href="#" data-method="copy" class="ui-corner-all" tabindex="-1" role="menuitem">{{:_s("Копировать")}}</a>
+            </li>
+
+            <li class="ui-menu-item" role="presentation">
+                <a href="#" data-method="paste" class="ui-corner-all" tabindex="-1" role="menuitem">{{:_s("Вставить")}}</a>
+            </li>
+
+            <li class="ui-menu-item" role="presentation">
+                <a href="#" data-method="delete" class="ui-corner-all" tabindex="-1" role="menuitem">{{:_s("Удалить")}}</a>
+            </li>
+
+            <div class="jump_context_button">
+                <li class="ui-menu-item" role="presentation">
+                    <a href="#" data-method="jump" class="ui-corner-all" tabindex="-1" role="menuitem">{{:_s("Прыжок к метке")}}</a>
+                </li>
+            </div>
+
+            <li class="ui-menu-item" role="presentation">
+                <a href="#" data-method="preview" class="ui-corner-all" tabindex="-1" role="menuitem">{{:_s("Запустить отсюда")}}</a>
+            </li>
+            <li class="ui-menu-item" role="presentation">
+                <a href="#" data-method="debug" class="ui-corner-all" tabindex="-1"
+                   role="menuitem">{{:_s("Отладка отсюда")}}</a>
+            </li>
+            <li class="ui-menu-item" role="presentation">
+                <a href="#" data-method="add_fav" class="ui-corner-all" tabindex="-1"
+                   role="menuitem">{{:_s("Добавить в избранное")}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="scenario_context_menu" class="context_menu"
+         style="display:none;z-index:99999;position:absolute;left:10px;top:10px">
+        <ul class="ui-menu ui-widget ui-widget-content ui-corner-all" role="menu" tabindex="0"
+            aria-activedescendant="ui-id-6">
+            <li class="ui-menu-item" role="presentation">
+                <a href="#" data-method="copy" class="ui-corner-all" tabindex="-1" role="menuitem">{{:_s("Дублировать")}}</a>
+            </li>
+            <li class="ui-menu-item" role="presentation">
+                <a href="#" data-method="rename" class="ui-corner-all" tabindex="-1"
+                   role="menuitem">{{:_s("Переименовать")}}</a>
+            </li>
+            <li class="ui-menu-item" role="presentation">
+                <a href="#" data-method="delete" class="ui-corner-all" tabindex="-1" role="menuitem">{{:_s("Удалить")}}</a>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="area_help_show">
+        <div class="area_help_text ">
+            <i class="fa-solid fa-circle-info"></i>
+            <span class="area_help_text_inner"></span>
+        </div>
+    </div>
+
+    <div class="area_help_hide dark_theme_help-btn animated animate__backInUp" style="display:none">
+        <i class="fa-regular fa-messages-question button_help_open"></i>
+    </div>
+
+    <link href="css/theme/jsoneditor.min.css" rel="stylesheet" type="text/css">
+    <script src="js/vne_theme/lib/jsoneditor.min.js"></script>
+
+    <script src="_new/scripts/bootstrap.js"></script>
+    <script src="_new/scripts/tmp.js"></script>
+    <script src="../../js/vne_theme/theme.core.js"></script>
+    <script src="js/vne_theme/tooltip.js"></script>
+
+
+    <script>
+        const selectElement = document.getElementById('vne_list_scene');
+        if (selectElement !== "") {
+            // Путь к директории
+            const directoryPath = app.getProjectPath() + "/data/scenario";
+            // Массив пропускаемых файлов
+            const unwantedFiles = [
+                'config.ks',
+                'first.ks',
+                '_preview.ks',
+                'make.ks',
+                'map.ks'
+            ];
+            selectElement.addEventListener('change', function() {localStorage.setItem('selectedValue', this.value);});
+            // Сканирование директории
+            fs.readdir(directoryPath, (err, files) => {
+                const path = require('path');
+                if (err) {console.error('Directory read error:', err); return;}
+                // Обход всех файлов в директории
+                files.forEach(file => {
+                    // Получение полного пути к файлу
+                    const filePath = path.join(directoryPath, file);
+                    // Проверка, является ли файл директорией
+                    if (fs.lstatSync(filePath).isDirectory()) {return;}
+                    // Пропускаем нежелательные файлы
+                    if (unwantedFiles.includes(file)) {return;}
+                    // Создание нового элемента option
+                    const optionElement = document.createElement('option');
+                    optionElement.value = file;
+                    optionElement.textContent = file;
+                    // Получение сохраненного значения из локального хранилища
+                    const savedValue = localStorage.getItem('selectedValue');
+                    // Установка элемента option как выбранного по умолчанию, если имя файла совпадает с сохраненным значением
+                    if (file === savedValue) {optionElement.selected = true;}
+                    // Добавление элемента option в элемент select
+                    selectElement.appendChild(optionElement);
+                });
+            });
+        } else {
+
+        }
+    </script>
+
+</div>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Coordinates Finder</title>
+    <style>
+        .body-coord {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #myCanvas {
+            border: 1px solid #000000;
+        }
+
+        #info {
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 60px;
+            left: 10px;
+        }
+
+        .marker {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .marker.dragging {
+            background-color: blue;
+        }
+
+        #controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            }
+
+        button {
+                padding: 5px 10px;
+                font-size: 14px;
+                cursor: pointer;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                margin-right: 10px !important;
+                margin-left: 10px !important;
+            }
+
+        input[type="file"] {
+                padding: 5px;
+                font-size: 14px;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: white;
+                border: none;
+                border-radius: 5px;
+            }
+</style>
+</head>
+
+<body class="body-coord">
+<div id="imageContainer" style="position: relative;">
+    <canvas id="myCanvas"></canvas>
+    <div id="info"></div>
+    <div id="controls" class="controls">
+        <input type="file" id="imageLoader" accept="image/*" />
+        <button id="resetButton">{{:_s("Сбросить")}}</button>
+        <button id="copyButton">{{:_s("Скопировать координаты")}}</button>
+    </div>
+</div>
+</body>
+
+<script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    const image = new Image();
+    const info = document.getElementById('info');
+    const resetButton = document.getElementById('resetButton');
+    const imageLoader = document.getElementById('imageLoader');
+    const copyButton = document.getElementById('copyButton');
+    let points = [];
+    let history = [];
+    let isDragging = false;
+    let draggedPointIndex = null;
+
+    function loadImage(src) {
+        image.src = src;
+        image.onload = () => {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            ctx.drawImage(image, 0, 0);
+        };
+    }
+
+    loadImage('location1.jpg');
+
+    imageLoader.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                loadImage(e.target.result);
+                points = [];
+                history = [];
+                updateInfo();
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    canvas.addEventListener('click', (event) => {
+        if (points.length < 4 && !isDragging) {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            points.push({ x, y });
+            drawPoints();
+            updateInfo();
+        }
+    });
+
+    canvas.addEventListener('mousedown', (event) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        points.forEach((point, index) => {
+            if (Math.abs(point.x - x) < 10 && Math.abs(point.y - y) < 10) {
+                isDragging = true;
+                draggedPointIndex = index;
+                history.push([...points]);
+                drawPoints();
+            }
+        });
+    });
+
+    canvas.addEventListener('mousemove', (event) => {
+        if (isDragging && draggedPointIndex !== null) {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            points[draggedPointIndex] = { x, y };
+            drawPoints();
+            updateInfo();
+        }
+    });
+
+    canvas.addEventListener('mouseup', () => {
+        isDragging = false;
+        draggedPointIndex = null;
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.ctrlKey && event.key === 'z' && history.length > 0) {
+            points = history.pop();
+            drawPoints();
+            updateInfo();
+        }
+    });
+
+    resetButton.addEventListener('click', () => {
+        points = [];
+        history = [];
+        drawPoints();
+        updateInfo();
+    });
+
+    copyButton.addEventListener('click', () => {
+        const infoText = document.getElementById('info').innerText;
+        const coordsMatch = infoText.match(/"coords": "([^"]+)"/);
+        if (coordsMatch && coordsMatch[1]) {
+            const coords = coordsMatch[1];
+            const tempInput = document.createElement('textarea');
+            tempInput.value = coords;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            Swal.fire({
+                position: 'bottom-end',
+                icon: 'success',
+                title: $.s("Координаты скопированы в буфер обмена!"),
+                color: "var(--vne-text-color)",
+                background: "var(--vne-right-panel-color)",
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true
+            });
+        } else {
+            Swal.fire({
+                position: 'bottom-end',
+                icon: 'success',
+                title: $.s("Координаты не установлены!"),
+                color: "var(--vne-text-color)",
+                background: "var(--vne-right-panel-color)",
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true
+            });
+        }
+    });
+
+    function drawPoints() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image, 0, 0);
+        ctx.beginPath();
+        points.forEach((point, index) => {
+            ctx.arc(point.x, point.y, 5, 0, Math.PI * 2, true);
+            ctx.fill();
+            if (index > 0) {
+                ctx.moveTo(points[index - 1].x, points[index - 1].y);
+                ctx.lineTo(point.x, point.y);
+                ctx.stroke();
+            }
+        });
+        if (points.length === 4) {
+            ctx.moveTo(points[3].x, points[3].y);
+            ctx.lineTo(points[0].x, points[0].y);
+            ctx.stroke();
+            fillPolygon(points);
+        }
+    }
+
+    function fillPolygon(points) {
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
+        }
+        ctx.closePath();
+        ctx.fillStyle = 'rgb(0,0,0)';
+        ctx.fill();
+    }
+
+    function updateInfo() {
+        if (points.length > 1) {
+            const x1 = Math.min(...points.map(p => p.x));
+            const y1 = Math.min(...points.map(p => p.y));
+            const x2 = Math.max(...points.map(p => p.x));
+            const y2 = Math.max(...points.map(p => p.y));
+            const width = x2 - x1;
+            const height = y2 - y1;
+
+            const length = points.reduce((acc, point, index) => {
+                if (index > 0) {
+                    const prevPoint = points[index - 1];
+                    acc += Math.sqrt(Math.pow(point.x - prevPoint.x, 2) + Math.pow(point.y - prevPoint.y, 2));
+                }
+                return acc;
+            }, 0);
+
+            const coords = [
+                x1, y1,
+                x2, y1,
+                x2, y2,
+                x1, y2
+            ].join(',');
+
+            info.innerHTML = `
+        "coords": "${coords}"
+      `;
+        } else {
+            info.innerHTML = '';
+        }
+    }
+</script>
+</html>

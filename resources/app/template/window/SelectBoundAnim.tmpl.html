@@ -1,0 +1,38 @@
+<div style="box-sizing:content-box">
+    <div id="bound_area" style="position:relative;">
+        <div style="position:absolute;z-index:9999999999">
+            <div id="bound_panel" style="width:400px;height:255px" class="darkTheme-bp-panel">
+                    <label style="padding:4px; position: relative;top: -29px;width: 166px" class="vne-control-label vne-md-content-margin vne-md-content">
+                        {{:_s("Цель")}} <select class="select_anim" style="width: 91px"></select>
+                    </label>
+                    <label style="padding:4px; position: absolute; height: 109px;right: 0px;left: 170px" class="vne-control-label vne-md-content-margin vne-md-content">
+                        X <input type="text" data-id="left" class="text_bound_x spinner-1" style="width:60px;background-color:white"/> px
+                        <br>
+                        Y <input type="text" data-id="top" class="text_bound_y spinner-1" style="width:60px;background-color:white"/> px
+                    </label>
+                    <label style="padding:4px; position: relative; top: 43px;width: 166px;right: 165px;left: -179px" class="vne-control-label vne-md-content-margin vne-md-content">
+                        {{:_s("Ширина")}} <input type="text" data-id="width" name="width" class="text_bound_width spinner-1" style="width:60px;background-color:white" value="200"/> px
+                        <br>
+                        {{:_s("Высота")}} <input type="text" data-id="height" class="text_bound_height spinner-1" style="width:60px;background-color:white"/> px
+                    </label>
+                <div class="vne_help_project_area area_anim" style="display:none">
+                    aaa
+                </div>
+                <div style="position:absolute;left:10px;bottom:-40px">
+                    <input type="button" class="button_reset btn-default" value='{{:_s("Сброс")}}'/> 　
+                    <input id="button_bound" type="button" class="btn-default" value='{{:_s("Принять")}}'/>
+                </div>
+            </div>
+        </div>
+
+        {{if bound_type == "ptext"}}
+        <div id="bound_select" style="z-index:99999;position:absolute;cursor:move" class="event-setting-element">
+
+        </div>
+        {{/if}}
+
+        <img id="bound_background_img" style="z-index:1;width:100%;height:100%;" src=""/>
+
+    </div>
+
+</div>

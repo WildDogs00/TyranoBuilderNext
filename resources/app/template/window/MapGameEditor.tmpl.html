@@ -1,0 +1,238 @@
+<div class="parts_box" style="box-sizing:content-box; overflow: auto; height: 600px;">
+    <label class="vne-control-label-help-text vne-md-content-margin">{{:_s("Не забывайте нажать кнопку сохранения после редактирования!")}}</label>
+    <div id="jsoneditor" style="display: none;"></div>
+    <div class="container ach_container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="accordion" id="filesAccordion">
+                    <div id="mapContainer" class="container" style="background: none !important;"></div>
+                </div>
+                <template id="fileTemplate">
+                    <div class="accordion-item" style="border: none;background: var(--vne-right-panel-color) !important;margin: 4px !important;">
+                        <h2 class="accordion-header" id="headingFile">
+                            <button class="accordion-button ach_button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFile" aria-expanded="false" aria-controls="collapseFile">
+                                <input type="text" class="form-control" placeholder='{{:_s("Название локации")}}' data-key="file_title" title='{{:_s("Название локации")}}'>
+                            </button>
+                        </h2>
+                        <div id="collapseFile" class="accordion-collapse collapse show" aria-labelledby="headingFile" data-bs-parent="#filesAccordion">
+                            <div class="accordion-body">
+                                <div class="accordion" id="labelsAccordion">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <template id="labelTemplate">
+                    <div class="accordion-item" style="border: none;background: var(--vne-right-panel-color) !important;margin: 4px !important;">
+                        <h2 class="accordion-header" id="headingLabel">
+                            <button class="accordion-button ach_button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLabel" aria-expanded="false" aria-controls="collapseLabel">
+                                <input type="text" class="form-control" placeholder='{{:_s("Название метки")}}' data-key="label_title" title='{{:_s("Название метки")}}'>
+                            </button>
+                        </h2>
+                        <div id="collapseLabel" class="accordion-collapse collapse" aria-labelledby="headingLabel" data-bs-parent="#labelsAccordion">
+                            <div class="card-body">
+                                <span class="vne-control-label-help-text vne-md-content-margin" style="margin: -5px 5px 5px 20px !important;font-size: 14px;display: flex;justify-content: center;align-items: center;" title='{{:_s("Если сделать активной, то данная метка будет присутствовать на карте игры, если отключить, то соответственно метка не будет отображена на карте.")}}'>{{:_s("Отображать:")}} <input type="checkbox" class="checkbox form-check-input" style="margin: 0px 2px 1px 2px !important;width: 25px;height: 25px;" data-key="label_display">  ?</span>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div style="margin-left: 10px !important; margin-bottom: 10px !important; margin-top: 10px !important;">
+                    <button id="save" class="btn-default">{{:_s("Сохранить")}}</button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div id="mapPreview" class="achievementPreview" style="position: sticky;"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const mapContainer = document.getElementById('mapContainer');
+        const fileTemplate = document.getElementById('fileTemplate');
+        const labelTemplate = document.getElementById('labelTemplate');
+        const editor = new JSONEditor(document.querySelector('#jsoneditor'));
+        const projectPatch = app.getProjectPath();
+
+        function loadJson() {
+            return fetch(projectPatch + 'data/system/labelListMap.json')
+                .then(response => response.json())
+                .catch(error => console.error('Ошибка:', error));
+        }
+
+        function generateUniqueId(base, index) {
+            return `${base}_${index}`;
+        }
+
+        function updateInterface(json) {
+            mapContainer.innerHTML = '';
+            Object.keys(json).forEach((fileKey, fileIndex) => {
+                const fileObject = json[fileKey];
+                const fileCard = generateFileCard(fileObject, fileKey, fileIndex);
+                mapContainer.appendChild(fileCard);
+            });
+        }
+
+        function updateEditorWithNewData(fileKey, propertyPath, value) {
+            let data = editor.get();
+            const props = propertyPath.split('.');
+            let currentData = data[fileKey];
+
+            for (let i = 0; i < props.length; i++) {
+                let prop = props[i];
+
+                if (i === props.length - 1) {
+                    currentData[prop] = value;
+                } else {
+                    let match = prop.match(/(\w+)\[(\d+)\]/);
+                    if (match) {
+                        prop = match[1];
+                        let index = parseInt(match[2], 10);
+                        if (!currentData[prop]) {
+                            currentData[prop] = [];
+                        }
+                        if (!currentData[prop][index]) {
+                            currentData[prop][index] = {};
+                        }
+                        currentData = currentData[prop][index];
+                    } else {
+                        if (!currentData[prop]) {
+                            currentData[prop] = {};
+                        }
+                        currentData = currentData[prop];
+                    }
+                }
+            }
+            editor.update(data);
+        }
+
+
+        function generateFileCard(fileObject, fileKey, fileIndex) {
+            const fileCardClone = fileTemplate.content.cloneNode(true);
+            const accordionItem = fileCardClone.querySelector('.accordion-item');
+            const accordionHeader = accordionItem.querySelector('.accordion-header');
+            const accordionButton = fileCardClone.querySelector('.accordion-button');
+            accordionButton.ariaExpanded = 'false';
+            accordionButton.classList.add('collapsed');
+            const accordionCollapse = fileCardClone.querySelector('.accordion-collapse');
+            accordionCollapse.classList.remove('show');
+            const labelsAccordion = accordionCollapse.querySelector('.accordion');
+            const fileId = generateUniqueId('file', fileIndex);
+            const headingId = generateUniqueId('headingFile', fileIndex);
+            const collapseId = generateUniqueId('collapseFile', fileIndex);
+            accordionHeader.id = headingId;
+            accordionButton.dataset.bsToggle = 'collapse';
+            accordionButton.dataset.bsTarget = `#${collapseId}`;
+            accordionButton.ariaExpanded = 'false';
+            accordionButton.ariaControls = collapseId;
+            accordionCollapse.id = collapseId;
+            accordionCollapse.ariaLabelledby = headingId;
+            accordionCollapse.dataset.bsParent = '#filesAccordion';
+
+            const fileTitleInput = accordionItem.querySelector('input[data-key="file_title"]');
+            fileTitleInput.value = fileObject.title;
+            fileTitleInput.addEventListener('change', function(event) {
+                updateEditorWithNewData(fileKey, 'title', event.target.value);
+            });
+            fileObject.labels.forEach((labelObject, labelIndex) => {
+                const labelCard = generateLabelCard(labelObject, fileKey, labelIndex); // Используйте fileKey из JSON
+                labelsAccordion.appendChild(labelCard);
+            });
+            return accordionItem;
+        }
+
+        function generateLabelCard(labelObject, fileKey, labelIndex, fileId) {
+            const labelCardClone = labelTemplate.content.cloneNode(true);
+            const accordionItem = labelCardClone.querySelector('.accordion-item');
+            const accordionHeader = accordionItem.querySelector('.accordion-header');
+            const accordionButton = labelCardClone.querySelector('.accordion-button');
+            accordionButton.ariaExpanded = 'false';
+            accordionButton.classList.add('collapsed');
+            const accordionCollapse = labelCardClone.querySelector('.accordion-collapse');
+            accordionCollapse.classList.remove('show');
+            const labelId = generateUniqueId(fileId, labelIndex);
+            const headingLabelId = generateUniqueId('headingLabel', labelId);
+            const collapseLabelId = generateUniqueId('collapseLabel', labelId);
+            accordionHeader.id = headingLabelId;
+            accordionButton.dataset.bsToggle = 'collapse';
+            accordionButton.dataset.bsTarget = `#${collapseLabelId}`;
+            accordionButton.ariaExpanded = 'false';
+            accordionButton.ariaControls = collapseLabelId;
+            accordionCollapse.id = collapseLabelId;
+            accordionCollapse.ariaLabelledby = headingLabelId;
+            accordionCollapse.dataset.bsParent = `#${fileId}`;
+
+            const labelTitleInput = accordionItem.querySelector('input[data-key="label_title"]');
+            labelTitleInput.value = labelObject.title;
+            labelTitleInput.addEventListener('change', function(event) {
+                updateEditorWithNewData(fileKey, `labels[${labelIndex}].title`, event.target.value);
+            });
+            const labelDisplayInput = accordionItem.querySelector('input[data-key="label_display"]');
+            labelDisplayInput.checked = labelObject.display;
+            labelDisplayInput.addEventListener('change', function(event) {
+                updateEditorWithNewData(fileKey, `labels[${labelIndex}].display`, event.target.checked);
+            });
+            return labelCardClone;
+        }
+
+        function updateAchievementPreview(fileKey, fileData) {
+            const previewElement = document.querySelector('#mapPreview');
+            previewElement.innerHTML = '';
+
+            for (const key in fileData) {
+                const value = fileData[key];
+                const propertyElement = document.createElement('p');
+
+                if (typeof value === 'boolean') {
+                    propertyElement.textContent = `${key}: ${value ? 'Да' : 'Нет'}`;
+                } else if (Array.isArray(value)) {
+                    propertyElement.textContent = `${key}: ${value.join(', ')}`;
+                } else if (typeof value === 'object') {
+                    propertyElement.textContent = `${key}:`;
+                    for (const subKey in value) {
+                        propertyElement.appendChild(document.createElement('br'));
+                        propertyElement.textContent += `  ${subKey}: ${value[subKey]}`;
+                    }
+                } else {
+                    propertyElement.textContent = `${key}: ${value}`;
+                }
+
+                previewElement.appendChild(propertyElement);
+            }
+        }
+
+        loadJson().then(json => {
+            editor.set(json);
+            updateInterface(json);
+        });
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('change', (event) => {
+                updateEditorWithNewData(event.target.dataset.key, event.target.value);
+            });
+        });
+
+        document.getElementById('save').addEventListener('click', function() {
+            if (editor) {
+                const updatedJson = editor.get();
+                const filePath = projectPatch + 'data/system/labelListMap.json';
+                saveJson(updatedJson, filePath);
+
+                // После успешного сохранения, отобразите уведомление
+                Swal.fire({
+                    icon: 'success', // Иконка уведомления (можете выбрать другую, если хотите)
+                    title: $.s('Данные обновлены'),
+                    color: "var(--vne-text-color)",
+                    background: "var(--vne-right-panel-color)",
+                    showConfirmButton: false, // Не показывать кнопку "ОК"
+                    timer: 1500 // Время, в течение которого уведомление будет отображаться (в миллисекундах)
+                });
+            } else {
+                console.error('Editor не определен');
+            }
+        });
+
+
+        function saveJson(updatedJson, filePath) {
+            fs.writeFileSync(filePath, JSON.stringify(updatedJson, null, 2), 'utf8');
+        }
+    </script>
+</div>

@@ -1,0 +1,51 @@
+<div>
+    <div class="form-horizontal ">
+        <div class="form-group">
+            <div class="col-sm-12 form-inline darkTheme-md-fm-container">
+                <select class="form-control col-sm-6 select-folder-add-file folder_select">
+                    <option value="">（{{:_s("Нет папки")}}）</option>
+                </select>
+                <br>
+                <span class="txt-add-folder folder_select btn-default">{{:_s("Создать новую папку")}}</span>
+                
+                <div class="form-inline cpn-search-block" style="float:right;margin-right:20px">
+				
+				    <div class="form-group darkTheme-md-fm-fg">
+					
+					    <span class="button_file_samune btn-default" style="font-size: 16px;"><i class="fa fa-th-large"></i></span>
+						<span style="font-size:16px;">｜</span>
+						<span class="button_file_list btn-default" style="font-size: 16px;"><i class="fa fa-list"></i></span>　
+                        <br>
+						<div class="input-group">
+						    <input type="text" class="form-control text_file_select_search darkTheme-md-fm-search" placeholder='{{:_s("Поиск по имени файла")}}' />
+							<div style="cursor:pointer" class="button_file_select_search input-group-addon">
+                                <span class="tb-i-search"></span>
+				            </div>
+				        </div>
+				    </div>
+							
+				</div>
+				
+                <div style="padding-top:3px;display:none" class="col-sm-11 form-inline area_add_folder_input darkTheme-md-fm-container">
+                    
+                  <input type="text" class="form-control col-sm-6 text_add_folder" />
+                  <input type="button" class="form-control col-sm-6 sbm_add_folder" style="left: 5px" value='{{:_s("Принять")}}' />
+                
+                </div>
+                
+              </div>
+              
+            </div>
+
+            <div class="add-file-upload-block file_draggable darkTheme-md-fm-container">
+              {{:_s("Перетащите сюда, чтобы добавить файлы")}}<br>
+                <input type="file" class="btn-default button_input_file" style="position: relative;top: -40px;width: 143px;left: 7px;opacity: 0.4;cursor: pointer"/>
+            </div>
+            
+			<div class="file_select_list_area darkTheme-md-fm-container" style="overflow:auto">
+              
+			</div>
+			
+        </div>
+    </div>    
+</div>

@@ -1,0 +1,112 @@
+
+<div class="page-content">
+					<div id="make_scenario" class="row-fluid">
+						<div class="span12">
+							<div class="col-sm-6">
+										<div style="width:500px" class="tabbable">
+											<ul class="nav nav-tabs" id="myTab">
+												<li class="active">
+													<a data-toggle="tab" href="#home">
+														<i class="green icon-picture bigger-110"></i>
+														{{:_s("Изображения")}}
+													</a>
+												</li>
+												<li class="">
+													<a data-toggle="tab" href="#position">
+														<i class="green icon-resize-full bigger-110"></i>
+														{{:_s("Позиция")}}
+													</a>
+												</li>
+												<li class="">
+													<a data-toggle="tab" href="#opacity">
+														<i class="green icon-tint bigger-110"></i>
+														{{:_s("Непрозрачность")}}
+													</a>
+												</li>
+												<li class="">
+													<a data-toggle="tab" href="#ptext">
+														<i class="green icon-text-width bigger-110"></i>
+														{{:_s("Имя")}}
+													</a>
+												</li>
+											</ul>
+											<div class="tab-content" style="width:550px;height:300px;">
+												<div id="home" class="tab-pane active">
+													<div>
+														<input class="check_message_image" type="checkbox" value="" />
+														{{:_s("Использовать нестандартное окно сообщения")}}
+													</div>
+													<br />
+													<br />
+													<div style="display:none" class="area_select_image">
+														<p>{{:_s("Выберите изображение, чтобы использовать")}}</p>
+														<p><input class="button_image_select" type="button" value='{{:_s("Выбрать")}}' /></p>
+														<div class="selected_image">
+														</div>
+													</div>
+												</div>
+												<div id="position" class="tab-pane">
+													<div>
+														<p>{{:_s("Размер окна")}}</p>
+														<p>
+															{{:_s("Ширина")}}:　<input class="msg_width spinner" type="text" value="" />px
+															{{:_s("Высота")}}:　<input class="msg_height spinner" type="text" value="" />px
+														</p>
+														<p>
+															{{:_s("По оси X")}}:　<input class="msg_left spinner" type="text" value="" />px
+															{{:_s("По оси Y")}}:　<input class="msg_top spinner" type="text" value="" />px
+														</p>
+														<br />
+														<p>{{:_s("Позиция текста внутри текстбокса")}}<br />
+														   {{:_s("Отступ текста от внутренних краев текстбокса")}}
+														</p>
+														<p>
+															{{:_s("Сверху")}}:　<input class="margint spinner" type="text" value="" />px
+															{{:_s("Снизу")}}:　<input class="marginb spinner" type="text" value="" />px
+														</p>
+														<p>
+															{{:_s("Слева")}}:　<input class="marginl spinner" type="text" value="" />px
+															{{:_s("Справа")}}:　<input class="marginr spinner" type="text" value="" />px
+														</p>
+													</div>
+												</div>
+												<div id="opacity" class="tab-pane">
+													<div>
+														<p>{{:_s("Непрозрачность")}}</p>
+														<p>
+															<input class="opacity spinner" type="text" value="" />(0〜255)
+														</p>
+														<br />
+													</div>
+												</div>
+												<div id="ptext" class="tab-pane">
+													<div>
+														<p>{{:_s("Положение имени")}}</p>
+														<p>
+															{{:_s("По оси X")}}:　<input class="chara_name_x spinner" type="text" value="" />px
+															{{:_s("По оси Y")}}:　<input class="chara_name_y spinner" type="text" value="" />px
+														</p>
+														<br />
+														<p>
+															{{:_s("Размер текста")}}:　<input class="chara_name_size spinner" type="text" value="" />px
+														</p>
+														
+													</div>
+													
+												</div>
+												
+											</div>
+										</div>
+							</div>
+							
+						</div>
+						
+						<br style="clear:both">
+						<div class="span12" style="padding-top:10px;padding-rignt:40px">
+								<input class="button_sbm" style="float:right" type="button" value='{{:_s("Применить")}}'>
+						</div>
+					</div>
+</div>
+
+			
+	

@@ -1,0 +1,37 @@
+<div class="row character-control-block">
+    <div class="col-sm-4">
+        <label class="vne-control-label vne-md-content-margin">{{:_s("Список персонажей")}}</label>
+        <div class="form-inline">
+            <div class="form-group chara_add_block vne-md-content">
+                <input class="text_chara_add form-control vne-cont-bg" type="text" value="" placeholder='{{:_s("Имя персонажа")}}'>
+                <input class="button_chara_add btn-default darkTheme-char-add" type="button" value='{{:_s("Добавить")}}'>
+            </div>
+        </div>
+        <div class="vne-md-content">
+            <select class="select_chara form-control vne-cont-bg" id="form-field-select-2" multiple="multiple"
+                    style="height: 188px !important; padding: 5px !important;">
+            </select>
+            <input class="button_chara_remove btn-default" type="button" value='{{:_s("Удалить персонажа")}}'>
+        </div>
+
+    </div>
+    <div class="col-sm-8">
+        <label class="vne-control-label-help-text vne-md-content-margin">{{:_s("Добавьте или выберите персонажа.")}}</label>
+        <div class="vne-md-content" style="margin-bottom: 20px !important;">
+            <div class="file_draggable chara_image_area" style="height:280px; margin-bottom: -10px !important;"></div>
+            <div id="chara_selected_file_area"></div>
+        </div>
+    </div>
+</div>
+
+<div id="select_image_context_menu" class="context_menu vne-md-content"
+     style="display:none;z-index:99999;position:absolute;left:10px;top:10px">
+    <ul id="menu" class="ui-menu ui-widget ui-widget-content ui-corner-all" role="menu" tabindex="0"
+        aria-activedescendant="ui-id-6">
+
+        <li class="ui-menu-item" role="presentation">
+            <a href="#" data-method="delete" class="ui-corner-all" tabindex="-1" role="menuitem">{{:_s("Удалить")}}</a>
+        </li>
+
+    </ul>
+</div>

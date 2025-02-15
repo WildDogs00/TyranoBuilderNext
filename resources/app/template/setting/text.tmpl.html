@@ -1,0 +1,185 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs vne-md-content-margin" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <span class="nav-link active vne-cs-tab-item" id="home-tab" data-bs-toggle="tab" data-bs-target="#base"
+              role="tab" aria-controls="home" aria-selected="true">{{:_s("Основное")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" id="profile-tab" data-bs-toggle="tab" data-bs-target="#effect"
+              role="tab" aria-controls="profile" aria-selected="false">{{:_s("Эффекты")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" id="messages-tab" data-bs-toggle="tab" data-bs-target="#space"
+              role="tab" aria-controls="messages" aria-selected="false">{{:_s("Интервал")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" id="settings-tab" data-bs-toggle="tab" data-bs-target="#anime"
+              role="tab" aria-controls="settings" aria-selected="false">{{:_s("Анимация")}}</span>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="base" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Размер шрифта")}}</label>
+            <div class="form-group vne-md-content">
+                    <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+                      <input class="input_setting spinner-1" value="24" data-key="defaultFontSize" type="text"
+                             aria-valuemin="0" aria-valuenow="24" autocomplete="off" role="spinbutton">
+                   	</span>
+                px
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Шрифт")}}</label>
+            <div class="vne-md-content">
+                <select class="input_setting form-control" id="userFace" data-key="userFace">
+                    {{for array_font}}
+                    <option value="{{:val}}">{{:name}}</option>
+                    {{/for}}
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Жирный текст")}}</label>
+            <div class="vne-md-content">
+                <select class="input_setting form-control" id="defaultBold" data-key="defaultBold">
+                    <option value="false">{{:_s("Нет")}}</option>
+                    <option value="true">{{:_s("Да")}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane" id="effect" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin" for="defaultChColor">{{:_s("Цвет шрифта")}}</label><br/>
+            <div class="vne-md-content">
+                <input style="width:100px;height:30px" class="input_setting form-control color_text" value=""
+                       id="defaultChColor" data-key="defaultChColor" type="text">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Сглаживание")}}</label>
+            <div class="vne-md-content">
+                <select class="input_setting form-control" id="defaultAntialiased" data-key="defaultAntialiased">
+                    <option value="0">{{:_s("Нет")}}</option>
+                    <option value="1">{{:_s("Слабое")}}</option>
+                    <option value="2">{{:_s("Сильное")}}</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group" style="width:150px;float:left">
+
+            <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Обводка")}}</label>
+            <div class="vne-md-content">
+                <select style="width:100px" class="input_setting form-control" id="defaultEdge" data-key="defaultEdge">
+                    <option value="false">{{:_s("Нет")}}</option>
+                    <option value="true">{{:_s("Да")}}</option>
+                </select>
+                <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Цвет обводки")}}</label><br/>
+                <input style="float:left;width:100px;height:30px" class="input_setting form-control color_text" value=""
+                       id="defaultEdgeColor" data-key="defaultEdgeColor" type="text">
+            </div>
+        </div>
+
+        <div class="form-group" style="width:150px;float:left">
+
+            <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Тень")}}</label>
+            <div class="vne-md-content">
+                <select style="width:100px" class="input_setting form-control" id="defaultShadow"
+                        data-key="defaultShadow">
+                    <option value="false">{{:_s("Нет")}}</option>
+                    <option value="true">{{:_s("Да")}}</option>
+                </select>
+                <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Цвет тени")}}</label><br/>
+                <input style="float:left;width:100px;height:30px" class="input_setting form-control color_text" value=""
+                       id="defaultShadowColor" data-key="defaultShadowColor" type="text">
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane" id="space" role="tabpanel" aria-labelledby="messages-tab" tabindex="0">
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Расстояние между строк")}}</label><br/>
+            <div class="vne-md-content">
+                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+                    <input class="spinner-1 input_setting" value="6" data-key="defaultLineSpacing" type="text"
+                           aria-valuemin="0" aria-valuenow="6" autocomplete="off" role="spinbutton">
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Расстояние между символами")}}</label><br/>
+            <div class="vne-md-content">
+                <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+                    <input class="input_setting spinner-1" value="0" data-key="defaultPitch" type="text"
+                           aria-valuemin="0" aria-valuenow="0" autocomplete="off" role="spinbutton">
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane" id="anime" role="tabpanel" aria-labelledby="settings-tab" tabindex="0">
+        <div class="form-group">
+
+            <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Выбрать анимацию")}}</label>
+            <div class="vne-md-content">
+                <select class="input_setting form-control" id="defaultChEffect" data-key="defaultChEffect">
+                    <option value="none">{{:_s("none")}}</option>
+                    <option value="fadeIn">fadeIn</option>
+                    <option value="fadeInDown">fadeInDown</option>
+                    <option value="fadeInLeft">fadeInLeft</option>
+                    <option value="fadeInRight">fadeInRight</option>
+                    <option value="fadeInUp">fadeInUp</option>
+                    <option value="rotateIn">rotateIn</option>
+                    <option value="zoomIn">zoomIn</option>
+                    <option value="slideIn">slideIn</option>
+                    <option value="bounceIn">bounceIn</option>
+                    <option value="vanishIn">vanishIn</option>
+                    <option value="puffIn">puffIn</option>
+                    <option value="rollIn">rollIn</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+
+            <div class="form-group">
+                <label class="vne-control-label vne-md-content-margin" for="userFace">{{:_s("Продолжительность")}}</label><br/>
+                <div class="vne-md-content">
+                    <select class="input_setting form-control" id="defaultChEffectSpeed"
+                            data-key="defaultChEffectSpeed">
+                        <option value="0.1s">0.1s</option>
+                        <option value="0.2s">0.2s</option>
+                        <option value="0.3s">0.3s</option>
+                        <option value="0.4s">0.4s</option>
+                        <option value="0.5s">0.5s</option>
+                        <option value="1s">1s</option>
+                        <option value="1.5s">1.5s</option>
+                        <option value="2s">2s</option>
+                        <option value="3s">3s</option>
+                        <option value="5s">5s</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="button_sbm_block">
+    <input class="button_sbm btn btn-default darkTheme-md-content-btn" type="button" style="margin-right: 4px !important;" value='{{:_s("Применить")}}'>
+</div>
+
+</div>
+

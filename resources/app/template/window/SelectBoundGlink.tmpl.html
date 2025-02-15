@@ -1,0 +1,56 @@
+<div style="box-sizing:content-box">
+
+	<div id="bound_area" style="position:relative;">
+		
+		<div id="bound_panel_outer" style="position:absolute;z-index:9999999999;">
+			<div id="bound_panel" class="darkTheme-bp-panel" style="height: 288px;">
+				<div class="">
+					<label style="padding:4px" class="vne-md-content vne-md-content-margin">
+						{{:_s("Текст")}} <input type="text" class="text_glink" data-key="text" style="font-size:14px;width:300px;height:30px;" />
+					</label>
+					<div class="vne-md-content">
+						<div style="padding:4px">
+							X	<input class="bound_x spinner-1 event-change" data-key="left" style="font-size:12px;width:60px;background-color:white" type="text" />px　
+							<br>
+							Y	<input class="bound_y spinner-1 event-change" data-key="top" style="font-size:12px;width:60px;background-color:white" type="text" />px　
+						</div>
+						<div style="padding:4px; position: absolute; top: 53px; left: 113px">
+							{{:_s("Ширина")}}	<input class="bound_width spinner-1 event-change" data-key="width" style="font-size:12px;width:60px;background-color:white" type="text" />px　
+							<br>
+							{{:_s("Высота")}}	<input class="bound_height spinner-1 event-change" data-key="height" style="font-size:12px;width:60px;background-color:white" type="text" />px　
+						</div>
+						<div style="padding:4px">
+							{{:_s("Размер")}}
+							<input class="bound_size spinner-1 event-change" data-key="font-size" style="width:60px;background-color:white" type="text" />
+						</div>
+					</div>
+					<div class="vne-md-content" style="margin-top: 5px !important;">
+						<div style="padding:4px">
+							{{:_s("Дизайн")}}
+							<select class="select_glink_kind " >
+							</select>
+							{{:_s("Цвет")}}
+							<select class="select_glink_color" >
+							</select>
+						</div>
+					</div>
+				</div>
+				<div style="position:absolute;right:10px;bottom:10px">
+					<input type="button" id="button_bound_background" value='{{:_s("Изменить фон")}}' class="btn-default"/>
+					<input id="button_bound" type="button" value='{{:_s("Принять")}}' class="btn-default"/>
+				</div>
+			</div>
+		</div>
+		<div id="bound_select" style="z-index:99999;position:absolute" class="glink_button event-setting-element">
+				<span class="button_text">Button</span>
+		</div>
+		<img id="bound_background_img" style="z-index:1;width:100%;height:100%" src="" />
+	</div>
+	<canvas  id="pixel" class="pixel" style="pointer-events: none; width: 100%; height: 100%"></canvas >
+
+</div>
+<script src="js/vne_theme/theme.core.js"></script>
+<script>
+	gridBg();
+</script>
+

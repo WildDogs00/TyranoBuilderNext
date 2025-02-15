@@ -1,0 +1,22 @@
+ <div item-type="sort" class="tb-main-cpn component-box {{:category}}" data-cpn="movie-play">
+            <div class="cpn-ico-block">
+              <div class="cpn-ico"><span class="tb-i-{{:icon}}" title="{{>name}}"></span></div>
+            </div>
+            <div class="cpn-block">
+              <div class="cpn-header-block">
+                <div class="cpn-header-title">
+                  <div class="cpn-title">{{>name}}</div>
+                  <div class="cpn-desc">{{:movie_url}}</div>
+                </div>
+                <div class="cpn-header-nav">
+                	
+               	   <span class="tb-i-chevron-down component_slide" title='{{:_s("Развернуть")}}'></span>
+                   <span class="tb-i-time component_remove" title='{{:_s("Удалить")}}'></span>
+                  
+                </div>
+              </div>
+              <div class="cpn-body">
+                <video style="width:80%" src="{{:app.getProjectPath()}}{{:base_movie_url}}{{:movie_url}}" controls=""></video>
+              </div>
+            </div>
+</div>

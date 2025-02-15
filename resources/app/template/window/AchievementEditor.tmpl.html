@@ -1,0 +1,172 @@
+<div class="parts_box" style="box-sizing:content-box; overflow: auto; height: 600px;">
+    <label class="vne-control-label-help-text vne-md-content-margin">{{:_s("Не забывайте нажать кнопку сохранения после редактирования достижения!")}}</label>
+    <div id="jsoneditor" style="display: none;"></div>
+    <div class="container ach_container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="accordion" id="achievementsAccordion">
+                    <div id="achievementsContainer" class="container" style="background: none !important;"></div>
+                </div>
+
+                <template id="achievementTemplate">
+                    <div class="accordion-item" style="border: none;padding: 3px !important;background: none !important;padding-top: 5px !important;">
+                        <h2 class="accordion-header" id="achievementHeading">
+                            <button class="accordion-button collapsed ach_button" type="button" data-bs-toggle="collapse" data-bs-target="#achievementCollapse" aria-expanded="false" aria-controls="achievementCollapse">
+                                {{:_s("Название")}}:&nbsp;  <span class="ach_name"> </span> &nbsp;:&nbsp; ID:&nbsp;  <span class="ach_id"> </span>
+                            </button>
+                        </h2>
+
+
+                        <div id="achievementCollapse" class="accordion-collapse collapse" aria-labelledby="achievementHeading" data-bs-parent="#achievementsAccordion">
+
+                            <div class="card mb-3" style="border: none;padding: 5px !important;background: var(--vne-param-group-color);">
+                                <div class="card-header">
+                                    <input type="text" class="form-control" placeholder='{{:_s("ID достижения")}}' data-key="ach_id" title='{{:_s("Уникальный идентификатор достижения")}}'>
+                                    <br>
+                                </div>
+                                <div class="card-body">
+                                    <input type="color" class="form-control mb-3" placeholder='{{:_s("Цвет достижения")}}' data-key="ach_color" title='{{:_s("Цвет фона карточки достижения")}}'>
+                                    <input type="number" class="form-control mb-3" placeholder='{{:_s("Отступ")}}' data-key="ach_padding" title='{{:_s("Отступы вокруг содержимого карточки достижения")}}'>
+                                    <input type="number" class="form-control mb-3" placeholder='{{:_s("Скругление углов")}}' data-key="ach_border_radius" title='{{:_s("Радиус скругления углов достижения")}}'>
+                                    <button id="chooseFileImageBtn1" class="btn-default">Выбрать изображение</button>
+                                    <input type="hidden" id="selectedFilePath">
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Изображение")}}' data-key="ach_img" title='{{:_s("Имя файла изображения для достижения")}}'>
+                                    <input type="number" class="form-control mb-3" placeholder='{{:_s("Ширина достижения")}}' data-key="ach_width" title='{{:_s("Общая ширина достижения")}}'>
+                                    <input type="number" class="form-control mb-3" placeholder='{{:_s("Ширина текста")}}' data-key="ach_text_width" title='{{:_s("Ширина текстового блока в достижении")}}'>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Название достижения")}}' data-key="ach_name" title='{{:_s("Название достижения")}}'>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Описание достижения")}}' data-key="ach_text" title='{{:_s("Описание достижения")}}'>
+                                    <input type="color" class="form-control mb-3" placeholder='{{:_s("Цвет названия")}}' data-key="ach_name_color" title='{{:_s("Цвет названия достижения")}}'>
+                                    <input type="color" class="form-control mb-3" placeholder='{{:_s("Цвет текста")}}' data-key="ach_fonts_color" title='{{:_s("Цвет описания достижения")}}'>
+                                    <input type="number" class="form-control mb-3" placeholder='{{:_s("Ширина изображения")}}' data-key="image_width" title='{{:_s("Ширина изображения в достижении")}}'>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Переменная достижения")}}' data-key="ach_var" title='{{:_s("Название переменной, которая хранит состояние достижения")}}'>
+                                    <input type="number" class="form-control mb-3" placeholder='{{:_s("Время отображения")}}' data-key="display_time" title='{{:_s("Время отображения достижения на экране")}}'>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Шрифт текста")}}' data-key="ach_font_text" title='{{:_s("Шрифт для основного текста достижения")}}'>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Фон текста")}}' data-key="highlight_text" title='{{:_s("Фон текста достижения (Может быть только true  или false)")}}'>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Шрифт названия")}}' data-key="ach_font_name" title='{{:_s("Шрифт для названия достижения")}}'>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn-default delete" style="margin-top: 5px !important;">{{:_s("Удалить")}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div style="margin-left: 10px !important; margin-bottom: 10px !important; margin-top: 10px !important;">
+                    <button id="addAchievement" class="btn-default">{{:_s("Добавить достижение")}}</button>
+                    <button id="save" class="btn-default">{{:_s("Сохранить")}}</button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div id="achievementPreview" class="achievementPreview" style="position: sticky;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const achievementsContainer = document.querySelector('#achievementsContainer');
+        const achievementTemplate = document.querySelector('#achievementTemplate');
+        const editor = new JSONEditor(document.querySelector('#jsoneditor'));
+        const projectPatch = app.getProjectPath();
+
+
+        function loadJson() {
+            return fetch(projectPatch + 'data/achievement/achievements.json')
+                .then(response => response.json())
+                .catch(error => console.error($.s('Ошибка:'), error));
+        }
+
+        function saveJson(updatedJson, filePath) {
+            fs.writeFileSync(filePath, JSON.stringify(updatedJson, null, 2));
+        }
+
+        function updateInterface(json) {
+            achievementsContainer.innerHTML = '';
+            json.forEach((achievement) => {
+                const card = generateCard(achievement, json);
+                achievementsContainer.appendChild(card);
+            });
+        }
+
+        function generateCard(achievement, json) {
+            const card = achievementTemplate.content.cloneNode(true);
+            let cardElement = card.querySelector('.accordion-item');
+            updateCardElement(cardElement, achievement, json);
+            cardElement.querySelector('.accordion-collapse').addEventListener('show.bs.collapse', () => {
+                updateAchievementPreview(achievement);
+            });
+            return cardElement;
+        }
+
+        function updateCardElement(cardElement, achievement, json) {
+            for (const input of cardElement.querySelectorAll('input')) {
+                input.value = achievement[input.dataset.key];
+                input.addEventListener('input', () => {
+                    achievement[input.dataset.key] = input.value;
+                    editor.update(json);
+                    updateAchievementPreview(achievement);
+                });
+            }
+            setAccordion(cardElement, achievement);
+            cardElement.querySelector('.ach_name').textContent = achievement.ach_name;
+            cardElement.querySelector('.ach_id').textContent = achievement.ach_id;
+            cardElement.querySelector('.delete').addEventListener('click', () => deleteAchievement(achievement, cardElement, json));
+        }
+
+        function setAccordion(cardElement, achievement) {
+            const { ach_id } = achievement;
+            cardElement.querySelector('.accordion-header').id = 'heading' + ach_id;
+            cardElement.querySelector('.accordion-collapse').id = 'collapse' + ach_id;
+            cardElement.querySelector('.accordion-button').dataset.bsTarget = '#collapse' + ach_id;
+            cardElement.querySelector('.accordion-button').ariaControls = 'collapse' + ach_id;
+            cardElement.querySelector('.accordion-collapse').ariaLabelledby = 'heading' + ach_id;
+        }
+
+        function deleteAchievement(achievement, cardElement, json) {
+            const ach_id = achievement.ach_id;
+            const indexToDelete = json.findIndex(el => el.ach_id === ach_id);
+            if (indexToDelete !== -1) {
+                json.splice(indexToDelete, 1);
+            }
+            editor.update(json);
+            cardElement.remove();
+        }
+
+        function updateAchievementPreview(achievementData) {
+            const previewElement = document.querySelector('#achievementPreview');
+            previewElement.innerHTML = '';
+            for (const key in achievementData) {
+                const placeholder = achievementTemplate.content.querySelector(`input[data-key="${key}"]`).placeholder;
+                const value = achievementData[key];
+                const propertyElement = document.createElement('p');
+                propertyElement.textContent = `${placeholder}: ${value}`;
+                previewElement.appendChild(propertyElement);
+            }
+        }
+
+        function addAchievement() {
+            const json = editor.get();
+            const newAchievement = {...json[0]};
+            let maxId = json.reduce((max, achievement) => Math.max(max, parseInt(achievement.ach_id)), 0);
+            newAchievement.ach_id = String(maxId + 1);
+            json.push(newAchievement);
+            editor.set(json);
+            updateInterface(json);
+            const filePath = app.getProjectPath() + 'data/achievement/achievements.json';
+            saveJson(json, filePath);
+        }
+
+        loadJson().then(json => {
+            editor.set(json);
+            updateInterface(json);
+        });
+
+        document.querySelector('#addAchievement').addEventListener('click', addAchievement);
+        document.querySelector('#save').addEventListener('click', () => {
+            const json = editor.get();
+            const filePath = projectPatch + 'data/achievement/achievements.json';
+            saveJson(json, filePath);
+        });
+    </script>
+
+
+</div>

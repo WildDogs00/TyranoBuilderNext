@@ -1,0 +1,105 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs vne-md-content-margin" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <span class="nav-link active vne-cs-tab-item" id="home-tab" data-bs-toggle="tab"
+              data-bs-target="#theme_base"
+              role="tab" aria-controls="home" aria-selected="true">{{:_s("Темы")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" id="profile-tab" data-bs-toggle="tab"
+              data-bs-target="#theme_option"
+              role="tab" aria-controls="profile" aria-selected="false">{{:_s("Опции")}}</span>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="theme_base" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <div id="base" class="tab-main" style="">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Выберите тему")}}</label>
+            <div class="vne-md-content form-check form-switch">
+                <input id="checkThemeSearch" name="checkThemeSearch" type="checkbox" class="checkbox form-check-input">
+                {{:_s("Показывать темы, которые соответствуют разрешению экрана проекта.")}}
+                <br>
+                <br>
+                <select style="" class="input_setting form-control select_theme">
+                    <option value="">{{:_s("По умолчанию")}}</option>
+                </select>
+
+                <br>
+                <div class="area_theme_preview">
+
+                </div>
+                <div class="area_theme_info" style="display:none">
+                    {{:_s("Автор темы")}}：<a class="link_theme_author" href="javascript:;"></a>
+                </div>
+                <div class="area_theme_special" style="display:none;margin-top:20px">
+                    <span class="button_copy_special btn-default" title='{{:_s("Загрузить ресурсы на свой ПК для редактирования")}}' style="position: absolute !important; top: 157px; font-size: 21px; left: 445px"><i class="fa-solid fa-download"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane" id="theme_option" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <div class="form-group">
+<!--            <label class="control-label vne_theme-md-content-margin">-->
+<!--                {{:_s("テーマオプション")}}-->
+<!--            </label>-->
+            <div class="form-group" style="width:450px;float:left">
+
+                <label class="vne-control-label vne-md-content-margin">{{:_s("Кнопки меню")}}</label>
+                <div class="vne-md-content">
+                    <select style="" class="input_setting form-control select_role_button">
+                        <option value="1">{{:_s("Включить кнопки меню (Настройки, Меню, История и т.д)")}}</option>
+                        <option value="0">{{:_s("Отключить кнопки меню (Настройки, Меню, История и т.д)")}}</option>
+                    </select>
+                </div>
+
+
+                <div style="float:left">
+                    <label class="vne-control-label vne-md-content-margin">{{:_s("Цвет текста")}}</label><br/>
+                    <div class="vne-md-content">
+                        <input style="float:left;width:100px;height:30px"
+                               class="input_setting form-control color_text message_color" value="" type="text">
+                    </div>
+
+                </div>
+
+                <div style="float:left;margin-left:30px">
+                    <label class="vne-control-label vne-md-content-margin">{{:_s("Цвет имени")}}</label><br/>
+                    <div class="vne-md-content">
+                        <input style="float:left;width:100px;height:30px"
+                               class="input_setting form-control color_text chara_name_color" value="" type="text">
+                    </div>
+
+                </div>
+
+                <div style="clear:both"/>
+
+                <label class="vne-control-label vne-md-content-margin">
+                    {{:_s("Непрозрачность")}}
+                </label>
+                <div class="form-inline vne-md-content">
+                    <input class="opacity form-control" type="text" value="">
+                    (0〜255)
+                    <br>
+                    <br>
+                    <div class="area_icon_preview" style="padding:10px">
+                        <img class="theme_icon" style="width:25px;height:25px"/>
+                        <br>
+                        <input class="button_copy_icon btn-default" type="button"
+                               value='{{:_s("Скопировать значок (ожидания клика), относящийся к этой теме")}}'>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="button_sbm_block">
+    <input class="button_sbm btn btn-default darkTheme-md-content-btn" type="button" style="margin-right: 4px !important;" value='{{:_s("Применить")}}'>
+</div>
+
+

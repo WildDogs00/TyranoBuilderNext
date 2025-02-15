@@ -1,0 +1,91 @@
+<div class="parts_box" style="box-sizing:content-box">
+
+	<div id="bound_area" style="position:relative;width:100%;height:100%;">
+		<div style="position:absolute">
+			<div id="bound_panel" style="width:360px;height:340px;z-index:99999" class="darkTheme-bp-panel">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs vne-md-content-margin" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation">
+        <span class="nav-link active vne-cs-tab-item" id="home-tab" data-bs-toggle="tab"
+              data-bs-target="#parts"
+              role="tab" aria-controls="home" aria-selected="true" style="position: relative; top: 5px">{{:_s("Добавить кнопку")}}</span>
+					</li>
+					<li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" id="profile-tab" data-bs-toggle="tab"
+              data-bs-target="#param"
+              role="tab" aria-controls="profile" aria-selected="false" style="position: relative; top: 5px">{{:_s("Параметры")}}</span>
+					</li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane active vne-md-content" id="parts" role="tabpanel" aria-labelledby="home-tab" tabindex="0" style="margin-top: 13px !important;">
+						<select class="select_parts"></select>
+						<br /><br />
+						<input class="button_add_parts btn-default" type="button" value='{{:_s("Добавить кнопку")}}' />
+						<br />
+						<input class="button_preview btn-default" type="button" value='{{:_s("Предпросмотр")}}' />
+
+					</div>
+					<div class="tab-pane" id="param" role="tabpanel" aria-labelledby="profile-tab" tabindex="0" style="position: relative;top: 8px">
+<!--						<div class="param_name" style="font-weight:bold"></div>-->
+
+						<div class="param param_size vne-md-content" style="margin-top:10px">
+							<table >
+								<tr>
+									<td style="width:30px"> X </td>
+									<td><input type="text" class="param_x input_position" style="width:100px;margin:3px" /> </td>
+									<td style="width:30px"> Y </td>
+									<td><input type="text" class="param_y input_position" style="width:100px;margin:3px" /></td>
+								</tr>
+								<tr>
+									<td style="width:30px">{{:_s("Ширина")}}  </td>
+									<td><input type="text" class="param_width input_position" style="width:100px;margin:3px" /> </td>
+									<td style="width:30px">{{:_s("Высота")}}  </td>
+									<td><input type="text" class="param_height input_position" style="width:100px;margin:3px" /></td>
+								</tr>
+
+							</table>
+						</div>
+						<div class="vne-md-content" style="margin-top: 3px !important;">
+							<div class="param param_image">
+								<span style="cursor:pointer" class="select_img btn-default">{{:_s("Заменить изображение")}}</span>
+							</div>
+							<br>
+
+							<div class="param param_cg" style="margin-top:10px">
+								{{:_s("CG：")}} <select class="select_cg" style="width:100px;margin:3px" ></select>
+							</div>
+
+							<div class="param param_replay" style="margin-top:10px">
+								{{:_s("Прикрепить к: ")}} <select class="select_replay" style="width:100px;margin:3px" ></select>
+							</div>
+
+							<div class="param param_jump" style="margin-top:10px !important;">
+								<div>
+									{{:_s("Расположение (Сцена)")}} <select class="select_jump_storage" style="width:100px;margin:3px" ></select>
+								</div>
+								<div>
+									{{:_s("Цель")}} <select class="select_jump_target" style="width:100px;margin:3px" ></select>
+								</div>
+							</div>
+
+							<div style="margin-top:50px">
+								<input type="button" class="button_delete btn-default" value='{{:_s("Удалить кнопку")}}' />
+								<input type="button" class="button_copy btn-default" value='{{:_s("Повторяющийся элемент")}}' />
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div style="margin-left:240px;margin-top:10px">
+					<input id="button_save" class="btn-default" type="button" value='{{:_s("Сохранить проект")}}' style="position: absolute;top: 350px;height: 40px"/>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

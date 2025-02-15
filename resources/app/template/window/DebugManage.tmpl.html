@@ -1,0 +1,85 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs vne-md-content-margin" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <span class="nav-link active vne-cs-tab-item" id="home-tab" data-bs-toggle="tab"
+              data-bs-target="#v_watch"
+              role="tab" aria-controls="home" aria-selected="true">{{:_s("Просмотр переменных")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" id="profile-tab" data-bs-toggle="tab"
+              data-bs-target="#code"
+              role="tab" aria-controls="profile" aria-selected="false">{{:_s("Отслеживание кода")}}</span>
+    </li>
+    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" id="messages-tab" data-bs-toggle="tab" data-bs-target="#config"
+              role="tab" aria-controls="messages" aria-selected="false">{{:_s("Настройки")}}</span>
+    </li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="v_watch" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <div class="col-md-12">
+            <label class="vne-control-label vne-md-content-margin">{{:_s("Переменные")}}</label>
+            <div class="vne-md-content" style="height: 40px; margin-bottom: 5px !important;">
+                <div style="float:left;position: relative;top: 3px;left: 3px">
+                    <input type="text" ts="textSearchVarName" style="width:140px;height:28px" class="text_page"
+                           placeholder='{{:_s("Поиск переменных")}}'>
+                </div>
+                <div style="float:right;position: relative;top: 1px">
+                    <input class="text_page" type="text" ts="textAddVariable" style="width:68px;height:28px"
+                           placeholder="f.xxx "/>
+                    <button type="button" ts="btnAddVariable" class="btn-default">{{:_s("Добавить")}}
+                    </button>
+                    <button type="button" ts="btnAddAllVariable" class="btn-default">
+                        {{:_s("Добавить все игровые переменные")}}
+                    </button>
+
+                    <button type="button" ts="btnVarReload" class="btn-default"><i class="fa fa-repeat"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="vne-md-content">
+                <table ts="datatable" class="darkTheme-dm-table">
+                    <thead>
+                    <tr style="background-color:#2C2B33; color: #ffff">
+                        <th style="border-right:solid 1px #636370;width:30px"></th>
+                        <th style="border-right:solid 1px #636370;">{{:_s("Имя переменной")}}</th>
+                        <th style="border-right:solid 1px #636370;">{{:_s("Значение")}}</th>
+                        <th style="width:30px"></th>
+                    </tr>
+                    </thead>
+                    <tbody ts="tableBody" style="background-color:#2C2B33; color: #ffff">
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="tab-pane" id="code" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="vne-control-label vne-md-content-margin" ts="labelScenarioFile">scene1.ks</label>
+            <div class="vne-md-content" style="margin-bottom: 5px !important;">
+                <pre class="prettyprint linenums" ts="areaCode" style="height:360px;overflow:scroll;white-space:nowrap"></pre>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="tab-pane" id="config" role="tabpanel" aria-labelledby="messages-tab" tabindex="0">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div class="form-group">
+                <label class="vne-control-label vne-md-content-margin">{{:_s("Синхронизация предпросмотра")}}</label>
+                <br/>
+                <div class="vne-md-content" style="margin-bottom: 5px !important;">
+                    <div class="checkbox form-check form-switch">
+                        <input class="check_preview_sync checkbox form-check-input" type="checkbox" value="">
+                        {{:_s("Синхронизация предварительного просмотра и запущенных компонентов")}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

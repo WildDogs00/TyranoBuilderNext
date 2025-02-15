@@ -1,0 +1,38 @@
+<div class="row character-control-block">
+    <div class="col-sm-4">
+
+        <label class="vne-control-label vne-md-content-margin">{{:_s("Переменные")}}</label>
+
+        <div class="form-inline">
+            <div class="form-group chara_add_block vne-md-content">
+                <input class="text_chara_add form-control" type="text" value="" placeholder='{{:_s("Имя переменной")}}'>
+                <input class="button_chara_add btn-default" type="button" value='{{:_s("Принять")}}'
+                       style="position: relative; height: 26px; left: 3px">
+            </div>
+        </div>
+        <div class="vne-md-content" style="margin-bottom: 5px !important;">
+            <select class="select_chara form-control" id="form-field-select-2" multiple="multiple"
+                    style="height: 188px !important; padding: 5px !important;">
+
+            </select>
+            <input class="button_chara_remove btn-default" type="button" value='{{:_s("Удалить переменную")}}'>
+        </div>
+
+    </div>
+    <div class="col-sm-8">
+        <label class="vne-control-label-help-text vne-md-content-margin">{{:_s("Добавьте или выберите переменную")}}</label>
+        <div class="var_set_area vne-md-content" style="display:none;height:283px; margin-bottom: 5px !important;">
+
+            <label class="vne-control-label-help-text">{{:_s("Начальное значение")}}</label>
+            <input class="form-control var_val" type="text" value="" placeholder='{{:_s("Значение")}}'></input>
+            <br>
+            <div style="margin:10px" class="checkbox form-check form-switch" data-bs-toggle="tooltip"
+                 data-bs-placement="bottom" title='{{:_s("Системные переменные являются общими для всей игры. Например, подсчет сколько раз игра была очищена")}}'>
+                <input class="check_val checkbox form-check-input" type="checkbox" />
+                <span>{{:_s("Системная переменная")}}</span>
+            </div>
+
+        </div>
+        <div id="chara_selected_file_area"></div>
+    </div>
+</div>

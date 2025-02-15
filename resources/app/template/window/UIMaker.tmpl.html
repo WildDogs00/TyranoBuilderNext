@@ -1,0 +1,86 @@
+<div class="parts_box" style="box-sizing:content-box">
+    <div class="message_outer drag_message_outer"
+         style="background-color: rgb(0, 0, 0); opacity: 0.7058823529411765; left: 20px; top: 371px; width: 920px; height: 211px; z-index: 100; position: absolute;">
+    </div>
+    <img class="message_outer_img drag_message_outer" style="z-index: 100; position: absolute;"/>
+
+    <p class="chara_name_area"
+       style="cursor:move;position: absolute; top: 381px; left: 30px; color: rgb(255, 255, 255); font-weight: bold; font-size: 26px; z-index:1000 ;">
+        {{:_s("Имя персонажа")}}</p>
+
+    <div id="bound_area" style="position:relative;width:100%;height:100%">
+        <div style="position:absolute">
+            <div id="bound_panel" class="darkTheme-bp-panel" style="height: 276px; width: 415px;">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs vne-md-content-margin" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+        <span class="nav-link active vne-cs-tab-item" data-bs-toggle="tab"
+              data-bs-target="#image"
+              role="tab" aria-controls="home" aria-selected="true"
+              style="position: relative; top: 6px">{{:_s("Добавить кнопку")}}</span>
+                    </li>
+                    <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" data-bs-toggle="tab"
+              data-bs-target="#position"
+              role="tab" aria-controls="profile" aria-selected="false" style="position: relative; top: 6px">{{:_s("Параметры")}}</span>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active vne-md-content" id="image" role="tabpanel"
+                         aria-labelledby="home-tab" tabindex="0" style="position: relative;top: 9px; width: 405px">
+                        <select class="select_parts">
+                            <option value="save">{{:_s("Кнопка сохранения")}}</option>
+                            <option value="load">{{:_s("Кнопка загрузки")}}</option>
+                            <option value="title">{{:_s("Вернуться на главный экран")}}</option>
+                            <option value="menu">{{:_s("Показывать кнопку меню")}}</option>
+                            <option value="window">{{:_s("Скрыть окно сообщения")}}</option>
+                            <option value="skip">{{:_s("Пропустить")}}</option>
+                            <option value="backlog">{{:_s("Показать журнал")}}</option>
+                            <option value="fullscreen">{{:_s("Включить полноэкранный режим")}}</option>
+                            <option value="quicksave">{{:_s("Быстрое сохранение")}}</option>
+                            <option value="quickload">{{:_s("Быстрая загрузка")}}</option>
+                            <option value="auto">{{:_s("Авто чтение")}}</option>
+                            <option value="config">{{:_s("Настройки")}}</option>
+                        </select>
+                        <br/>
+                        <br/>
+                        <input class="button_add_parts vne-set-area-btn" type="button" value='{{:_s("Добавить кнопку")}}'/>
+                    </div>
+                    <div class="tab-pane" id="position" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                        <div class="vne-md-content" style="position: relative;top: 9px; width: 405px">
+                            <div>
+                                X <input type="text" class="param_x input_position" style="width:100px;margin:3px"/>
+                                <br>
+                                Y <input type="text" class="param_y input_position" style="width:100px;margin:3px"/>
+                            </div>
+                            <div style="position: relative;top: -56px;left: 130px;">
+                                {{:_s("Ширина")}} <input type="text" class="param_width input_position"
+                                                         style="width:100px;margin:3px"/> px
+                                <br>
+                                {{:_s("Высота")}} <input type="text" class="param_height input_position"
+                                                         style="width:100px;margin:3px"/> px
+                            </div>
+                            <span style="cursor:pointer;display: inline-flex;margin-bottom: 2px !important;"
+                                  class="select_img btn-default">{{:_s("Заменить изображение")}}</span>
+                            <div>
+                                <input type="button" class="button_delete btn-default"
+                                       value='{{:_s("Удалить кнопку")}}'/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="position:absolute;left:10px;bottom:-47px">
+                    <input id="button_save" class="btn-default" type="button" value='{{:_s("Сохранить")}}'
+                           style="width:100px; height: 40px;"/>
+                </div>
+            </div>
+        </div>
+        <canvas  id="pixel" class="pixel" style="pointer-events: none; width: 100%; height: 100%"></canvas >
+    </div>
+</div>
+<script src="../../js/vne_theme/theme.core.js"></script>
+<script>
+    gridBg();
+</script>

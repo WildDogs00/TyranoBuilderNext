@@ -1,0 +1,62 @@
+<div style="box-sizing:content-box">
+
+	<div id="bound_area" class="bound_area" style="position:relative;width:100%;height:100%">
+	<div style="position:absolute">
+		<div id="bound_panel" style="width:400px;height:190px;position: relative;top: 9px;" class="darkTheme-bp-panel">
+			<label class="vne-control-label vne-md-content-margin vne-md-content" style="width: 390px">
+				X - <span class="bound_x"></span> px
+				<br>
+				Y - <span class="bound_y"></span> px
+				<br>
+				<br>
+				{{:_s("Ширина")}} - <span class="bound_width"></span> px
+				<br>
+				{{:_s("Высота")}} - <span class="bound_height"></span> px
+				<br>
+				<br>
+				<div style="display:none" id="area_check_reflect" class="checkbox form-check form-switch">
+					<input type="checkbox" id="check_reflect" class="checkbox form-check-input"/>{{:_s("Перевернуть изображение")}}
+				</div>
+			</label>
+
+			<div style="position:absolute;left:10px;bottom:-40px">
+				<input class="btn-default" type="button" id="button_bound_background" value='{{:_s("Изменить фон")}}' /> 　
+				<input class="btn-default" id="button_bound" type="button" value='{{:_s("Принять")}}' />
+			</div>
+
+		</div>
+
+	</div>
+
+	{{if bound_type == "image" || bound_type == "chara"}}
+	<div id="bound_select" class="bound_select" style="cursor:move;position:absolute;z-index:99" ><img style="position:relative;width:100%;height:100%;background: rgba(0,53,99,0.45);" src="{{:bound_image_storage}}" /></div>
+	{{/if}}
+
+	{{if bound_type == "plugin"}}
+	<div id="bound_select" class="bound_select" style="cursor:move;position:absolute;z-index:99" ></div>
+	{{/if}}
+
+	{{if bound_type == "glink"}}
+	<div id="bound_select" style="z-index:99999;position:absolute" class="button event-setting-element bound_select">
+			<span class="button_text">Button</span>
+	</div>
+	{{/if}}
+
+	{{if bound_type == "clickable"}}
+	<div id="bound_select" class="bound_select" style="cursor:move;position:absolute;border:solid 1px black;background-color:black;opacity: 0.6; z-index: 2" ></div>
+	{{/if}}
+
+	{{if bound_type == "textbox"}}
+	<div id="bound_select" class="bound_select" style="cursor:move;position:absolute;background-color:white;z-index:99999;border:solid 1px gray"></div>
+	{{/if}}
+
+	<img id="bound_background_img" style="z-index:1;width:100%;height:100%" src="" />
+
+	</div>
+	<canvas  id="pixel" class="pixel" style="pointer-events: none; width: 100%; height: 100%"></canvas >
+
+</div>
+<script src="js/vne_theme/theme.core.js"></script>
+<script>
+	gridBg();
+</script>

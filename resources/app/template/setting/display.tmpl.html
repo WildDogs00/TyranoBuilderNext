@@ -1,0 +1,77 @@
+<div id="display" class="tab-pane active">
+    <div class="form-group">
+        <label for="select_display_mode" class="vne-control-label vne-md-content-margin">{{:_s("Настройка Разрешения")}}</label><br>
+        <div class="vne-md-content">
+            <select class="input_setting" id="select_display_mode" data-key="ScreenRatio">
+                <option value="fix">{{:_s("Сохранить пропорции")}}</option>
+                <option value="fit">{{:_s("Растягивать (вместе с содержимым)")}}</option>
+                <option value="normal">{{:_s("Фиксированный размер")}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="select_centering" class="vne-control-label vne-md-content-margin">{{:_s("Центрирование на экране")}}</label><br>
+        <div class="vne-md-content">
+            <select class="input_setting" id="select_centering" data-key="ScreenCentering">
+                <option value="true">{{:_s("Да")}}</option>
+                <option value="false">{{:_s("Нет")}}</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="select_camera" class="vne-control-label vne-md-content-margin">{{:_s("3D Камера")}}</label><br>
+        <div class="vne-md-content">
+            <select class="input_setting" id="select_camera" data-key="useCamera">
+                <option value="true">{{:_s("Да")}}</option>
+                <option value="false">{{:_s("Нет")}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="vne-control-label vne-md-content-margin" style="width: 108px;max-width: 300px;">{{:_s("Размер экрана")}}</div>
+        <div class="form-inline vne-md-content">
+            {{:_s("Ширина")}}
+            <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+                      <input class="input_setting spinner-10" value="640" data-key="scWidth" type="text"
+                             aria-valuemin="0" aria-valuenow="640" autocomplete="off" role="spinbutton">
+                    </span>
+            px
+            {{:_s("Высота")}}
+            <span class="ui-spinner ui-widget ui-widget-content ui-corner-all">
+                      <input class="spinner-10 input_setting" value="480" data-key="scHeight" type="text"
+                             aria-valuemin="0" aria-valuenow="480" autocomplete="off" role="spinbutton">
+                    </span>
+            px
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="vne-control-label vne-md-content-margin" for="vne_list_size_screen">{{:_s("Развернуть игру на весь экран?")}}</label>
+        <div class="vne-md-content">
+            <select class="form-select vne_auto_save" name="fullScreenEnter" id="fullScreenEnter">
+                <option value="fullScreenEnter">{{:_s("Полный экран")}}</option>
+                <option value="3" selected>{{:_s("По умолчанию")}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="vne-control-label vne-md-content-margin" for="vne_list_size_screen">{{:_s("Размер окна при запуске")}}</label>
+        <div class="vne-md-content">
+            <select class="form-select vne_auto_save" name="vne_list_size_screen" id="vne_list_size_screen">
+                <option value="1">{{:_s("1280 x 720")}}</option>
+                <option value="2">{{:_s("1920 x 1080")}}</option>
+                <option value="3" selected>{{:_s("По умолчанию")}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="button_sbm_block">
+        <input class="button_sbm btn btn-default darkTheme-md-content-btn" type="button" style="margin-right: 4px !important;" value='{{:_s("Применить")}}'>
+    </div>
+</div>
+<script src="js/vne_theme/theme.core.js"></script>

@@ -1,0 +1,318 @@
+<div class="row character-control-block" xmlns="http://www.w3.org/1999/html">
+    <div class="col-sm-4">
+        <label style="margin-top:18px" class="vne-control-label vne-md-content-margin">{{:_s("Список персонажей")}}</label>
+        <div class="vne-md-content" style="margin-bottom: 5px !important;">
+            <select class="select_chara form-control vne-cont-bg" id="form-field-select-2" size=10
+                    style="height:240px !important; padding: 5px !important;">
+            </select>
+            <input style="margin-top: 10px !important;margin-bottom: 5px !important;" class="button_chara_reflesh btn-default" type="button"
+                   value='{{:_s("Обновить")}}'>
+            <input class="button_fuki_save btn-default"
+                   type="button" value='{{:_s("Сохранить проект")}}'>
+        </div>
+    </div>
+
+    <div class="col-sm-8">
+        <span style="float:right" class="button_function_chara_manage darkTheme-open-char-manager"
+              title='{{:_s("Открыть менеджер персонажей")}}'>
+            <i class="fa-solid fa-user"></i>
+        </span>
+
+        <span style="float:right;" class="button_function_copy darkTheme-apply-all-char"
+              title='{{:_s("Применяется ко всем персонажам")}}'>
+            <i class="fa-solid fa-users"></i>
+        </span>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs vne-md-content-margin" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+        <span class="nav-link active vne-cs-tab-item" data-bs-toggle="tab"
+              data-bs-target="#fukidashi"
+              role="tab" aria-controls="home" aria-selected="true">{{:_s("Облачко")}}</span>
+            </li>
+            <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" data-bs-toggle="tab"
+              data-bs-target="#sippo"
+              role="tab" aria-controls="profile" aria-selected="false">{{:_s("Хвостик")}}</span>
+            </li>
+            <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" data-bs-toggle="tab"
+              data-bs-target="#design"
+              role="tab" aria-controls="profile" aria-selected="false">{{:_s("Дизайн")}}</span>
+            </li>
+            <li class="nav-item" role="presentation">
+        <span class="nav-link vne-cs-tab-item" data-bs-toggle="tab"
+              data-bs-target="#msg"
+              role="tab" aria-controls="profile" aria-selected="false">{{:_s("Диалоги")}}</span>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="fukidashi" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <div class="form-group">
+                    <div style="float:left">
+                        <label class="vne-control-label vne-md-content-margin">{{:_s("Расстояние от левого края экрана")}}</label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="form-control vne-cont-bg spinner" sp-min="0"
+                                   sp-step="1" value="" data-key="left" type="text">
+                            <span style="line-height: 30px">&nbsp; px</span>
+                        </div>
+                    </div>
+                    <div style="float:left;margin-left:30px">
+                        <label class="vne-control-label vne-md-content-margin">{{:_s("Расстояние от верхнего края экрана")}}</label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="form-control vne-cont-bg spinner" value=""
+                                   data-key="top" type="text">
+                            <span style="line-height: 30px">&nbsp; px</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" style="width:350px;float:left;margin-top:20px">
+
+                    <label class="vne-control-label vne-md-content-margin">{{:_s("Максимальная ширина облачка")}}</label>
+                    <div class="vne-md-content">
+                        <select class="select_fix_width form-control vne-cont-bg" style="width:100px" data-key="select_fix_width">
+                            <option value="false">{{:_s("Изменяемый размер")}}</option>
+                            <option value="true">{{:_s("Фиксированный размер")}}</option>
+                        </select>
+                    </div>
+
+                    <div style="float:left">
+                        <label class="vne-control-label vne-md-content-margin">{{:_s("Изменяемый размер")}}</label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="input_setting form-control vne-cont-bg"
+                                   value="" data-key="max_width" type="text">
+                            <span style="line-height: 30px">&nbsp; px</span>
+                        </div>
+                    </div>
+
+                    <div style="float:left;">
+                        <label class="vne-control-label vne-md-content-margin">{{:_s("Фиксированный размер")}}</label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="input_setting form-control"
+                                   value="" data-key="fix_width" type="text">
+                            <span style="line-height: 30px">&nbsp; px</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tab-pane" id="sippo" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <div class="form-group">
+
+                    <label class="vne-control-label vne-md-content-margin">
+                        {{:_s("Положение хвостика")}}
+                    </label>
+                    <div class="vne-md-content">
+                        <select style="width:100px" class="form-control vne-cont-bg" data-key="sippo">
+                            <option value="top">{{:_s("Сверху")}}</option>
+                            <option value="right">{{:_s("Справа")}}</option>
+                            <option value="left">{{:_s("Слева")}}</option>
+                            <option value="bottom">{{:_s("Снизу")}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div style="float:left">
+                        <label class="vne-control-label vne-md-content-margin">
+                            {{:_s("Ширина хвостика")}}
+                        </label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="form-control vne-cont-bg spinner" sp-min="0"
+                                   sp-step="1" value="" data-key="sippo_width" type="text">
+                            <span style="line-height: 30px">&nbsp; px</span>
+                        </div>
+
+                    </div>
+
+                    <div style="float:left;margin-left:30px">
+                        <label class="vne-control-label vne-md-content-margin">
+                            {{:_s("Высота хвостика")}}
+                        </label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="form-control vne-cont-bg spinner" value=""
+                                   data-key="sippo_height" type="text">
+                            <span style="line-height: 30px">&nbsp; px</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div style="float:left">
+                        <label class="vne-control-label vne-md-content-margin">
+                            {{:_s("Расстояние хвостика от левого края экрана")}}
+                        </label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="form-control vne-cont-bg spinner" sp-min="0"
+                                   sp-step="1" value="" data-key="sippo_left" type="text">
+                            <span style="line-height: 30px">&nbsp; px</span>
+                        </div>
+                    </div>
+                    <div style="float:left;margin-left:30px">
+                        <label class="vne-control-label vne-md-content-margin">
+                            {{:_s("Расстояние хвостика от верхнего края экрана")}}
+                        </label>
+                        <div class="vne-md-content" style="margin-bottom: 5px !important;">
+                            <input style="float:left;width:100px;height:30px" class="form-control vne-cont-bg spinner" value=""
+                                   data-key="sippo_top" type="text">
+                            <span style="line-height: 30px">&nbsp; px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="design" role="tabpanel" aria-labelledby="messages-tab" tabindex="0">
+                <div class="form-group">
+                    <div>
+                        <label class="vne-control-label vne-md-content-margin">
+                            {{:_s("Цвет облачка")}}
+                        </label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="form-control color_text" value=""
+                                   data-key="color" type="text">
+                        </div>
+                        <label class="vne-control-label vne-md-content-margin">
+                            {{:_s("Картинка облачка")}}
+                        </label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="form-control bgImage" value=""
+                                   data-key="bgImage" type="text" readonly>
+                            <button type="button" id="selectImageButton" class="btn-default" style="height: 30px;">Выбрать картинку</button>
+                            <input type="file" id="fileInput" style="display: none;" accept="image/*">
+                            <button type="button" id="removeImageButton" class="btn-default" style="height: 30px;">&times;</button>
+                        </div>
+
+                    </div>
+                    <div>
+                        <label class="vne-control-label vne-md-content-margin">
+                            {{:_s("Непрозрачность")}}
+                        </label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="form-control spinner" sp-min="0"
+                                   sp-step="1" sp-max="255" value="" data-key="opacity" type="text">
+                            <span style="line-height: 30px">&nbsp; px</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        <label class="vne-control-label vne-md-content-margin">
+                            {{:_s("Толщина обводки")}}
+                        </label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="form-control vne-cont-bg spinner" value=""
+                                   data-key="border_size" type="text">
+                            <span style="line-height: 30px">&nbsp; px</span>
+                            <br>
+                            <input style="float:left;width:100px;height:30px" class="form-control vne-cont-bg color_text" value=""
+                                   data-key="border_color" type="text">
+                            <span style="position: relative; top: -11px">&nbsp; {{:_s("Цвет обводки")}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <label class="vne-control-label vne-md-content-margin">
+                            {{:_s("Закругление углов")}}
+                        </label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="form-control vne-cont-bg spinner" value=""
+                                   data-key="radius" type="text">
+                            <span style="line-height: 30px">&nbsp; px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="msg" role="tabpanel" aria-labelledby="settings-tab" tabindex="0">
+                <div class="form-group">
+
+                    <div style="float:left">
+                        <label class="vne-control-label vne-md-content-margin">
+                            {{:_s("Цвет шрифта")}}
+                        </label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="form-control vne-cont-bg color_text" value=""
+                                   data-key="font_color" type="text">
+                        </div>
+
+                    </div>
+
+                    <div style="float:left;margin-left:30px">
+                        <label class="vne-control-label vne-md-content-margin">
+                            {{:_s("Размер шрифта")}}
+                        </label>
+                        <div class="vne-md-content">
+                            <input style="float:left;width:100px;height:30px" class="form-control vne-cont-bg spinner" sp-min="0"
+                                   sp-step="1" sp-max="255" value="" data-key="font_size" type="text">
+                            <span style="line-height: 30px">&nbsp; px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const path = require('path');
+        const { dialog } = require('electron').remote;
+
+        const bgImageInput = document.querySelector('.form-control.bgImage');
+        const savedImagePath = localStorage.getItem('bgImagePathFuki');
+
+        if (savedImagePath) {
+            bgImageInput.value = savedImagePath;
+        }
+
+        const getFormattedPath = (filePath) => {
+            const dataDir = 'data';
+            const normalizedPath = path.normalize(filePath);
+            const index = normalizedPath.indexOf(dataDir);
+
+            if (index !== -1) {
+                const relativePath = normalizedPath.substring(index);
+                return `${relativePath.replace(/\\/g, '/')}`;
+            }
+            return filePath;
+        };
+
+        const handleFileSelection = async () => {
+            const defaultPath = app.getDataPath();
+
+            const { canceled, filePaths } = await dialog.showOpenDialog({
+                properties: ['openFile'],
+                defaultPath,
+                filters: [{ name: 'Images', extensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'] }]
+            });
+
+            if (!canceled && filePaths.length > 0) {
+                const filePath = filePaths[0];
+                const formattedPath = getFormattedPath(filePath);
+                bgImageInput.value = formattedPath;
+                localStorage.setItem('bgImagePathFuki', formattedPath);
+            }
+        };
+
+        const handleFileInputChange = (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const filePath = file.path;
+                const formattedPath = getFormattedPath(filePath);
+                bgImageInput.value = formattedPath;
+                localStorage.setItem('bgImagePathFuki', formattedPath);
+            }
+        };
+
+        const removeImage = () => {
+            localStorage.removeItem('bgImagePathFuki');
+            bgImageInput.value = '';
+        };
+
+        document.getElementById('selectImageButton').addEventListener('click', handleFileSelection);
+        document.getElementById('fileInput').addEventListener('change', handleFileInputChange);
+        document.getElementById('removeImageButton').addEventListener('click', removeImage);
+
+    </script>
+
+</div>
+

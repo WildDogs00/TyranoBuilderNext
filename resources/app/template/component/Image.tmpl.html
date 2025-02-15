@@ -1,0 +1,37 @@
+<div item-type="sort" class="tb-main-cpn component-box {{:category}}" data-cpn="img-in">
+	
+            <div class="cpn-ico-block">
+              <div class="cpn-ico"><span class="tb-i-{{:icon}}" title=""></span></div>
+            </div>
+            <div class="cpn-block">
+              <div class="cpn-header-block">
+                <div class="cpn-header-title">
+                  <div class="cpn-title">{{:name}}</div>
+                  <div class="cpn-desc">{{:image_url}}</div>
+                </div>
+                <div class="cpn-header-nav">
+                	
+                  <span class="tb-i-chevron-down component_slide" title='{{:_s("Развернуть")}}'></span>
+                  <span class="tb-i-time component_remove" title='{{:_s("Удалить")}}'></span>
+               
+                </div>
+              </div>
+              <div class="cpn-body">
+                <div class="img-box">
+
+                {{if component.config.custom_image_url != undefined}}
+					<img style="" src="{{:app.getProjectPath()}}{{:component.config.custom_image_url(component)}}" />
+				{{else}}
+					<img style="" src="{{:app.getProjectPath()}}{{:base_img_url}}{{:image_url}}" />
+				{{/if}}
+                
+                </div><!-- .img-box の中はタグとタグの間の余計な半角スペース禁止 -->
+              </div>
+            </div>
+     
+</div>
+
+
+
+
+

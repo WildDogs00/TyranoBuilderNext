@@ -1,0 +1,352 @@
+<div class="parts_box" style="box-sizing:content-box; overflow: auto; height: 600px;">
+    <label class="vne-control-label-help-text vne-md-content-margin">{{:_s("Не забывайте нажать кнопку сохранения после редактирования предмета!")}}</label>
+    <div id="jsoneditor" style="display: none;"></div>
+    <div class="container ach_container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="accordion" id="achievementsAccordion">
+                    <div id="achievementsContainer" class="container" style="background: none !important;"></div>
+                </div>
+
+                <template id="achievementTemplate">
+                    <div class="accordion-item" style="border: none;padding: 3px !important;background: none !important;padding-top: 5px !important;">
+                        <h2 class="accordion-header" id="achievementHeading">
+                            <button class="accordion-button collapsed ach_button" type="button" data-bs-toggle="collapse" data-bs-target="#achievementCollapse" aria-expanded="false" aria-controls="achievementCollapse">
+                                {{:_s("Название")}}:&nbsp;  <span class="ach_name" data-key="name"> </span> &nbsp;:&nbsp; ID:&nbsp;  <span class="ach_id"> </span>
+                            </button>
+                        </h2>
+
+
+                        <div id="achievementCollapse" class="accordion-collapse collapse" aria-labelledby="achievementHeading" data-bs-parent="#achievementsAccordion">
+
+                            <div class="card mb-3" style="border: none;padding: 5px !important;background: var(--vne-param-group-color);">
+                                <div class="card-header">
+                                    <input type="text" class="form-control" placeholder='{{:_s("Название")}}' data-key="name" title='{{:_s("Название")}}'>
+                                    <br>
+                                </div>
+                                <div class="card-body">
+                                    <textarea type="text" class="form-control mb-3" style="min-height: 100px" placeholder='{{:_s("Описание")}}' data-key="description" title='{{:_s("Описание предмета")}}'></textarea>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Иконка")}}' data-key="icon" title='{{:_s("Иконка предмета")}}'>
+                                    <input type="number" class="form-control mb-3" placeholder='{{:_s("Цена")}}' data-key="price" title='{{:_s("Стоимость предмета")}}'>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Негативный эффект?")}}' style="display: none" data-key="adverselyAffectCheck" title='{{:_s("Эффект, который может возникнуть при чрезмерном использовании предмета")}}'>
+                                    <div class="form-check form-switch form-control mb-3 check-center" title='{{:_s("Эффект, который может возникнуть при чрезмерном использовании предмета")}}'>
+                                        <input class="form-check-input" type="checkbox" role="switch" id="adverselyAffectCheck">
+                                        <label class="form-check-label" for="adverselyAffectCheck">{{:_s("Негативный эффект?")}}</label>
+                                    </div>
+                                    <input type="number" class="form-control mb-3" placeholder='{{:_s("Позитивное влияние")}}' data-key="positiveVal" title='{{:_s("Эффект который что-то улучшает (переменную жизней например)")}}'>
+                                    <input type="number" class="form-control mb-3" placeholder='{{:_s("Негативный эффект")}}' data-key="negativeVal" title='{{:_s("Эффект который что-то ухудшает (переменную жизней например)")}}'>
+                                    <input type="number" class="form-control mb-3" placeholder='{{:_s("Количество")}}' data-key="amount" title='{{:_s("Количество предмета")}}'>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Предмет получен?")}}' style="display: none" data-key="activeCheck" title='{{:_s("Определяет получен ли предмет")}}'>
+                                    <div class="form-check form-switch form-control mb-3 check-center" title='{{:_s("Определяет получен ли предмет")}}'>
+                                        <input class="form-check-input" type="checkbox" role="switch" id="activeCheck">
+                                        <label class="form-check-label" for="activeCheck">{{:_s("Предмет получен?")}}</label>
+                                    </div>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Переменная для позитивного эффекта")}}' style="display: none" data-key="varItem" title='{{:_s("Та переменная которая изменится при применении предмета")}}'>
+                                    <div class="form-control mb-3">
+                                        <label for="varItemSelect" class="form-label">{{:_s("Список переменных")}}</label>
+                                        <select class="form-control mb-3 select-var-list" id="varItemSelect" data-key="varItem" title='{{:_s("Та переменная которая изменится при применении предмета")}}'>
+
+                                        </select>
+                                    </div>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Математическая операция")}}' style="display: none" data-key="operationVar">
+                                    <div class="form-control mb-3">
+                                        <label for="operationVar" class="form-label">{{:_s("Список операций")}}</label>
+                                        <select class="form-control mb-3 select-var-list" id="operationVar" data-key="operationVar" title='{{:_s("Операция, которая применяется при положительном эффекте")}}'>
+                                            <option value="+=">{{:_s("Добавить значение")}}</option>
+                                            <option value="-=">{{:_s("Вычесть значение")}}</option>
+                                        </select>
+                                    </div>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Проверять уровень?")}}' style="display: none" data-key="levelRequirementCheck" title='{{:_s("Проверяет уровень игрока. Это необходимо, чтобы игрок не мог получить предмет, если его уровень ниже определённого")}}'>
+                                    <div class="form-check form-switch form-control mb-3 check-center" title='{{:_s("Проверяет уровень игрока. Это необходимо, чтобы игрок не мог получить предмет, если его уровень ниже определённого")}}'>
+                                        <input class="form-check-input" type="checkbox" role="switch" id="levelRequirementCheck">
+                                        <label class="form-check-label" for="levelRequirementCheck">{{:_s("Проверять уровень?")}}</label>
+                                    </div>
+                                    <input type="number" class="form-control mb-3" placeholder='{{:_s("Уровень игрока")}}' data-key="levelRequirement" title='{{:_s("Уровень игрока, достигнув которого игрок может получить предмет")}}'>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Переменная уровня")}}' data-key="levelRequirementVar" style="display: none" title='{{:_s("Переменная, по которой отслеживается уровень игрока")}}'>
+                                    <div class="form-control mb-3">
+                                        <label for="levelRequirementVar" class="form-label">{{:_s("Список переменных")}}</label>
+                                        <select class="form-control mb-3 select-var-list" id="levelRequirementVar" data-key="levelRequirementVar" title='{{:_s("Уровень игрока, достигнув которого игрок может получить предмет")}}'>
+
+                                        </select>
+                                    </div>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Проверка редкости?")}}' data-key="rarityCheck" title='{{:_s("Проверяет редкость предмета")}}' style="display: none">
+                                    <div class="form-check form-switch form-control mb-3 check-center" title='{{:_s("Проверяет редкость предмета")}}'>
+                                        <input class="form-check-input" type="checkbox" role="switch" id="rarityCheck">
+                                        <label class="form-check-label" for="rarityCheck">{{:_s("Проверка редкости?")}}</label>
+                                    </div>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Редкость")}}' data-key="rarity" title='{{:_s("Укажите редкость предмета. Например: Epic.")}}'>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Используемый?")}}' data-key="usedCheck" style="display: none">
+                                    <div class="form-check form-switch form-control mb-3 check-center" title='{{:_s("Определяет, используемый это предмет или нет. Например, ключ нельзя использовать на игрока, а вот еду или зелье здоровья можно.")}}'>
+                                        <input class="form-check-input" type="checkbox" role="switch" id="usedCheck">
+                                        <label class="form-check-label" for="usedCheck">{{:_s("Используемый?")}}</label>
+                                    </div>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Тип предмета")}}' data-key="type" title='{{:_s("Тип предмета нужен для взаимодействия с «Взаимодействие». Тип полностью должен совпадать с «Типом объекта» во «Взаимодействие».")}}'>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Предмет взаимодействия")}}' data-key="targetObject" title='{{:_s("Предмет взаимодействия должен полностью совпадать с «Предмет взаимодействия» во «Взаимодействие».")}}'>
+                                    <input type="text" class="form-control mb-3" placeholder='{{:_s("Ключевой предмет?")}}' data-key="pivotal" style="display: none">
+                                    <div class="form-check form-switch form-control mb-3 check-center" title='{{:_s("Проверяет на ключевой предмет, такой предмет может быть только один по количеству.")}}'>
+                                        <input class="form-check-input" type="checkbox" role="switch" id="pivotal">
+                                        <label class="form-check-label" for="pivotal">{{:_s("Ключевой предмет?")}}</label>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn-default delete" style="margin-top: 5px !important;">{{:_s("Удалить")}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div style="margin-left: 10px !important; margin-bottom: 10px !important; margin-top: 10px !important;">
+                    <button id="addItem" class="btn-default">{{:_s("Добавить предмет")}}</button>
+                    <button id="save" class="btn-default">{{:_s("Сохранить")}}</button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div id="inventoryPreview" class="achievementPreview" style="position: sticky;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const achievementsContainer = document.querySelector('#achievementsContainer');
+        const achievementTemplate = document.querySelector('#achievementTemplate');
+        const editor = new JSONEditor(document.querySelector('#jsoneditor'));
+        const projectPatch = app.getProjectPath();
+
+        function loadJson() {
+            return fetch(projectPatch + 'data/inventory/data.json')
+                .then(response => response.json())
+                .catch(error => console.error($.s('Ошибка:'), error));
+        }
+
+        function cleanJsonObject(obj) {
+            const cleanedObj = {};
+
+            Object.entries(obj).forEach(([key, value]) => {
+                if (typeof key === 'string' && key.trim() !== '' && key !== 'undefined') {
+                    if (value !== undefined) {
+                        cleanedObj[key] = value;
+                    }
+                }
+            });
+            return cleanedObj;
+        }
+
+        function saveJson(updatedJson, filePath) {
+            const cleanedJson = updatedJson.map(cleanJsonObject);
+
+            const jsonString = JSON.stringify(cleanedJson, (key, value) => {
+                if (typeof value === 'string') {
+                    if (value.toLowerCase() === 'true') {
+                        return true;
+                    } else if (value.toLowerCase() === 'false') {
+                        return false;
+                    }
+                }
+                return value;
+            }, 2);
+
+            fs.writeFileSync(filePath, jsonString);
+        }
+
+        function updateInterface(json) {
+            achievementsContainer.innerHTML = '';
+            json.forEach((achievement) => {
+                const card = generateCard(achievement, json);
+                achievementsContainer.appendChild(card);
+            });
+        }
+
+        function fillOperationOptions(selectElement) {
+            selectElement.innerHTML = '';
+            const operations = [
+                { symbol: '+=', text: `{{:_s("Добавить значение")}}` },
+                { symbol: '-=', text: `{{:_s("Вычесть значение")}}` }
+            ];
+
+            operations.forEach(operation => {
+                const option = document.createElement('option');
+                option.value = operation.symbol;
+                option.textContent = operation.text;
+                selectElement.appendChild(option);
+            });
+        }
+
+        function fillVariableOptions(selectElement, variables) {
+            selectElement.innerHTML = '';
+            Object.keys(variables).forEach(varName => {
+                const option = document.createElement('option');
+                option.value = varName;
+                option.textContent = varName;
+                selectElement.appendChild(option);
+            });
+        }
+
+        function generateCard(inventory, json) {
+            const card = achievementTemplate.content.cloneNode(true);
+            let cardElement = card.querySelector('.accordion-item');
+            updateCardElement(cardElement, inventory, json);
+
+            const toggleInputs = cardElement.querySelectorAll('.form-check-input[type="checkbox"]');
+            toggleInputs.forEach(input => {
+                const key = input.id.split('-')[0];
+                const uniqueId = key + '-' + inventory.idItem;
+                input.id = uniqueId;
+                const label = cardElement.querySelector(`label[for="${key}"]`);
+                label.setAttribute('for', uniqueId);
+
+                input.checked = inventory[key] === 'true';
+
+                input.addEventListener('change', () => {
+                    inventory[key] = input.checked ? 'true' : 'false';
+                    editor.update(json);
+                    updateInventoryPreview(inventory);
+                });
+            });
+
+            const selectElements = cardElement.querySelectorAll('select[data-key]');
+            selectElements.forEach(select => {
+                const key = select.getAttribute('data-key');
+
+                if (key === "operationVar") {
+                    fillOperationOptions(select);
+                } else {
+                    const variables = app.config.project_config.map_var;
+                    fillVariableOptions(select, variables);
+                }
+
+                select.value = inventory[key] || '';
+
+                select.addEventListener('change', () => {
+                    inventory[key] = select.value;
+                    editor.update(json);
+                    updateInventoryPreview(inventory);
+                });
+            });
+
+            const textareaElements = cardElement.querySelectorAll('textarea[data-key]');
+            textareaElements.forEach(textarea => {
+                const key = textarea.getAttribute('data-key');
+                textarea.value = inventory[key] || '';
+                textarea.style.resize = 'vertical';
+
+                textarea.addEventListener('input', () => {
+                    inventory[key] = textarea.value;
+                    editor.update(json);
+                    updateInventoryPreview(inventory);
+                });
+            });
+
+            cardElement.querySelector('.accordion-collapse').addEventListener('show.bs.collapse', () => {
+                updateInventoryPreview(inventory);
+            });
+
+            return cardElement;
+        }
+
+        function updateCardElement(cardElement, inventory, json) {
+            for (const input of cardElement.querySelectorAll('input')) {
+                input.value = inventory[input.dataset.key];
+                input.addEventListener('input', () => {
+                    inventory[input.dataset.key] = input.value;
+                    editor.update(json);
+                    updateInventoryPreview(inventory);
+                });
+            }
+            setAccordion(cardElement, inventory);
+            cardElement.querySelector('.ach_name').textContent = inventory.name;
+            cardElement.querySelector('.ach_id').textContent = inventory.idItem;
+            cardElement.querySelector('.delete').addEventListener('click', () => deleteItem(inventory, cardElement, json));
+        }
+
+        function setAccordion(cardElement, inventory) {
+            const { idItem } = inventory;
+            cardElement.querySelector('.accordion-header').id = 'heading' + idItem;
+            cardElement.querySelector('.accordion-collapse').id = 'collapse' + idItem;
+            cardElement.querySelector('.accordion-button').dataset.bsTarget = '#collapse' + idItem;
+            cardElement.querySelector('.accordion-button').ariaControls = 'collapse' + idItem;
+            cardElement.querySelector('.accordion-collapse').ariaLabelledby = 'heading' + idItem;
+        }
+
+        function deleteItem(inventory, cardElement, json) {
+            const ach_id = inventory.idItem;
+            const indexToDelete = json.findIndex(el => el.idItem === ach_id);
+            if (indexToDelete !== -1) {
+                console.log("Удаление элемента с ach_id:", ach_id, "на позиции:", indexToDelete);
+                json.splice(indexToDelete, 1);
+                editor.update(json);
+                cardElement.remove();
+            } else {
+                console.error("Элемент для удаления не найден с ach_id:", ach_id);
+            }
+        }
+
+        function updateInventoryPreview(inventoryData) {
+            const previewElement = document.querySelector('#inventoryPreview');
+            previewElement.innerHTML = '';
+            for (const key in inventoryData) {
+                const inputElement = achievementTemplate.content.querySelector(`input[data-key="${key}"]`);
+                if (inputElement) {
+                    const placeholder = inputElement.placeholder;
+                    const value = inventoryData[key];
+                    const propertyElement = document.createElement('p');
+                    propertyElement.textContent = `${placeholder}: ${value}`;
+                    previewElement.appendChild(propertyElement);
+                }
+            }
+        }
+
+        function addItem() {
+            const json = editor.get();
+
+            const newItemInventory = {};
+
+            if (json.length > 0) {
+                const template = json[0];
+                Object.keys(template).forEach(key => {
+                    if (key !== 'idItem') {
+                        newItemInventory[key] = template[key] === 'true' ? 'false' : "";
+                    }
+                });
+            }
+
+            let maxId = json.reduce((max, inventory) => Math.max(max, parseInt(inventory.idItem)), 0);
+            newItemInventory.idItem = String(maxId + 1);
+
+            json.push(newItemInventory);
+            editor.set(json);
+            updateInterface(json);
+
+            const filePath = app.getProjectPath() + 'data/inventory/data.json';
+            saveJson(json, filePath);
+        }
+
+
+        loadJson().then(json => {
+            editor.set(json);
+            updateInterface(json);
+        });
+
+
+        document.querySelector('#addItem').addEventListener('click', addItem);
+        document.querySelector('#save').addEventListener('click', () => {
+            const json = editor.get();
+            const filePath = projectPatch + 'data/inventory/data.json';
+
+            const cleanedJson = json.map(cleanJsonObject);
+
+            saveJson(cleanedJson, filePath);
+
+            Swal.fire({
+                position: 'bottom-end',
+                icon: 'success',
+                title: $.s("Предметы сохранены!"),
+                color: "var(--vne-text-color)",
+                background: "var(--vne-right-panel-color)",
+                showConfirmButton: false,
+                timer: 3000,
+                toast: true
+            });
+        });
+    </script>
+</div>
