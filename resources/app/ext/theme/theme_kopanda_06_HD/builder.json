@@ -1,0 +1,19 @@
+{
+    "name":{
+        "ja":"サイバー HD",
+        "en":"Cyber HD",
+        "ru":"Cyber HD"
+    },
+    "pm":{
+        "font_color":"0xEEEEEE", 
+        "name_color":"0xF1F1F1",  
+        "frame_opacity":255  
+    },
+    "glink":"ts06",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda"
+    
+}
+
