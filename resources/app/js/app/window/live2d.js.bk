@@ -1,0 +1,513 @@
+Live2dWindow = {};
+Live2dWindow = Builder.Core.Base.extend({
+
+    defaults : {
+
+    },
+
+    selected_motion : "",
+
+    live2d_model : {},
+    param : {},
+    
+    
+    setIpc:function(){
+		
+		var that = this;
+		
+		//スタジオ拡張用。iframeで読み込んだときの対応
+        try {
+            this.ipc = require('electron');
+        } catch (e) {
+            return false;
+        }
+        
+        this.ipc = require('electron');
+        
+        this.ipc.ipcRenderer.on('init_live2d', function(event, arg){
+            
+            //ここで必要なデータを受け取ろうね。
+            let data = JSON.parse(arg);
+            console.log(data);
+            
+            //ロード完了
+            that.setEvent();
+            
+        });
+        
+        
+	},
+	
+	sendSync:function(key,cmd,json_obj){
+        
+        var json_obj["_cmd"]=cmd;
+        var data = this.ipc.ipcRenderer.sendSync(key, JSON.stringify(json_obj));
+        return data;
+        
+    },
+	
+	send:function(key,json_obj){
+        
+        this.ipc.ipcRenderer.send(key, JSON.stringify(json_obj));
+        
+    },
+
+    init : function() {
+        //イベントやら初期化設定やらを書いていく
+		this.setIpc();
+		
+		//ロードが完了したことを知らせる
+		this.send("live2d-load-complete",{});
+		
+	},
+	
+	setEvent:function(){
+
+		//var data = this.sendSync("live2d","get",{"aaaa":"bbbbbb"});
+
+        var that = this;
+
+        //Live2Dのキャラリスト
+        //this.sendSync("live2d","get",{"aaaa":"bbbbbb"});
+        var models = this.sendSync("live2d","models",{});
+        
+        var j_select_model = $(".select_model");
+
+        app.live2d.loadModel();
+
+        this.param = app.live2d.select_window_data;
+
+        var target = this.param.target;
+
+        var selected_model_id = app.live2d.selected_live2d_model_for_window;
+        
+        var chara_num = 0;
+        for (var key in models) {
+            j_select_model.append('<option value="' + key + '">' + key + '</option>');
+            chara_num++;
+        }
+        
+        if (selected_model_id) {
+            j_select_model.val(selected_model_id);
+        }
+        
+        //モーション選択
+        var j_select_motion = $(".select_motion");
+        var j_select_motion_no = $(".select_motion_no");
+        var j_select_expression = $(".select_expression");
+         
+        
+        var mouseflag = false;
+        var mouse_x = 0;
+        var mouse_y = 0;
+        var current_x = 0;
+        var current_y = 0;
+        //canvas の設定
+        $("#live2d_canvas_tyrano").on('mousedown', function(e) {
+            mouseflag=true;
+            
+            var rect = e.target.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            
+            var pos = tyranolive2dplugin.getTyranoManager().convertCanvasPos(x,y);
+            mouse_x = pos.x - current_x;
+            mouse_y = pos.y - current_y;
+            
+            //tyranolive2dplugin.getTyranoManager().updateModel({"x":pos.x,"y":pos.y,"name":selected_model_id});
+            
+        }); 
+        
+        $("#live2d_canvas_tyrano").on('mouseup', function(e) {
+            mouseflag=false;
+                        
+        }); 
+
+        $("#live2d_canvas_tyrano").on('mousemove', function(e) {
+            
+            if(mouseflag){
+                var rect = e.target.getBoundingClientRect();
+                var x = e.clientX - rect.left;
+                var y = e.clientY - rect.top;
+                
+                var pos = tyranolive2dplugin.getTyranoManager().convertCanvasPos(x,y);
+                
+                var move_x = pos.x - mouse_x;
+                var move_y = pos.y - mouse_y;
+                
+                current_x = move_x;
+                current_y = move_y;
+                
+                //alert(pos.x +":"+pos.y);
+                tyranolive2dplugin.getTyranoManager().updateModel({"x":move_x,"y":move_y,"name":selected_model_id});
+            }
+        }); 
+        
+        var scale=2;
+        
+        $("#live2d_canvas_tyrano").on("mousewheel",function(e){
+            
+            e.preventDefault();
+            var delta = e.originalEvent.deltaY ? -(e.originalEvent.deltaY) : e.originalEvent.wheelDelta ? e.originalEvent.wheelDelta : -(e.originalEvent.detail);
+            if (delta < 0){
+                // マウスホイールを下にスクロールしたときの処理を記載
+                scale = scale - 0.2;
+                
+            } else {
+                // マウスホイールを上にスクロールしたときの処理を記載
+                scale = scale + 0.2;
+                
+            }
+            
+            tyranolive2dplugin.getTyranoManager().updateModel({"scale":scale,"name":selected_model_id});
+            
+        });
+        
+          
+        
+        var j_file = $('<input class="button_input_file" type="file" />');
+        j_file.change(function() {
+
+            var file = this.files[0];
+
+            if (file != null) {
+
+                var filename = file.name;
+                
+                //体験版の場合、Live2Dモデル数に制限あり
+                if (global_build == "trial") {
+                    if (chara_num >= 3) {
+                        $.alert($.s("体験版では登録できるLive2Dモデルは3人までに制限されています"));
+                        return false;
+                    }
+                }
+                
+                if(filename.indexOf("model.json") != -1){
+                    $.alert($.s("model3.jsonファイルを指定して下さい。Cubism3.0より古いファイル形式には未対応です。"));
+                    return;
+                }else if (filename.indexOf("model3.json") == -1) {
+                    $.alert($.s("Live2Dのmodel3.jsonファイルを指定して下さい"));
+                    return;
+                }
+                
+                //保存先は
+                var model_name = $.replaceAll(filename, ".model3.json", "");
+                var dir_path = app.getDataPath() + "others/plugin/live2d/model/" + model_name;
+
+                var original_path = $.replaceAll(file.path, filename, "");
+
+                //ファイルの存在チェック。上書きするかを問いかける
+                if (app.io.exists(dir_path)) {
+                    if ($.confirm($.s("「") + filename + $.s("」は既に存在します。上書きしてよろしいですか？"))) {
+                        app.io.copy(original_path, dir_path);
+                    }else{
+                        return;
+                    }
+                } else {
+                    app.io.copy(original_path, dir_path);
+
+                }
+                
+                $.alert("" + model_name + " " + $.s("を追加しました"), function() {
+                    
+                    location.reload();
+                    
+                });
+
+                //alert("完了");
+
+                //$(this).val("");
+                //that.showFiles(that.data);
+
+            }
+
+        });
+
+        $(".button_add_model").click(function() {
+            j_file.trigger("click");
+        });
+
+        var Live2Dglno = 0;
+        
+        $(".select_model").change(function() {
+            
+            var tm = tyranolive2dplugin.getTyranoManager();
+            tm.deleteAllModel();
+            
+            //マウス操作の初期化
+            mouseflag = false;
+            mouse_x = 0;
+            mouse_y = 0;
+            current_x = 0;
+            current_y = 0;
+            scale=2;
+            
+            //非表示に
+            /*
+            if(selected_model_id!=""){
+                var pm ={"name":selected_model_id,"visible":"false"};
+                tm.updateModel(pm);
+            }
+            */
+            
+            j_select_motion.empty();
+            j_select_motion_no.empty();
+
+            var select_val = $(".select_model").children(':selected').val();
+            var array_motion = app.live2d.getMotion(select_val);
+            
+            selected_model_id = select_val;
+            for (key in array_motion) {
+                j_select_motion.append('<option value="' + key + '">' + key + '</option>');
+            }
+            
+            var model = app.live2d.models[selected_model_id];
+            
+            var live2d_path = app.getDataPath() + "others/plugin/live2d/model/";
+            tm.setResourcesPath(live2d_path);
+            
+            var pm = {
+                name:selected_model_id,
+                model_id:selected_model_id,
+                idle:"Idle",
+                x:"0",
+                y:"0",
+                scale:"2",
+                visible:"true",
+                lip:"false",
+                lip_time:"100",
+                lip_value:"0",
+            }
+            
+            //expression のリストを更新
+            var array_expression = app.live2d.getExpression(selected_model_id);
+            j_select_expression.empty();
+            for (key in array_expression) {
+                var a = array_expression[key]
+                j_select_expression.append('<option value="' + a["Name"] + '">' + a["Name"] + '</option>');
+            }
+
+
+            //キャラクターを表示する
+            tm.addModel(pm);
+            
+            j_select_motion.trigger("change");
+            
+        });
+
+        var j_model_preview_area = $("#model_preview_area");
+        
+        that.selected_motion ="";
+
+        j_select_motion.on("change",function(e) {
+            
+            //model_id,mtnfilenm/*モーションファイル名*/,idle/*アイドリング有無*/){
+            
+            var select_val = j_select_motion.children(':selected').val();
+            that.selected_motion = select_val;
+            
+            if(typeof that.selected_motion!="undefined"){
+                
+                var no = 0;
+                var tm = tyranolive2dplugin.getTyranoManager();
+                tm.setMotion(selected_model_id, that.selected_motion, no ,"true");
+            
+            }
+            
+            //モーションに設定されているNOを設定する
+            j_select_motion_no.empty();
+            
+            var array_motion = app.live2d.getMotion(selected_model_id);
+            
+            if(that.selected_motion){
+            
+                var motions = array_motion[that.selected_motion];
+                
+                for (var i=0; i<motions.length; i++) {
+                    var mtn = motions[i]["File"];
+                    j_select_motion_no.append('<option value="' + i + '">' + mtn + '</option>');
+                }
+                
+            }
+            
+            
+        });
+        
+        j_select_motion_no.on("change",function(){
+            
+            //選択されているモーションの番号を調べる
+            var select_no = j_select_motion_no.children(':selected').val();
+            //該当するモデルを再生する
+            
+            var no = select_no;
+            var tm = tyranolive2dplugin.getTyranoManager();
+            tm.setMotion(selected_model_id, that.selected_motion, no ,"true");
+
+            
+        });
+        
+        j_select_expression.on("change",function(e){
+            
+            var expression = $(this).val();
+            //alert(expression);  
+            
+            //モデルを追加
+            var tm = tyranolive2dplugin.getTyranoManager();
+            tm.setExpression(selected_model_id,expression); //noを最後に渡す。
+            
+            //expressionを反映する。
+              
+            
+        });
+        
+        var j_radio=$(".radio_live2d_kind");
+        j_radio.on("change",function(e){
+            
+            var kind = $(this).val();
+            
+            if(kind=="motion"){
+                
+                $(".area_select_expression").hide();
+                $(".area_select_motion").show();
+                
+            }else{
+                
+                $(".area_select_expression").show();
+                $(".area_select_motion").hide();
+                    
+            }
+            
+        });
+
+        //モーション選択の場合/////////////////
+        if (target == "motion") {
+
+            //モーション決定ボタンを表示
+            $(".button_chara_sbm").show();
+            
+            //ラジオボタンの表情削除
+            
+            $(".button_chara_sbm").click(function() {
+            
+                var select_val = $(".select_motion").children(':selected').val();
+                var select_val_no = $(".select_motion_no").children(':selected').val();
+
+                that.param.call_back(select_val,select_val_no);
+
+                window.close();
+
+            });
+
+            //現在選択中のキャラクターにトリガー
+            //選択中のモーションにトリガー
+            var model_name = that.param["selected_model"];
+            var model_motion = that.param["selected_motion"];
+            
+            
+            that.selected_motion = model_motion;
+            
+            $(".select_model").val(model_name);
+            
+            
+            $(".select_model").attr("disabled", "disabled");
+            $(".radio_live2d_kind").attr("disabled", "disabled");
+            $(".button_add_model").hide();
+            
+            $(".select_model").trigger("change");
+            
+            
+        }else if (target == "expression") {
+
+            //モーション決定ボタンを表示
+            $(".button_chara_sbm").val($.s("表情決定"))
+            $(".button_chara_sbm").show();
+            
+            //ラジオボタンの表情削除
+            
+            $(".button_chara_sbm").click(function() {
+                
+                var select_val = $(".select_expression").children(':selected').val();
+                that.param.call_back(select_val);
+                window.close();
+
+            });
+
+            //選択中のモーションにトリガー
+            var model_name = that.param["selected_model"];
+            var model_expression = that.param["selected_expression"];
+            
+            //ラジオボタンを表情に変更
+            $('input[name=radio_live2d]:eq(1)').prop('checked', true);
+            $(".radio_live2d_kind").trigger("change");
+            
+            $(".select_model").val(model_name);
+            $(".select_expression").val(model_expression);
+            
+            $(".radio_live2d_kind").val("expression");
+            
+            $(".select_model").attr("disabled", "disabled");
+            $(".radio_live2d_kind").attr("disabled", "disabled");
+            $(".button_add_model").hide();
+            
+            $(".select_model").trigger("change");
+            
+            /*
+            setTimeout(function(){
+                $(".select_expression").trigger("change");
+            },100);
+            */
+            
+        } else {
+            
+            //キャラクター定義。設定画面
+            $(".button_chara_remove").show();
+
+            $(".button_chara_remove").click(function() {
+
+                var selected_model = $(".select_model").children(':selected').val();
+
+                $.confirm(selected_model + $.s("を削除します。よろしいですね？"), function() {
+
+                    ///削除実行
+                    app.live2d.removeModel(selected_model);
+                    location.reload();
+
+                });
+
+            });
+            
+            $(".select_model").trigger("change");
+            
+        }
+
+    },
+
+    transLang : function() {
+        //HTML翻訳対応
+        var j_array = $(".lang");
+        $.lang_html(j_array);
+
+    },
+
+    //数値が正しいかをチェックする
+    close : function() {
+
+    },
+});
+
+var live2d;
+
+$(window).load(function() {
+
+    live2d = new Live2dWindow();
+
+    //Windowsで反映されないため、再度調整
+    live2d.transLang();
+
+    setTimeout(function() {
+        live2d.transLang();
+    }, 500);
+
+    live2d.init();
+
+});
