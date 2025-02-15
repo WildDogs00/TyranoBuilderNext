@@ -1,0 +1,19 @@
+{
+    "name":{
+        "ja":"ダークブルーHD",
+        "en":"DarkBlue HD",
+        "ru":"DarkBlue HD"
+    },
+    "pm":{
+        "font_color":"0xF1F1F1", 
+		"name_color":"0xFFCC00",  
+        "frame_opacity":200  
+    },
+    "glink":"ts01",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda"
+    
+}
+
