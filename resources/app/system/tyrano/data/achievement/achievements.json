@@ -1,0 +1,21 @@
+[
+  {
+    "ach_id": "1",
+    "ach_color": "#fff",
+    "ach_padding": "5",
+    "ach_border_radius": "5",
+    "ach_img": "172351.png",
+    "ach_width": "220",
+    "ach_text_width": "150",
+    "ach_name": "",
+    "ach_text": "",
+    "ach_name_color": "#000000",
+    "ach_fonts_color": "#fff",
+    "image_width": "50",
+    "ach_var": "f.achievementSystem",
+    "display_time": "5000",
+    "ach_font_text": "Arial",
+    "highlight_text": "true",
+    "ach_font_name": "Arial"
+  }
+]
