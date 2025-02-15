@@ -1,0 +1,241 @@
+/*メニュ－ボタン系*/
+.menu_item {
+	position:relative;
+	margin: 0;
+	text-align:center;
+	cursor:pointer
+}
+
+.menu_item img {
+	width:auto;
+	height:auto;
+	max-width:100%;
+	max-height:100%;
+}
+
+/* セーブ */
+.menu_save {
+	display: inline-block;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 200px;
+	left: 300px;
+}
+
+/* ロード */
+.menu_load {
+	display: inline-block;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 270px;
+	left:300px;
+}
+
+/* テキスト消去 */
+.menu_window_close {
+	display: inline-block;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 340px;
+	left:300px;
+}
+
+/* メッセージスキップ */
+.menu_skip {
+	display: inline-block;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 410px;
+	left:300px;
+}
+
+/* タイトルに戻る */
+.menu_back_title {
+	display: inline-block;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top:  480px;
+	left: 300px;
+}
+
+
+/* バックログ画面の設定
+--------------------------------------*/
+.log_body {
+	width:80%;
+	height:65%;
+	margin-top:150px;
+	padding:15px;
+	font-weight:normal;
+	line-height:1.6em;
+	text-align:left;
+	color:#777;
+	border:1px solid #ccc;
+	overflow-y:scroll;
+	-webkit-overflow-scrolling: touch;
+	overflow-scrolling:touch;
+	transform: translateZ(0);
+	}
+
+.log_body::-webkit-scrollbar{width:12px}
+.log_body::-webkit-scrollbar-thumb{background:#999;}
+.log_body::-webkit-scrollbar-track{background:#ccc;}
+
+
+/* セーブ・ロード画面の設定
+--------------------------------------*/
+.area_save_list {
+	display:block;
+	width:80%;
+	height:450px;
+	margin-top:150px;
+	overflow-y:scroll;
+	-webkit-overflow-scrolling: touch;
+	overflow-scrolling:touch;
+	transform: translateZ(0);
+}
+.area_save_list::-webkit-scrollbar{width:10px}
+.area_save_list::-webkit-scrollbar-thumb{background:#999;}
+.area_save_list::-webkit-scrollbar-track{background:#ccc;}
+
+/* セーブ時の画面の設定
+--------------------------*/
+/* セーブデータリスト全体の設定 */
+.save_list {
+	display: table;
+	table-layout: fixed;
+	margin:0;
+	padding:0;
+	width: 720px;
+	height: 450px;
+	font-size: 15px;
+	font-weight: normal;
+	border-top: 1px dotted #999;
+}
+
+/* セーブデータの設定 */
+.save_list_item {
+	display: table-row;
+	cursor: pointer;
+	width: 570px;
+	height: 100px;
+	box-sizing: border-box;
+}
+
+.save_list_item:hover > .save_list_item_thumb{
+	background-color: rgba(0, 0, 0, .1);
+}
+
+.save_list_item:hover > .save_list_item_area{
+	background-color: rgba(0, 0, 0, .1);
+}
+
+.save_list_item:hover {
+	background: none;
+}
+
+/* セーブデータのサムネイル部分の設定 */
+.save_list_item_thumb {
+	display: table-cell;
+	margin:0
+	padding: 10px 0 0 20px;
+	width: 150px;
+	height: 100px;
+	border-bottom: 1px dotted #999;
+	box-sizing: border-box;
+}
+
+.save_list_item_thumb img {
+	margin:0;
+	padding: 5px 0 0 0;
+	width: 120px;
+	height: 80px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+/* セーブデータのテキスト部文の設定 */
+.save_list_item_area {
+	display: table-cell;
+	vertical-align: top;
+	padding: 10px 0 0 10px;
+	border-bottom: 1px dotted #999;
+}
+
+/* セーブデータの日付の設定 */
+.save_list_item_date {
+	display: block;
+	margin: 0;
+	padding: 0 0 5px 0;
+	line-height: 1;
+	font-weight: bold;
+	text-align:left;
+	color:#48D1CC;
+}
+/* セーブデータのテキストの設定 */
+.save_list_item_text {
+	display: block;
+	margin: 0;
+	padding: 0 20px 0 0;
+	height: 60px;
+	line-height: 1.3;
+	text-align:left;
+	color:#666;
+	overflow: hidden;
+}
+
+
+.layer_event_click{
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.layer{
+	background-size:100% 100%;
+}
+
+.button_menu{
+	position:absolute;
+	z-index:99999;
+	cursor:pointer;
+}
+
+/*glink系の設定*/
+
+.ts02 {
+	opacity:.8;
+	color: #fff;
+	background: #666;
+	background: -webkit-gradient(linear, left top, right bottom, from(#777), color-stop(0.5, #aaa), to(#777));
+	background: -moz-linear-gradient(lefttop, #777, #aaa 50%, #777);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#aaaaaa', endColorstr='#777777');
+	border: solid 3px #bfbfbf;
+	-webkit-border-radius: 1.5em;
+	-moz-border-radius: 1.5em;
+	border-radius: 1.5em;
+}
+
+.ts02:hover {
+	opacity:1;
+	color: #fff;
+	background: #00d2e5;
+	background:-webkit-gradient(linear, left top, right bottom, from(#005d7d), color-stop(0.5, #00d2e5), to(#005d7d));
+	background: -moz-linear-gradient(lefttop, #005d7d, #00d2e5 50%, #005d7d);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00d2e5', endColorstr='#005d7d');
+}
+
+.ts02:active {
+	opacity:1;
+	color: #fff;
+	background: #00d2e5;
+	background:-webkit-gradient(linear, left top, right bottom, from(#00d2e5), color-stop(0.5, #005d7d), to(#00d2e5));
+	background: -moz-linear-gradient(lefttop, #00d2e5, #005d7d 50%, #00d2e5);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#005d7d', endColorstr='#00d2e5');
+}
