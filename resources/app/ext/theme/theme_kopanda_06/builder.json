@@ -1,0 +1,19 @@
+{
+    "name":{
+        "ja":"サイバー",
+        "en":"Cyber",
+        "ru":"Cyber"
+    },
+    "pm":{
+        "font_color":"0xEEEEEE", 
+        "name_color":"0xF1F1F1",  
+        "frame_opacity":255  
+    },
+    "glink":"ts06",
+    "pro":0,
+    "width":960,
+    "height":640,
+    "author":"kopanda"
+    
+}
+
