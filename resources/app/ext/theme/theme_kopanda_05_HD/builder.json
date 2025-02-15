@@ -1,0 +1,19 @@
+{
+    "name":{
+        "ja":"リボン HD",
+        "en":"Ribon HD",
+        "ru":"Ribon HD"
+    },
+    "pm":{
+        "font_color":"0x504139", 
+        "name_color":"0xC5004C",  
+        "frame_opacity":255  
+    },
+    "glink":"ts05",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda"
+    
+}
+
