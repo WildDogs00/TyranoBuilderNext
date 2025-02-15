@@ -1,5 +1,5 @@
 # Important!
-This Modifaction Is not by me, but by IDGLab, Naito on steam.
+This Modification Is not by me, but by IDGLab, Naito on steam.
 The reason I have posted it here is to download it you have to sign up to the somewhat sketchy site to download, so I am making it easier and less sketchy by posting it here. All credit goes to and is owed to IDGLab, not me, I did nothing but just post it here on github.
 
 # Note
