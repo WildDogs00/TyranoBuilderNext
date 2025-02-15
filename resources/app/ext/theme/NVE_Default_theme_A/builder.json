@@ -1,0 +1,17 @@
+{
+    "name":{
+        "en":"NVE Default Theme A",
+        "ru":"NVE Default Theme A"
+    },
+    "pm":{
+        "font_color":"0x454D51", 
+        "name_color":"0xFAFAFA",  
+        "frame_opacity":255  
+    },
+    "glink":"ts01_1280",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"IDG Lab"
+    
+}
