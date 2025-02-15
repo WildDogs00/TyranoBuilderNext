@@ -1,0 +1,24 @@
+{
+  "nav_component_opend": {
+    "group-scenario": 1,
+    "character": 1,
+    "scenario": 1,
+    "live2d": 1,
+    "screen_effect": 1,
+    "text": 1,
+    "eval": 1,
+    "image": 1,
+    "camera": 1,
+    "media": 1,
+    "effect": 1,
+    "bgmovie": 1,
+    "script": 1,
+    "plugin": 1,
+    "fav": 1
+  },
+  "tab_mode": true,
+  "show_help": false,
+  "text_cmp_font_size": 12,
+  "text_cmp_height": 80,
+  "file_select_type": 1
+}

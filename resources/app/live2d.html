@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8" />
+	<title>Live2D</title>
+
+	<meta name="description" content="bootstrap grid sizing" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- basic styles -->
+
+	<!--
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    -->
+
+	<link rel="stylesheet" href="js/libs/jquery-ui.css" />
+
+	<!-- fonts -->
+
+	<!--
+    <link rel="stylesheet" href="assets/css/fonts.css" />
+    -->
+
+	<link rel="stylesheet" href="css/builder.css" />
+
+	<link rel="stylesheet" href="css/alertify.core.css" />
+	<link rel="stylesheet" href="css/alertify.default.css" >
+	<link rel="stylesheet" href="css/theme/theme.import.styles.css" >
+
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+	<![endif]-->
+
+	<!-- inline styles related to this page -->
+
+	<link href="_new/styles/styles.css" rel="stylesheet">
+	<link href="_new/styles/my.css" rel="stylesheet">
+
+	<script>
+		Builder = {};
+
+		var local = window.parent.local;
+		var global_lang = window.parent.global_lang;
+		var global_build = window.parent.global_build;
+
+		if (typeof global_lang === 'undefined' || global_lang === null || global_lang === "") {
+			global_lang = 'en';
+			global_build = 'steam';
+		}
+
+	</script>
+
+
+</head>
+
+<body>
+
+<!--
+<div class="main-container container-fluid" id="main-container">
+</div>
+-->
+
+<div class="modal-content vne-ep-content" style="border:none">
+	<div class="modal-body widget-body" style="overflow: hidden;">
+		<div class="row character-control-block" style="display: flex">
+			<div class="col-sm-5 vne-md-content">
+				<div class="control-label">
+					<span class="lang vne-control-label-help-text vne-md-content-margin" style="font-size: 14px;"
+						  data-lang="span">Список моделей</span>
+				</div>
+				<div class="form-inline">
+					<div class="form-group chara_add_block">
+						<select class="select_model form-control" id="form-field-select-2"></select>
+						<input type="button" class="button_add_model btn btn-default lang" data-lang="val" value="Добавить модель Live2D" />
+					</div>
+					<div>
+						<input id="radio_live2d_motion" class="radio_live2d_kind" type="radio" name="radio_live2d" value="motion" checked="checked"><label for="radio_live2d_motion" >&nbsp;<span class="lang" data-lang="span">Поза</span></label>　
+						<input id="radio_live2d_expression" class="radio_live2d_kind" type="radio" name="radio_live2d" value="expression"><label for="radio_live2d_expression" class="lang">&nbsp;<span class="lang" data-lang="span">Эмоция</span></label>
+					</div>
+
+				</div>
+
+				<div class="area_select_motion" >
+					<select style="height:200px; min-width: 294px;" class="select_motion form-control" id="form-field-select-2" multiple="multiple"></select>
+					<select style="" class="select_motion_no form-control" id="form-field-select-2" ></select>
+				</div>
+
+				<div class="area_select_expression" style="display:none" >
+					<select style="height:200px; min-width: 294px;" class="select_expression form-control" id="form-field-select-2" multiple="multiple"></select>
+				</div>
+
+				<input style="display:none" class="button_chara_remove btn btn-default btn-sm lang" data-lang="val" type="button" value="Удалить модель">
+				<input style="display:none" class="button_chara_sbm btn btn-default btn-sm lang" data-lang="val" type="button" value="モーション決定">
+
+			</div>
+			<div class="col-sm-8">
+
+				<div id="model_preview_area" style="top:100px">
+					<canvas id="live2d_canvas_tyrano" width="400px" height="400px" />
+				</div>
+				<div id="chara_selected_file_area"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	const translations = {
+		'ru': {
+			'Список моделей': 'Список моделей',
+			'Добавить модель Live2D': 'Добавить модель Live2D',
+			'Поза': 'Поза',
+			'Эмоция': 'Эмоция',
+			'Удалить модель': 'Удалить модель',
+			'モーション決定': 'Определить моушн'
+		},
+		'en': {
+			'Список моделей': 'Model list',
+			'Добавить модель Live2D': 'Add Live2D model',
+			'Поза': 'Pose',
+			'Эмоция': 'Emotion',
+			'Удалить модель': 'Remove model',
+			'モーション決定': 'Decide motion'
+		}
+	};
+
+	function translatePage(lang) {
+		document.querySelectorAll('[data-lang="span"]').forEach(element => {
+			const key = element.textContent.trim();
+			const translation = translations[lang][key];
+			if (translation) {
+				element.textContent = translation;
+			}
+		});
+
+		document.querySelectorAll('[data-lang="val"]').forEach(element => {
+			const key = element.value.trim();
+			const translation = translations[lang][key];
+			if (translation) {
+				element.value = translation;
+			}
+		});
+	}
+
+	translatePage(global_lang);
+
+</script>
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+	window.jQuery || document.write("<script src='js/libs/jquery-2.0.3.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+	window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+<script src="js/libs/jquery-ui.min.js"></script>
+
+<!-- backborn JS -->
+<script src="js/libs/json2.js"></script>
+<script src="js/libs/underscore-min.js"></script>
+<script src="js/libs/jsrender.min.js"></script>
+<script src="js/libs/alertify.min.js"></script>
+
+<script src="js/app/core/core.js"></script>
+<script src="js/app/core/libs.js"></script>
+
+<script src="js/app/window/live2d.js"></script>
+
+<!-- live2d  -->
+<script>
+	tyranolive2dplugin = {};
+</script>
+<script src="system/live2d_v4/live2d/driver/polyfill.min.js"></script>
+<script src="system/live2d_v4/live2d/driver/live2dcubismcore.min.js"></script>
+<script src="system/live2d_v4/live2d/driver/index.js"></script>
+
+<!-- Live2D ここまで -->
+
+<!-- inline scripts related to this page -->
+
+<div id="overlay_load"></div>
+<div id="modalbox_load">
+	<div class="loading"></div>
+	<p class="text-center text-muted">
+		Processing...
+	</p>
+</div>
+
+<script type="text/javascript">
+
+	var app = window.parent.getApp();
+	var TYRANO = null;
+</script>
+
+</body>
+</html>

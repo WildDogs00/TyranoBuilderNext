@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>TyranoBuilder | Next</title>
+
+		<meta name="description" content="bootstrap grid sizing" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="js/libs/jquery-ui.css" />
+
+		<link rel="stylesheet" href="css/builder.css" />
+		<link rel="stylesheet" href="css/glink.css" />
+
+		<link rel="stylesheet" href="css/alertify.core.css" />
+		<link rel="stylesheet" href="css/alertify.default.css" >
+
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<link href="_new/styles/styles.css" rel="stylesheet">
+		<link href="_new/styles/my.css" rel="stylesheet">
+		<link href="_new/styles/font-awesome.css" rel="stylesheet">
+		<link href="css/theme/theme.import.styles.css" rel="stylesheet" id="style_theme">
+		<link href="css/theme/animate.min.css" rel="stylesheet">
+		<link href="css/theme/all.min.css" rel="stylesheet">
+		<link href="css/theme/bootstrap.min.css" rel="stylesheet">
+		<link href="js/vne_theme/lib/dat.gui.css" rel="stylesheet">
+
+		<script type="text/javascript">
+			var global_lang = "ru";
+			var global_build = "steam";
+		</script>
+	</head>
+
+	<body>
+
+		<div id="main_view" class="main_theme_screen">
+
+		</div>
+
+		<!--[if !IE]> -->
+			<script type="text/javascript">
+				window.jQuery || document.write("<script src='js/libs/jquery-2.0.3.min.js'>"+"<"+"/script>");
+			</script>
+		<!-- <![endif]-->
+		<!--[if IE]>
+			<script type="text/javascript">
+			 window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+			</script>
+		<![endif]-->
+
+		<script src="js/libs/jquery-ui.min.js"></script>
+		<script src="js/libs/jquery.validate.js"></script>
+		<script src="js/libs/jquery.validate.japlugin.js"></script>
+		<link href="js/libs/textillate/assets/animate.css" rel="stylesheet">
+		<script type="text/javascript" src="js/libs/textillate/assets/jquery.lettering.js"></script>
+		<script type="text/javascript" src="js/libs/textillate/jquery.textillate.js"></script>
+		<link href="js/libs/colorpicker/jquery.minicolors.css" rel="stylesheet">
+		<script src="js/libs/colorpicker/jquery.minicolors.min.js"></script>
+		<link rel="stylesheet" href="js/libs/prettify/skins/sunburst.css">
+ 		<script src="js/libs/prettify/prettify.js" ></script>
+		<link rel="stylesheet" href="js/libs/codemirror/lib/codemirror.css">
+	    <script src="js/libs/codemirror/lib/codemirror.js" ></script>
+	    <script src="js/libs/codemirror/mode/xml/xml.js"></script>
+	    <script src="js/libs/codemirror/mode/css/css.js"></script>
+	    <script src="js/libs/codemirror/mode/javascript/javascript.js"></script>
+	    <script src="js/libs/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+		<script src="js/libs/json2.js"></script>
+		<script src="js/libs/underscore-min.js"></script>
+		<script src="js/libs/jsrender.min.js"></script>
+		<script src="js/libs/alertify.min.js"></script>
+		<script src="js/app/core/lang_init.js"></script>
+		<script src="js/app/core/libs.js"></script>
+
+		<script src="js/app/component/default.js"></script>
+		<script src="js/app/component/default_pro.js"></script>
+
+		<script src="js/app/core/core.js"></script>
+		<script src="js/app/core/parser.js"></script>
+		<script src="js/app/core/io.js"></script>
+		<script src="js/app/core/view.js"></script>
+		<script src="js/app/core/component.js"></script>
+		<script src="js/app/core/param.js"></script>
+		<script src="js/app/core/define.js"></script>
+		<script src="js/app/core/window.js"></script>
+		<script src="js/app/core/gui.js"></script>
+		<script src="js/app/core/config.js"></script>
+		<script src="js/app/core/setting.js"></script>
+		<script src="js/app/core/plugin.js"></script>
+		<script src="js/app/core/live2d.js"></script>
+
+		<script src="js/app/view/view.js"></script>
+		<script src="js/app/component/component.js"></script>
+		<script src="js/app/component/manage.js"></script>
+
+		<script src="js/app/param/base.js"></script>
+		<script src="js/app/param/param.js"></script>
+		<script src="js/app/window/base.js"></script>
+		<script src="js/app/window/window.js"></script>
+		<script src="js/app/window/setting.js"></script>
+
+		<script src="js/app/visual_maker/visual_maker.js"></script>
+		<script src="js/app/visual_maker/vm_parts.js"></script>
+
+		<script src="js/vne_theme/theme.core.js"></script>
+		<script src="js/vne_theme/lib/bootstrap.bundle.min.js"></script>
+
+		<script src="js/app/core/app.js"></script>
+		<script src="js/vne_theme/lib/sweetalert2.js"></script>
+		<script src="js/vne_theme/lib/popper.min.js"></script>
+		<script src="js/vne_theme/lib/tippy-bundle.umd.js"></script>
+		<script src="js/vne_theme/lib/dat.gui.min.js"></script>
+
+
+
+		<div id="overlay_load"></div>
+		<div id="modalbox_load">
+			<div class="d-flex justify-content-center">
+				<div class="spinner-border text-primary" style="width: 4rem; height: 4rem;margin-bottom: 10px !important;margin-top: 10px !important;">
+				</div>
+			</div>
+          <p class="text-center" style="color: #DEDEDE; font-size: 12px">Обработка...</p>
+		</div>
+
+	</body>
+</html>

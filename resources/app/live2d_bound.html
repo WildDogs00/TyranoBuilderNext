@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<title>Live2D</title>
+
+		<meta name="description" content="bootstrap grid sizing" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="js/libs/jquery-ui.css" />
+
+		<link rel="stylesheet" href="css/builder.css" />
+
+		<link rel="stylesheet" href="css/alertify.core.css" />
+		<link rel="stylesheet" href="css/alertify.default.css" >
+
+		<!--[if lte IE 8]>
+		<link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+
+		<link href="_new/styles/styles.css" rel="stylesheet">
+		<link href="_new/styles/my.css" rel="stylesheet">
+
+		<link href="_new/styles/font-awesome.css" rel="stylesheet">
+		<link href="css/theme/theme.import.styles.css" rel="stylesheet">
+
+		<script>
+			Builder = {};
+
+			var local = window.parent.local;
+			var global_lang = window.parent.global_lang;
+			var global_build = window.parent.global_build;
+
+			if (typeof global_lang === 'undefined' || global_lang === null || global_lang === "") {
+				global_lang = 'en';
+				global_build = 'steam';
+			}
+
+		</script>
+
+	</head>
+
+	<body style="overflow:hidden;">
+
+
+<style>
+	#bound_area {
+		background-color: #636370;
+		min-height: 418px;
+		-webkit-box-shadow: 0 0 13px rgba(4,0,0,.67);
+		background-size: 20px 20px;
+		background-repeat: repeat;
+	}
+
+</style>
+
+
+
+	<div id="bound_area" style="position:relative;width:100%;height:100%;" class="no-drag">
+		
+		<div id="bound_panel" style="padding:5px;position:absolute;width:400px;height:60px;z-index: 999">
+			<div style="padding:5px" class="vne-md-content">
+				X <input type="number" step="0.1" class="bound_x" style="width:50px" ></input>　
+				Y <input type="number" step="0.1" class="bound_y" style="width:50px"></input>　
+				<br>
+				Scale <input type="number" step="0.1" class="bound_scale" style="width:50px"></input>
+				<br>
+        		<input id="button_bound" style="margin-left:20px;border: none" class="lang btn-default" data-lang="val" value='Принять' />
+		   </div>
+		</div>
+		
+		<img id="bound_background_img" style="width:100%;height:100%;position:absolute;z-index:1;" src="" />
+		<canvas id="live2d_canvas_tyrano" style="cursor:move;position:absolute;z-index:99" />
+		
+		
+	</div>
+
+		
+		
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+
+		<script type="text/javascript">
+            window.jQuery || document.write("<script src='js/libs/jquery-2.0.3.min.js'>" + "<" + "/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+		<script type="text/javascript">
+		window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+		</script>
+		<![endif]-->
+
+		<script src="js/libs/jquery-ui.min.js"></script>
+
+		<!-- backborn JS -->
+		<script src="js/libs/json2.js"></script>
+		<script src="js/libs/underscore-min.js"></script>
+		<script src="js/libs/jsrender.min.js"></script>
+		<script src="js/libs/alertify.min.js"></script>
+
+		<script src="js/app/core/core.js"></script>
+		<script src="js/app/core/libs.js"></script>
+
+
+		<!-- live2d  -->
+        <script>
+    		tyranolive2dplugin = {};
+        </script>
+		<script src="system/live2d_v4/live2d/driver/polyfill.min.js"></script>
+		<script src="system/live2d_v4/live2d/driver/live2dcubismcore.min.js"></script>
+		<script src="system/live2d_v4/live2d/driver/index.js"></script>
+				
+		<!-- Live2D ここまで -->
+
+		<script src="js/app/window/live2d_bound.js"></script>
+
+		<!-- inline scripts related to this page -->
+
+		<div id="overlay_load"></div>
+		<div id="modalbox_load">
+			<div class="loading"></div>
+			<p class="text-center text-muted">
+				Processing...
+			</p>
+		</div>
+
+		<script type="text/javascript">
+    		
+            var app = window.parent.getApp();
+            console.log(app);
+
+		</script>
+
+	</body>
+</html>
