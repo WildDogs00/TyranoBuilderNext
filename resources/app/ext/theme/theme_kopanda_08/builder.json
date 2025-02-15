@@ -1,0 +1,19 @@
+{
+    "name":{
+        "ja":"ボックス",
+        "en":"BOX",
+        "ru":"BOX"
+    },
+    "pm":{
+        "font_color":"0x66564C", 
+        "name_color":"0xfafafa",  
+        "frame_opacity":255  
+    },
+    "glink":"ts08",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda"
+    
+}
+
