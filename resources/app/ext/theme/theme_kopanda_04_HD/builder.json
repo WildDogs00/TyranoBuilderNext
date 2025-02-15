@@ -1,0 +1,19 @@
+{
+    "name":{
+        "ja":"チョコレート HD",
+        "en":"Chocolate HD",
+        "ru":"Chocolate HD"
+    },
+    "pm":{
+        "font_color":"0x665555", 
+        "name_color":"0xE0ADA8",  
+        "frame_opacity":255  
+    },
+    "glink":"ts04",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda"
+    
+}
+
