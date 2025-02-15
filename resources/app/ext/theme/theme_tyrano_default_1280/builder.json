@@ -1,0 +1,20 @@
+{
+    "name":{
+    
+        "ja":"ティラノオーシャン_16:9",
+        "en":"TyranoOcean_16:9",
+        "ru":"TyranoOcean_16:9"
+
+    },
+    "pm":{
+        "font_color":"0x454D51", 
+        "name_color":"0xFAFAFA",  
+        "frame_opacity":255  
+    },
+    "glink":"ts01_1280",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"tyrano"
+    
+}
