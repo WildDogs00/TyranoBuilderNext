@@ -1,0 +1,20 @@
+{
+    "name":{
+        "ja":"[DLC] Visual Novel GUI Pack #1 -kopanda UI-",
+        "en":"[DLC] Visual Novel GUI Pack #1 -kopanda UI-",
+        "ru":"[DLC] Visual Novel GUI Pack #1 -kopanda UI-"
+    },
+    "pm":{
+        "font_color":"0x222222", 
+		"name_color":"0x222222",  
+        "frame_opacity":255  
+    },
+    "glink":"bth06",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda_dlc",
+    "special":1
+    
+}
+
