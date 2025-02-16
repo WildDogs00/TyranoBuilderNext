@@ -1,0 +1,18 @@
+{
+    "name":{
+        "ja":"エメラルドバブル",
+        "en":"SeaFoam",
+        "ru":"SeaFoam"
+    },
+    "pm":{
+        "font_color":"0x4c4741",
+        "name_color":"0xadd8d8",
+        "frame_opacity":255
+    },
+    "glink":"ts13",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda"
+    
+}
