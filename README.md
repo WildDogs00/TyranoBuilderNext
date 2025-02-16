@@ -28,7 +28,7 @@ Now I will tell you about some of the improvements that were implemented during 
 
 Interface:
 
-! [Alt text] (https://github.com/WildDogs00/TyranoBuilderNext/blob/main/Images/3259040342_preview_screenshot_2024-06-01-20-36-00-28.jpg)
+! [Alt text](https://github.com/WildDogs00/TyranoBuilderNext/blob/main/Images/3259040342_preview_screenshot_2024-06-01-20-36-00-28.jpg)
 
 The new interface pleases the eye with pleasant colors. It has two main modes: light and dark.
 Overall, the interface has been significantly improved, and now it looks nice and more understandable.
