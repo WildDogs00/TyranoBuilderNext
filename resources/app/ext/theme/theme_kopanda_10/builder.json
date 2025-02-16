@@ -1,0 +1,19 @@
+{
+    "name":{
+        "ja":"中世ファンタジー",
+        "en":"Middle Ages ",
+        "ru":"Middle Ages "
+    },
+    "pm":{
+        "font_color":"0x373748",
+        "name_color":"0xF1F1F1",
+        "frame_opacity":255
+    },
+    "glink":"ts10",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda"
+    
+}
+
