@@ -1,0 +1,41 @@
+システム画面素材とお揃いで使えるように調整した glink 用の css ファイルです。
+tyrano.css の適当な場所に貼り付けてご利用ください。
+
+-----------------------------------------------------ここから-----------------------------------------------------------------------
+
+/* 通常時 */
+.ts01 {
+color: #ccc; <span class="com">/* 文字色 */</span>
+background: #1f1f1f; <span class="com">/* 背景色（グラデ未対応のブラウザ用） */</span>
+background: -webkit-gradient(linear, left top, left bottom, from(#515357), to(#1f1f1f)); <span class="com">/* 背景グラデーション */</span>
+background: -moz-linear-gradient(lefttop, #515357, #1f1f1f); <span class="com">/* 同上 */</span>
+filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#515357', endColorstr='#1f1f1f'); <span class="com">/* 同上 */</span>
+border: 1px solid #000; <span class="com">/* ボーダーライン */</span>
+-webkit-border-radius: 5px; <span class="com">/* 角丸 5px */</span>
+-moz-border-radius: 5px; <span class="com">/* 同上 */</span>
+border-radius: 5px; <span class="com">/* 同上 */</span>
+}</span>
+
+/* ホバー時 */
+.ts01:hover {
+color: #fad43c;
+background:-webkit-gradient(linear, left top, left bottom, from(#515357), to(#1f1f1f));
+background: -moz-linear-gradient(lefttop, #515357, #1f1f1f);
+filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#515357', endColorstr='#1f1f1f');
+}
+
+/* クリック時 */
+.ts01:active {
+color: #fad43c;
+background: -webkit-gradient(linear, left top, left bottom, from(#1f1f1f), to(#515357));
+background: -moz-linear-gradient(top,  #1f1f1f,  #515357);
+filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#1f1f1f', endColorstr='#515357');
+}
+
+-----------------------------------------------------ここまで-----------------------------------------------------------------------
+
+◆シナリオファイル内でのタグ記述例
+*sample_ts01
+[ glink text="その１" size=20 width=300 x=100 y=100 target=*001 color=ts01 ]
+
+※color 属性の値を今回作った ts01 にするだけです
