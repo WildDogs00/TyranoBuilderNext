@@ -1,0 +1,19 @@
+{
+    "name":{
+        "ja":"ヨーロピアン（シンプル）",
+        "en":"Europe(simple)",
+        "ru":"Europe(simple)"
+    },
+    "pm":{
+        "font_color":"0xf1f1f1",
+        "name_color":"0xf1f1f1",
+        "frame_opacity":255
+    },
+    "glink":"ts09",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda"
+    
+}
+
