@@ -1,0 +1,19 @@
+{
+    "name":{
+        "ja":"シャイン",
+        "en":"Shine",
+        "ru":"Shine"
+    },
+    "pm":{
+        "font_color":"0xE5DFD9",
+        "name_color":"0xf9e1af",
+        "frame_opacity":255
+    },
+    "glink":"ts14",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda"
+    
+}
+
