@@ -1,0 +1,17 @@
+{
+    "name":{
+        "ja":"さくら",
+        "en":"CherryBlossoms",
+        "ru":"CherryBlossoms"
+    },
+    "pm":{
+        "font_color":"0x362e4c",
+        "name_color":"0xF9DAE8",
+        "frame_opacity":255
+    },
+    "glink":"ts15",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda"
+}

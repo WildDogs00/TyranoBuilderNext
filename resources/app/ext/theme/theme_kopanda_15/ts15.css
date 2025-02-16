@@ -1,0 +1,338 @@
+/* menu button
+-------------------------------------*/
+.menu_item {
+	position: relative;
+	margin-top: 2%;
+	text-align: center;
+	cursor: pointer;
+}
+
+.menu_item img {
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
+	margin-right: 10px;
+}
+
+/* Save Data */
+.menu_save {
+	display: inline-block;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 143px;
+	left: 901px;
+}
+
+/* Load Data */
+.menu_load {
+	display: inline-block;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 240px;
+	left: 897px;
+}
+
+/* Hide Message */
+.menu_window_close {
+	display: inline-block;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 338px;
+	left: 844px;
+}
+
+/* Skip Message */
+.menu_skip {
+	display: inline-block;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 435px;
+	left: 850px;
+}
+
+/* Back to Title */
+.menu_back_title {
+	display: inline-block;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top:  533px;
+	left: 859px;
+}
+
+
+/* Backlog
+--------------------------------------*/
+.log_body {
+	position: absolute;
+	top: 190px;
+	left: 130px;
+	width: 960px;
+	height: 460px;
+	margin: 0;
+	padding: 30px 90px 30px 30px;
+	border: none;
+	border-radius: none;
+	color: #eeeeee;
+	background: none;
+	font-weight: normal;
+	text-align: left;
+	line-height: 1.6em;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	box-sizing: border-box;
+}
+
+/* Backlog > Scroll */
+.log_body::-webkit-scrollbar {
+	width: 16px;
+}
+.log_body::-webkit-scrollbar-thumb {
+	border-radius: none;
+	background: #63556B;
+}
+
+.log_body::-webkit-scrollbar-track {
+	background: rgba(255,255,255,.1);
+}
+
+
+/* Save Load
+--------------------------------------*/
+.area_save_list {
+	display: block;
+	width: 980px;
+	height: 480px;
+	left: 130px;
+	margin: 40px 0 0 0;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+/* Save Load > Scroll */
+.area_save_list::-webkit-scrollbar {
+	width:16px;
+}
+
+.area_save_list::-webkit-scrollbar-thumb {
+	border-radius: none;
+	background: #63556B;
+}
+
+.area_save_list::-webkit-scrollbar-track {
+	border-radius: none;
+	background: rgba(255,255,255,.1);
+}
+
+
+/* Save data list */
+.save_list {
+	display: table;
+	table-layout: fixed;
+	position: absolute;
+	width: 900px;
+	height: 130px;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	font-weight: normal;
+	background-color: none;
+	border: none;
+	border-collapse: separate;
+	border-spacing: 0 16px;
+	box-sizing: border-box;
+}
+
+/* save data */
+.save_list_item {
+	display:table-row;
+	width: 900px;
+	height: 130px;
+	margin: 0;
+	padding: 0;
+	border: none;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+.save_list_item:hover > .save_list_item_thumb{
+	background: url('image/system/saveslot2.png');
+	background-repeat: y-repeat;
+	background-position: left top;
+	background-color: none;
+}
+
+.save_list_item:hover > .save_list_item_area{
+	background: url('image/system/saveslot2.png');
+	background-repeat: y-repeat;
+	background-position: right top;
+	background-color: none;
+}
+
+.save_list_item:hover {
+	background: none;
+}
+
+/* save data thumbnail */
+.save_list_item_thumb {
+	display: table-cell;
+	width: 255px;
+	height: 130px;
+	margin: 0;
+	padding: 0;
+	border: none;
+	background: url('image/system/saveslot.png');
+	background-repeat: y-repeat;
+	background-position: left top;
+	box-sizing: border-box;
+}
+
+/* thumbnail image */
+.save_list_item_thumb img {
+	width: 160px;
+	height: 90px;
+	margin: 20px 0 0 75px;
+	padding: 0;
+	border: none;
+	border-radius: 0px;
+}
+
+/* save data text */
+.save_list_item_area {
+	display: table-cell;
+	width: 645px;
+	height: 130px;
+	padding: 20px 50px 0 20px;
+	border-radius: none;
+	border: none;
+	background: url('image/system/saveslot.png');
+	background-repeat: y-repeat;
+	background-position: right top;
+	text-align: left;
+	vertical-align: top;
+	box-sizing: border-box;
+}
+
+/* save data date */
+.save_list_item_date {
+	display: block;
+	margin: 0;
+	padding: 0;
+	height: 20px;
+	line-height: 1;
+	color: #daa299;
+	font-weight: bold;
+	box-sizing: border-box;
+}
+
+/* save data text */
+.save_list_item_text {
+	display: block;
+	height: 65px;
+	margin: 0;
+	padding: 10px 16px 16px 0;
+	line-height: 1.3;
+	color: #eee;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.layer_event_click{
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.layer{
+	background-size: 100% 100%;
+}
+
+.button_menu{
+	position: absolute;
+	z-index: 99999;
+	cursor: pointer;
+}
+
+/*glink
+--------------------------------------------- */
+
+/* normal */
+.ts15 {
+	display: inline-block;
+	position: relative;
+	padding: .5em 2em .55em;
+	background: rgba(255,254,254,.8);
+	background: -moz-linear-gradient(top,  rgba(255,254,254,.8) 50%, rgba(242,220,214,.8) 100%);
+	background: -webkit-linear-gradient(top,  rgba(255,254,254,.8) 50%,rgba(242,220,214,.8) 100%);
+	background: linear-gradient(to bottom,  rgba(255,254,254,.8) 50%,rgba(242,220,214,.8) 100%);
+    border-radius : 10px;
+    -moz-border-radius : 10px;
+    -webkit-border-radius : 10px;
+	border: 2px solid #573E57;
+	color: #573E57;
+}
+
+.ts15::after {
+	display: inline-block;
+	position: absolute;
+	content: "";
+	top: 4px;
+	right: 4px;
+	bottom: 4px;
+	left: 4px;
+	border-radius : 6px;
+    -moz-border-radius : 6px;
+    -webkit-border-radius : 6px;
+	border: 1px solid #8F7E8F;
+}
+
+
+/* hover */
+.ts15:hover {
+	background: rgba(255,254,254,.9);
+	background: -moz-linear-gradient(top,  rgba(255,254,254,.9) 11%, rgba(236,143,136,.9) 100%);
+	background: -webkit-linear-gradient(top,  rgba(255,254,254,.9) 11%,rgba(236,143,136,.9) 100%);
+	background: linear-gradient(to bottom,  rgba(255,254,254,.9) 11%,rgba(236,143,136,.9) 100%);
+}
+
+.ts15:hover::after {
+	display: inline-block;
+	position: absolute;
+	content: "";
+	top: 4px;
+	right: 4px;
+	bottom: 4px;
+	left: 4px;
+	border-radius : 6px;
+    -moz-border-radius : 6px;
+    -webkit-border-radius : 6px;
+	border: 1px solid #573E57;
+}
+
+/* active */
+.ts15:active {
+	background: #543459;
+	color: #F1F1F1;
+}
+
+.ts15:active::after {
+	display: inline-block;
+	position: absolute;
+	content: "";
+	top: 4px;
+	right: 4px;
+	bottom: 4px;
+	left: 4px;
+	border-radius : 6px;
+    -moz-border-radius : 6px;
+    -webkit-border-radius : 6px;
+	border: 1px solid #daa299;
+}
