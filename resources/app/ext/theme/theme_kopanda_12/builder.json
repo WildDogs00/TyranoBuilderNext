@@ -1,0 +1,19 @@
+{
+    "name":{
+        "ja":"ペーパークラフト",
+        "en":"PaperCraft",
+        "ru":"PaperCraft"
+    },
+    "pm":{
+        "font_color":"0x432E36",
+        "name_color":"0xD0BFAB",
+        "frame_opacity":255
+    },
+    "glink":"ts12",
+    "pro":0,
+    "width":640,
+    "height":960,
+    "author":"kopanda"
+    
+}
+
