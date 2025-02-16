@@ -28,26 +28,26 @@ Now I will tell you about some of the improvements that were implemented during 
 
 Interface:
 
-ImagePlaceHolder
+! [Alt text] (https://github.com/WildDogs00/TyranoBuilderNext/blob/main/Images/3259040342_preview_screenshot_2024-06-01-20-36-00-28.jpg)
 
 The new interface pleases the eye with pleasant colors. It has two main modes: light and dark.
 Overall, the interface has been significantly improved, and now it looks nice and more understandable.
 
 Interface language:
 
-ImagePlaceHolder
+! [Alt text] (https://github.com/WildDogs00/TyranoBuilderNext/blob/main/Images/3259040342_preview_screenshot_2024-06-01-20-38-59-30.png)
 
 Now it is very easy to switch languages, and with the new update, many other languages have been added to the existing Russian and English languages, such as Chinese, Korean, Japanese, and others.
 
 Creating a project:
 
-ImagePlaceHolder
+! [Alt text] (https://github.com/WildDogs00/TyranoBuilderNext/blob/main/Images/3259040342_preview_screenshot_2024-06-01-20-42-24-31.png)
 
 I removed unnecessary tabs that did not carry any useful information, and put all the data on one screen. This allowed us to speed up and simplify the project creation process.
 
 Editor Settings:
 
-ImagePlaceHolder
+! [Alt text] (https://github.com/WildDogs00/TyranoBuilderNext/blob/main/Images/3259040342_preview_screenshot_2024-06-01-20-45-05-32.png)
 
 Now you can choose the size of the editor. Supported resolutions are 1280x720 and 1700x900. This is convenient for those who have a small or large monitor.
 You can also configure the components. Now you can arrange them in one or two columns.
@@ -56,14 +56,14 @@ In general, these improvements make the development process more comfortable.
 
 Translating a game:
 
-ImagePlaceHolder
+! [Alt text] (https://github.com/WildDogs00/TyranoBuilderNext/blob/main/Images/3259040342_preview_screenshot_2024-06-01-20-50-58-33.png)
 
 In the original version of TyranoBuilder, creating a game translation required creating different builds of the game with different translations, using a system of conditional statements (if-else) to select between languages, or creating duplicate scenes for different translations. 
 Now, all this is not necessary, because there is a translation system that translates not only text in the game, but also images. In general, it is now very easy to translate for the game, and the list of languages supported for translation is very extensive.
 
 Variable Update:
 
-ImagePlaceHolder
+! [Alt text] (https://github.com/WildDogs00/TyranoBuilderNext/blob/main/Images/3259040342_preview_screenshot_2024-06-01-20-55-37-34.png)
 
 Updating variables is a process that allows you to change the values displayed on the screen in real time. In TyranoBuilder, you need to recreate the component responsible for displaying the variable in order to update its value. 
 Using a special component that can be simply placed on the stage, updates are instantaneous. This means that you don't need to perform any additional actions-the system will do everything itself.
