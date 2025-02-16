@@ -1,0 +1,19 @@
+{
+    "name":{
+        "ja":"ブラックサイバー",
+        "en":"BlackCyber ",
+        "ru":"BlackCyber "
+    },
+    "pm":{
+        "font_color":"0xF1F1F1",
+        "name_color":"0xF1F1F1",
+        "frame_opacity":255
+    },
+    "glink":"ts11",
+    "pro":0,
+    "width":1280,
+    "height":720,
+    "author":"kopanda"
+    
+}
+
